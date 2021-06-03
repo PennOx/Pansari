@@ -6,13 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/welcome_wholesaler_btn"
+        android:layout_width="312dp"
         android:layout_height="wrap_content"
-        android:text="Welcome Activity"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/primary_color"
+        android:onClick="wholesalerButtonClick"
+        android:text="As Wholesaler"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/welcome_shopkeeper_btn"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary_color"
+        android:onClick="shopkeeperButtonClick"
+        android:text="As Shopkeeper"
+        app:layout_constraintBottom_toTopOf="@+id/welcome_wholesaler_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
