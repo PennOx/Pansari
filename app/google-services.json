@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "370376520637",
+    "firebase_url": "https://pansari-app-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pansari-app",
+    "storage_bucket": "pansari-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370376520637:android:e3c559bda04f5a9ba818d4",
+        "android_client_info": {
+          "package_name": "project.pansari"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370376520637-9grjsu5fptn5v2d5m8t0fr5h6lp5mb57.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaDNgMS2rQqL4IhQF8ZOgw2SfctsWk6c4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370376520637-9grjsu5fptn5v2d5m8t0fr5h6lp5mb57.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
