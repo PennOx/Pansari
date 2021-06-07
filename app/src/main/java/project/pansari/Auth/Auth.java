@@ -13,13 +13,18 @@ public class Auth {
         }
     }
 
-    public static boolean isSignedIn(){
+    public static boolean isSignedIn() {
         init();
         return getCurrentUser() != null;
     }
 
-    public static FirebaseUser getCurrentUser(){
+    public static FirebaseUser getCurrentUser() {
         init();
         return auth.getCurrentUser();
+    }
+
+    public static FirebaseAuth getInstance() {
+        init();
+        return auth;
     }
 }
