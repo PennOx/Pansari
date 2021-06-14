@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity">
+
+    <EditText
+        android:id="@+id/signup_confirmpassword_edittext"
+        android:layout_width="323dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="12dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/signup_register_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_shopname_edittext"
+        android:layout_width="320dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:hint="Enter Shop Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/signup_address_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_name_edittext"
+        android:layout_width="320dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="36dp"
+        android:ems="10"
+        android:hint="Enter Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/signup_email_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_email_edittext"
+        android:layout_width="322dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Enter E-mail Address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/signup_contact_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_contact_edittext"
+        android:layout_width="322dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Enter Phone Number"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/signup_shopname_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_address_edittext"
+        android:layout_width="320dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Enter Shop Address"
+        android:inputType="textPostalAddress"
+        app:layout_constraintBottom_toTopOf="@+id/signup_pincode_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_pincode_edittext"
+        android:layout_width="323dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="28dp"
+        android:ems="10"
+        android:hint="Enter Pincode"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/signup_password_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/signup_password_edittext"
+        android:layout_width="323dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/signup_confirmpassword_edittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/signup_register_button"
+        android:layout_width="157dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="16dp"
+        android:onClick="registerButtonClick"
+        android:text="Register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

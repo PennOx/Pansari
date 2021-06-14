@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void registerButtonClick(View view) {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
         intent.putExtra("type", type);
         startActivity(intent);
     }
@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (password.length() < 6) {
-            passwordField.setError("Password must be of 6 character.");
+            passwordField.setError("Password should be at least 6 characters.");
             enableButtons();
 
         }
