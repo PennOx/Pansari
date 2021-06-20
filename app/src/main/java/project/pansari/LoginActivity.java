@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 
 import project.pansari.Auth.Auth;
@@ -44,11 +44,11 @@ public class LoginActivity extends AppCompatActivity {
 
         disableButtons();
 
-        EditText emailField = findViewById(R.id.login_email_edittext);
-        EditText passwordField = findViewById(R.id.login_password_edittext);
+        TextInputLayout emailField = findViewById(R.id.login_email_field);
+        TextInputLayout passwordField = findViewById(R.id.login_password_field);
 
-        String email = emailField.getEditableText().toString();
-        String password = passwordField.getEditableText().toString();
+        String email = emailField.getEditText().getEditableText().toString();
+        String password = passwordField.getEditText().getEditableText().toString();
 
         if (email.isEmpty()) {
             emailField.setError("Email is required.");

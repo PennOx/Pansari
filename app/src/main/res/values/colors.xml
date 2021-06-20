@@ -9,4 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary_color">#3DADF2</color>
+
+    <color name="button">#1A9CF1</color>
+    <color name="divider">#707070</color>
 </resources>
