@@ -19,12 +19,34 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView7"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/signup_background" />
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/signup_background" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Registration"
+                    android:textColor="@color/divider"
+                    android:textSize="34sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/imageView7"
+                    app:layout_constraintVertical_bias="0.90" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -38,7 +60,9 @@
                     android:id="@+id/signup_name_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter name" />
+                    android:hint="Enter name"
+                    android:inputType="textPersonName"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -53,7 +77,9 @@
                     android:id="@+id/signup_shopname_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter Shop name" />
+                    android:hint="Enter Shop name"
+                    android:inputType="textPersonName|textCapWords"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -68,7 +94,8 @@
                     android:id="@+id/signup_email_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter E-mail" />
+                    android:hint="Enter E-mail"
+                    android:inputType="textWebEmailAddress|textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -83,7 +110,8 @@
                     android:id="@+id/signup_contact_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter contact number" />
+                    android:hint="Enter contact number"
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -98,7 +126,9 @@
                     android:id="@+id/signup_address_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter shop address" />
+                    android:hint="Enter shop address"
+                    android:inputType="textPostalAddress"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -113,7 +143,8 @@
                     android:id="@+id/signup_pincode_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter pincode" />
+                    android:hint="Enter pincode"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -128,7 +159,8 @@
                     android:id="@+id/signup_password_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Enter password" />
+                    android:hint="Enter password"
+                    android:inputType="textPassword|textWebPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -143,7 +175,9 @@
                     android:id="@+id/signup_confirmpassword_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm password" />
+                    android:hint="Confirm password"
+                    android:inputType="textPassword|textWebPassword"
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button

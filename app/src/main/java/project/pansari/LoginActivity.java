@@ -69,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        startMainActivity();
+                        startStartActivity();
+                        finish();
                     } else {
                         Toast.makeText(LoginActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
                         enableButtons();
@@ -79,8 +80,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void startMainActivity() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+    private void startStartActivity() {
+        Intent intent = new Intent(LoginActivity.this, StartActivity.class);
+        intent.putExtra("type", type);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

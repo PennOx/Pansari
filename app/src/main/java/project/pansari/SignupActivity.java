@@ -1,8 +1,8 @@
 package project.pansari;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -104,7 +104,6 @@ public class SignupActivity extends AppCompatActivity {
                                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                startWelcomeActivity();
                                                 dialog.cancel();
                                                 finish();
                                             }
@@ -138,7 +137,6 @@ public class SignupActivity extends AppCompatActivity {
                                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                startWelcomeActivity();
                                                 dialog.cancel();
                                                 finish();
                                             }
@@ -147,23 +145,19 @@ public class SignupActivity extends AppCompatActivity {
                                         alert.show();
                                     } else {
                                         enableButtons();
-                                        Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
                         }
                     } else {
                         enableButtons();
-                        Toast.makeText(SignupActivity.this, task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("SignupError", task.getException().getMessage());
                     }
                 }
             });
         }
-    }
-
-    private void startWelcomeActivity() {
-        Intent intent = new Intent(SignupActivity.this, WelcomeActivity.class);
-        startActivity(intent);
     }
 
     private void disableButtons() {
