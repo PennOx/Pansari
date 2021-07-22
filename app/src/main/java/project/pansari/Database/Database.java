@@ -8,6 +8,7 @@ public class Database {
     private static final DatabaseReference root = FirebaseDatabase.getInstance().getReference();
     private static final DatabaseReference wholesalerRef = root.child("Wholesaler");
     private static final DatabaseReference shopkeeperRef = root.child("Shopkeeper");
+    private static final DatabaseReference pinRef = root.child("PIN");
 
     public static DatabaseReference getWholesalerRef() {
         return wholesalerRef;
@@ -15,6 +16,10 @@ public class Database {
 
     public static DatabaseReference getShopkeeperRef() {
         return shopkeeperRef;
+    }
+
+    public static DatabaseReference getPinRef() {
+        return pinRef;
     }
 
 }

@@ -92,10 +92,11 @@ public class SignupActivity extends AppCompatActivity {
                             currentUser.setPinCode(finalPinCode);
                             currentUser.setShopName(shopName);
 
+                            Database.getPinRef().child(finalPinCode + "").child(Auth.getCurrentUser().getUid()).setValue(true);
                             Database.getShopkeeperRef().child(Auth.getCurrentUser().getUid()).setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
+                                    if (task.isSuccessful()) {
                                         Auth.getCurrentUser().sendEmailVerification();
                                         Auth.getInstance().signOut();
                                         AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);

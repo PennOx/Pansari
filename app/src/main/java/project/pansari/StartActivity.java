@@ -21,40 +21,27 @@ public class StartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        char type = getIntent().getCharExtra("type", 'd');
-
         setContentView(R.layout.activity_start);
 
         if (Auth.isSignedIn()) {
 
             if (Auth.getCurrentUser().isEmailVerified()) {
 
-
-                if (type == 's') {
-
-                    startShopkeeperMainActivity();
-
-                } else if (type == 'w') {
-                    startWholesalerMainActivity();
-                } else {
-
-                    Database.getShopkeeperRef().addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.hasChild(Auth.getCurrentUser().getUid())) {
-                                startShopkeeperMainActivity();
-                            } else {
-                                startWholesalerMainActivity();
-                            }
+                Database.getShopkeeperRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild(Auth.getCurrentUser().getUid())) {
+                            startShopkeeperMainActivity();
+                        } else {
+                            startWholesalerMainActivity();
                         }
+                    }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
-
-                }
+                    }
+                });
 
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this);
