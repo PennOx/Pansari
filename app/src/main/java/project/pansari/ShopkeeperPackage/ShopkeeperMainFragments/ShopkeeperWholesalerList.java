@@ -27,8 +27,8 @@ import project.pansari.ViewHolders.WholesalerListHolder;
 
 public class ShopkeeperWholesalerList extends Fragment {
 
-    FirebaseRecyclerAdapter<Boolean, WholesalerListHolder> adapter;
-    RecyclerView recyclerView;
+    private FirebaseRecyclerAdapter<Boolean, WholesalerListHolder> adapter;
+    private RecyclerView recyclerView;
 
     public ShopkeeperWholesalerList() {
         // Required empty public constructor
@@ -45,7 +45,6 @@ public class ShopkeeperWholesalerList extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_shopkeeper_wholesaler_list, container, false);
-
         recyclerView = v.findViewById(R.id.shopkeeper_wholesaler_recycler);
 
         Database.getShopkeeperRef().child(Auth.getCurrentUser().getUid()).child("pinCode").addListenerForSingleValueEvent(new ValueEventListener() {

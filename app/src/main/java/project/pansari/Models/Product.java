@@ -1,12 +1,13 @@
 package project.pansari.Models;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Product {
-
+    @NonNull
     @PrimaryKey
     @ColumnInfo(name = "pid")
     String pid;

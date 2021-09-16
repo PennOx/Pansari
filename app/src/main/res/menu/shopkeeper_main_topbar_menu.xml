@@ -3,8 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/shopkeeper_main_menu_search_wholesaler"
+        android:id="@+id/shopkeeper_wholesaler_menu_search"
+        android:checkable="false"
+        android:enabled="true"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"
-        app:actionViewClass="android.widget.SearchView" />
+        app:actionViewClass="android.widget.SearchView"
+        app:showAsAction="always" />
 </menu>
