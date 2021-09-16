@@ -12,4 +12,5 @@
 
     <color name="button">#1A9CF1</color>
     <color name="divider">#707070</color>
+    <color name="colorTransparentWhite">#cccccc</color>
 </resources>

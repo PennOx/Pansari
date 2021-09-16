@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/shopkeeper_main_menu_wholesaler"
+        android:enabled="true"
+        android:icon="@drawable/store"
+        android:title="Wholesalers"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/shopkeeper_main_menu_orders"
+        android:enabled="true"
+        android:icon="@drawable/product"
+        android:title="Orders"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/shopkeeper_main_menu_cart"
+        android:enabled="true"
+        android:icon="@drawable/cart"
+        android:title="Cart"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/shopkeeper_main_menu_profile"
+        android:enabled="true"
+        android:icon="@drawable/profile_image"
+        android:title="Profile"
+        app:showAsAction="always|withText" />
+</menu>

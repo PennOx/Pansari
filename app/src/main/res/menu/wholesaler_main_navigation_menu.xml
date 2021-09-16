@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/wholesaler_main_menu_pending"
+        android:enabled="true"
+        android:icon="@drawable/pending"
+        android:title="Pending"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/wholesaler_main_menu_completed"
+        android:enabled="true"
+        android:icon="@drawable/pending"
+        android:title="Completed"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/wholesaler_main_menu_products"
+        android:icon="@drawable/product"
+        android:title="Products"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/wholesaler_main_menu_profile"
+        android:icon="@drawable/profile_image"
+        android:title="Profile"
+        android:visible="true"
+        app:showAsAction="always|withText" />
+</menu>

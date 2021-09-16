@@ -1,67 +1,37 @@
 package project.pansari.Models;
 
-public class Wholesaler {
-    private String name;
-    private String email;
-    private String contact;
-    private String deviceId;
-    private String shopName;
-    private String address;
-    private int pinCode;
+public class Wholesaler extends User {
 
-    public String getName() {
-        return name;
+    private String wid;
+    private boolean status;
+
+    public String getWid() {
+        return wid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWid(String wid) {
+        this.wid = wid;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getPinCode() {
-        return pinCode;
-    }
-
-    public void setPinCode(int pinCode) {
-        this.pinCode = pinCode;
-    }
+//    public void clone(Wholesaler w) {
+//
+//        setName(w.getName());
+//        setShopName(w.getShopName());
+//        setWid(w.getWid());
+//        setPinCode(w.getPinCode());
+//        setContact(w.getContact());
+//        setAddress(w.getAddress());
+//        setStatus(w.isStatus());
+//        setDeviceId(w.getDeviceId());
+//        setEmail(w.getEmail());
+//        setImage(w.getImage());
+//    }
 }

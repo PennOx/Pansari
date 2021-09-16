@@ -9,19 +9,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pansari">
-        <activity android:name=".WholesalerAddProduct"></activity>
-        <activity android:name=".WholesalerMainActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".WelcomeActivity" />
-        <activity android:name=".StartActivity">
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/primary_color" />
+
+        <activity android:name=".ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview" />
+        <activity android:name=".WholesalerPackage.WholesalerAddProduct" />
+        <activity android:name=".WholesalerPackage.WholesalerMainActivity" />
+        <activity android:name=".LoginAndSignupPackage.SignupPackage.SignupActivity" />
+        <activity android:name=".LoginAndSignupPackage.LoginPackage.LoginActivity" />
+        <activity android:name=".LoginAndSignupPackage.WelcomeActivity" />
+        <activity
+            android:name=".LoginAndSignupPackage.StartActivityPackage.StartActivity"
+            android:theme="@style/SplashStyle">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShopkeeperMainActivity" />
+        <activity android:name=".ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity" />
     </application>
+
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignupActivity">
+    tools:context=".LoginAndSignupPackage.SignupPackage.SignupActivity">
 
     <ScrollView
         android:layout_width="0dp"
@@ -182,11 +182,12 @@
 
             <Button
                 android:id="@+id/signup_register_button"
-                android:layout_width="157dp"
-                android:layout_height="52dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
                 android:gravity="center_horizontal"
                 android:onClick="registerButtonClick"
                 android:text="Register" />

@@ -5,26 +5,23 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Auth {
 
-    private static FirebaseAuth auth;
+    private static FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    private static void init(){
-        if(auth == null){
-            auth = FirebaseAuth.getInstance();
-        }
-    }
-
-    public static boolean isSignedIn() {
-        init();
-        return getCurrentUser() != null;
+    public static FirebaseAuth getInstance() {
+        return auth;
     }
 
     public static FirebaseUser getCurrentUser() {
-        init();
         return auth.getCurrentUser();
     }
 
-    public static FirebaseAuth getInstance() {
-        init();
-        return auth;
+    public static String getCurrentUserUid() {
+        return auth.getCurrentUser().getUid();
     }
+
+    public static boolean isSignedIn() {
+        return getCurrentUser() != null;
+    }
+
+
 }
