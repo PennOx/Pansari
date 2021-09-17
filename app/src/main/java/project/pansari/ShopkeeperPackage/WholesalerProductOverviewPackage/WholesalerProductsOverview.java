@@ -40,7 +40,7 @@ public class WholesalerProductsOverview extends AppCompatActivity implements Pro
         setContentView(R.layout.activity_wholesaler_products_overview);
 
         String wid = getIntent().getStringExtra("wid");
-        image = findViewById(R.id.wholesaler_overview_image);
+        image = findViewById(R.id.wholesaler_overview_profile_image);
         name = findViewById(R.id.wholesaler_overview_name);
         address = findViewById(R.id.wholesaler_overview_address);
         call = findViewById(R.id.wholesaler_overview_call);

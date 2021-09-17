@@ -20,7 +20,7 @@ public class WholesalerListHolder extends RecyclerView.ViewHolder {
 
     public WholesalerListHolder(@NonNull View itemView) {
         super(itemView);
-        image = itemView.findViewById(R.id.single_wholesaler_image);
+        image = itemView.findViewById(R.id.wholesaler_overview_banner);
         name = itemView.findViewById(R.id.single_wholesaler_name);
         address = itemView.findViewById(R.id.single_wholesaler_address);
     }

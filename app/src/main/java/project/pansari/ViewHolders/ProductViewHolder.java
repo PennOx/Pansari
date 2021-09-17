@@ -25,7 +25,7 @@ public class ProductViewHolder<T extends ProductActionClickListener> extends Rec
     private ProductViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        image = itemView.findViewById(R.id.single_wholesaler_image);
+        image = itemView.findViewById(R.id.wholesaler_overview_banner);
         name = itemView.findViewById(R.id.single_product_name);
         description = itemView.findViewById(R.id.single_product_description);
         actionButton = itemView.findViewById(R.id.single_product_button);
@@ -44,10 +44,13 @@ public class ProductViewHolder<T extends ProductActionClickListener> extends Rec
 
         if (p.getImage() != null) {
             Glide.with(itemView).load(p.getImage()).into(image);
+
+        } else {
+            image.setVisibility(View.GONE);
         }
 
         name.setText(p.getName());
-        description.setText(p.getDescription());
+        description.setText(p.getQuantity());
 
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
