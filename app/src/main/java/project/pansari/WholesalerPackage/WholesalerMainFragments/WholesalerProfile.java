@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +16,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
 import project.pansari.LoginAndSignupPackage.StartActivityPackage.StartActivity;
@@ -26,7 +26,7 @@ import project.pansari.R;
 
 public class WholesalerProfile extends Fragment {
 
-    private ImageView image;
+    private CircleImageView image;
     private TextView name;
     private TextView sName;
     private TextView address;
