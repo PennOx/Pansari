@@ -2,7 +2,6 @@ package project.pansari.WholesalerPackage;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -11,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -30,7 +30,7 @@ public class WholesalerAddProduct extends AppCompatActivity {
     private EditText brand;
     private EditText quantity;
     private EditText description;
-    private Button action;
+    private ExtendedFloatingActionButton action;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
