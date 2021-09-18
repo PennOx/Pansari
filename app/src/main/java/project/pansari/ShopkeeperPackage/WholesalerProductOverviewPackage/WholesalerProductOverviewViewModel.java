@@ -1,25 +1,28 @@
 package project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 
-public class WholesalerProductOverviewViewModel extends ViewModel implements WholesalerProductOverviewDataLoadListener {
+public class WholesalerProductOverviewViewModel extends AndroidViewModel implements WholesalerProductOverviewDataLoadListener {
 
     private String wid;
     private WholesalerProductOverviewRepo<WholesalerProductOverviewViewModel> repo;
     private MutableLiveData<Wholesaler> wholesaler;
     private MutableLiveData<List<Product>> wholesalerProducts;
 
-    public WholesalerProductOverviewViewModel(String wid) {
+    public WholesalerProductOverviewViewModel(Application app, String wid) {
+        super(app);
 
         this.wid = wid;
-        this.repo = new WholesalerProductOverviewRepo<>(this, wid);
+        this.repo = new WholesalerProductOverviewRepo<>(app, this, wid);
         wholesalerProducts = repo.getProducts();
         wholesaler = repo.getWholesaler();
     }

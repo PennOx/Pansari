@@ -1,5 +1,9 @@
 package project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage;
 
+import android.app.Application;
+import android.content.Context;
+import android.os.AsyncTask;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -12,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import project.pansari.Database.Database;
+import project.pansari.Database.OfflineDatabase;
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 
@@ -19,14 +24,16 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
 
     private String wid;
     private WholesalerProductOverviewDataLoadListener wholesalerProductOverviewDataLoadListener;
+    private Context context;
     private Wholesaler wholesaler = new Wholesaler();
     private List<Product> productList = new LinkedList<>();
 
-    public WholesalerProductOverviewRepo(T context, String wid) {
+    public WholesalerProductOverviewRepo(Application app, T listener, String wid) {
         this.wid = wid;
-        wholesalerProductOverviewDataLoadListener = context;
+        wholesalerProductOverviewDataLoadListener = listener;
         loadWholesaler(wid);
         loadProducts();
+        context = app.getApplicationContext();
     }
 
     public MutableLiveData<Wholesaler> getWholesaler() {
@@ -97,5 +104,27 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
 
     public void addProductToCart(String pid) {
         //TODO add to cart
+        Database.getProductsRef().child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                AsyncTask.execute(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Product p = snapshot.getValue(Product.class);
+                        p.setInCart(1);
+
+                        OfflineDatabase db = OfflineDatabase.getInstance(context);
+                        db.getCartDao().addToCart(p);
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

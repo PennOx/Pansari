@@ -21,17 +21,4 @@ public class Wholesaler extends User {
         this.status = status;
     }
 
-//    public void clone(Wholesaler w) {
-//
-//        setName(w.getName());
-//        setShopName(w.getShopName());
-//        setWid(w.getWid());
-//        setPinCode(w.getPinCode());
-//        setContact(w.getContact());
-//        setAddress(w.getAddress());
-//        setStatus(w.isStatus());
-//        setDeviceId(w.getDeviceId());
-//        setEmail(w.getEmail());
-//        setImage(w.getImage());
-//    }
 }

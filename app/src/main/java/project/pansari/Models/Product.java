@@ -5,23 +5,28 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.database.Exclude;
+
 @Entity
 public class Product {
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "pid")
-    String pid;
-
+    private String pid;
     @ColumnInfo(name = "name")
-    String name;
+    private String name;
     @ColumnInfo(name = "brand")
-    String brand;
+    private String brand;
     @ColumnInfo(name = "description")
-    String description;
+    private String description;
     @ColumnInfo(name = "image")
-    String image;
+    private String image;
     @ColumnInfo(name = "quantity")
-    String quantity;
+    private String quantity;
+    @Exclude
+    @ColumnInfo(name = "inCart")
+    private int inCart;
+    private String sellerId;
 
     public Product() {
         //for firebase;
@@ -83,4 +88,20 @@ public class Product {
         this.quantity = quantity;
     }
 
+    @Exclude
+    public int getInCart() {
+        return inCart;
+    }
+
+    public void setInCart(int inCart) {
+        this.inCart = inCart;
+    }
+
+    public String getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId;
+    }
 }

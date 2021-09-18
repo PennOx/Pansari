@@ -52,7 +52,7 @@ public class WholesalerProductsOverview extends AppCompatActivity implements Pro
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                T vm = (T) new WholesalerProductOverviewViewModel(wid);
+                T vm = (T) new WholesalerProductOverviewViewModel(getApplication(), wid);
                 return vm;
             }
         }).get(WholesalerProductOverviewViewModel.class);

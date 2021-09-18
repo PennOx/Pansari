@@ -17,6 +17,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
+import project.pansari.Auth.Auth;
 import project.pansari.Models.Product;
 import project.pansari.R;
 
@@ -31,6 +32,7 @@ public class WholesalerAddProduct extends AppCompatActivity {
     private ExtendedFloatingActionButton action;
 
     private WholesalerAddProductViewModel viewModel;
+
     private View.OnClickListener onClickEditProduct = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -58,7 +60,7 @@ public class WholesalerAddProduct extends AppCompatActivity {
                     p.setBrand(brand.getText().toString());
                     p.setQuantity(quantity.getText().toString());
                     p.setDescription(description.getText().toString());
-
+                    p.setSellerId(Auth.getCurrentUserUid());
                     viewModel.addProduct(p);
 
                     Toast.makeText(WholesalerAddProduct.this, "Product added.", Toast.LENGTH_LONG).show();
