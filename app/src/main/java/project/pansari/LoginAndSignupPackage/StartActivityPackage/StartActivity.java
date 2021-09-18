@@ -17,7 +17,7 @@ import project.pansari.Database.Database;
 import project.pansari.LoginAndSignupPackage.WelcomeActivity;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity;
-import project.pansari.WholesalerPackage.WholesalerMainActivity;
+import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity;
 
 public class StartActivity extends AppCompatActivity {
 

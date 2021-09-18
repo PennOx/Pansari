@@ -1,4 +1,4 @@
-package project.pansari.WholesalerPackage.WholesalerMainFragments;
+package project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments;
 
 import android.content.Intent;
 import android.os.Bundle;

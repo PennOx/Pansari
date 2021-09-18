@@ -1,4 +1,4 @@
-package project.pansari.WholesalerPackage;
+package project.pansari.WholesalerPackage.WholesalerMainActivityPackage;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -11,10 +11,10 @@ import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.DataLoadListener;
-import project.pansari.WholesalerPackage.WholesalerMainFragments.WholesalerCompletedOrders;
-import project.pansari.WholesalerPackage.WholesalerMainFragments.WholesalerPendingOrders;
-import project.pansari.WholesalerPackage.WholesalerMainFragments.WholesalerProducts;
-import project.pansari.WholesalerPackage.WholesalerMainFragments.WholesalerProfile;
+import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerCompletedOrders;
+import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerPendingOrders;
+import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProducts;
+import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProfile;
 
 public class WholesalerMainActivityViewModel extends ViewModel implements DataLoadListener {
 

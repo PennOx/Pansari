@@ -1,4 +1,4 @@
-package project.pansari.WholesalerPackage;
+package project.pansari.WholesalerPackage.WholesalerMainActivityPackage;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;

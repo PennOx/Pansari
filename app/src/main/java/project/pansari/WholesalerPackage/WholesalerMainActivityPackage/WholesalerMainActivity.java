@@ -1,4 +1,4 @@
-package project.pansari.WholesalerPackage;
+package project.pansari.WholesalerPackage.WholesalerMainActivityPackage;
 
 import android.os.Bundle;
 import android.view.MenuItem;

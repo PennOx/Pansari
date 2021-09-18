@@ -1,4 +1,4 @@
-package project.pansari.WholesalerPackage.WholesalerMainFragments;
+package project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import project.pansari.Models.Product;
 import project.pansari.R;
 import project.pansari.ViewHolders.ProductActionClickListener;
 import project.pansari.WholesalerPackage.WholesalerAddProduct;
-import project.pansari.WholesalerPackage.WholesalerMainActivityViewModel;
+import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
 
 public class WholesalerProducts extends Fragment implements ProductActionClickListener {
 
