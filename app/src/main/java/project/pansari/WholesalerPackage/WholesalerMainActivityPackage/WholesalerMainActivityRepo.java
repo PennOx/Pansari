@@ -15,16 +15,16 @@ import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
-import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.DataLoadListener;
+import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductOverviewDataLoadListener;
 
-public class WholesalerMainActivityRepo<T extends DataLoadListener> {
+public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataLoadListener> {
 
-    private DataLoadListener dataLoadListener;
+    private WholesalerProductOverviewDataLoadListener wholesalerProductOverviewDataLoadListener;
     private Wholesaler wholesaler = new Wholesaler();
     private List<Product> productList = new LinkedList<>();
 
     public WholesalerMainActivityRepo(T context) {
-        dataLoadListener = context;
+        wholesalerProductOverviewDataLoadListener = context;
         loadProducts();
         loadWholesaler();
     }
@@ -59,7 +59,7 @@ public class WholesalerMainActivityRepo<T extends DataLoadListener> {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             productList.add(snapshot.getValue(Product.class));
-                            dataLoadListener.onProductsLoaded();
+                            wholesalerProductOverviewDataLoadListener.onProductsLoaded();
                         }
 
                         @Override
@@ -84,7 +84,7 @@ public class WholesalerMainActivityRepo<T extends DataLoadListener> {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 wholesaler = snapshot.getValue(Wholesaler.class);
-                dataLoadListener.onWholesalerLoaded();
+                wholesalerProductOverviewDataLoadListener.onWholesalerLoaded();
             }
 
             @Override

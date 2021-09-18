@@ -1,6 +1,6 @@
 package project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage;
 
-public interface DataLoadListener {
+public interface WholesalerProductOverviewDataLoadListener {
 
 
     void onProductsLoaded();

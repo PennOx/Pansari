@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -19,7 +20,7 @@ import project.pansari.Adapters.WholesalerProductsRecyclerAdapter;
 import project.pansari.Models.Product;
 import project.pansari.R;
 import project.pansari.ViewHolders.ProductActionClickListener;
-import project.pansari.WholesalerPackage.WholesalerAddProduct;
+import project.pansari.WholesalerPackage.WholesalerAddProductPackage.WholesalerAddProduct;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
 
 public class WholesalerProducts extends Fragment implements ProductActionClickListener {
@@ -71,9 +72,10 @@ public class WholesalerProducts extends Fragment implements ProductActionClickLi
     }
 
     @Override
-    public void onProductActionClick(int position) {
+    public void onProductActionClick(String pid) {
         Intent intent = new Intent(getContext(), WholesalerAddProduct.class);
-        intent.putExtra("pid", viewModel.getWholesalerProducts().getValue().get(position).getPid());
+        intent.putExtra("pid", pid);
+        Toast.makeText(getContext(), pid, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 }

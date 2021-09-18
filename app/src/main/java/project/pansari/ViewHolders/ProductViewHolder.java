@@ -55,7 +55,7 @@ public class ProductViewHolder<T extends ProductActionClickListener> extends Rec
         actionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                actionClickListener.onProductActionClick(getBindingAdapterPosition());
+                actionClickListener.onProductActionClick(p.getPid());
             }
         });
     }

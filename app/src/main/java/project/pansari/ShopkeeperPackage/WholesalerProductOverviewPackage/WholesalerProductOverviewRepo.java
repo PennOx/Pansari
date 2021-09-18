@@ -15,16 +15,16 @@ import project.pansari.Database.Database;
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 
-public class WholesalerProductOverviewRepo<T extends DataLoadListener> {
+public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDataLoadListener> {
 
     private String wid;
-    private DataLoadListener dataLoadListener;
+    private WholesalerProductOverviewDataLoadListener wholesalerProductOverviewDataLoadListener;
     private Wholesaler wholesaler = new Wholesaler();
     private List<Product> productList = new LinkedList<>();
 
     public WholesalerProductOverviewRepo(T context, String wid) {
         this.wid = wid;
-        dataLoadListener = context;
+        wholesalerProductOverviewDataLoadListener = context;
         loadWholesaler(wid);
         loadProducts();
     }
@@ -59,7 +59,7 @@ public class WholesalerProductOverviewRepo<T extends DataLoadListener> {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             productList.add(snapshot.getValue(Product.class));
-                            dataLoadListener.onProductsLoaded();
+                            wholesalerProductOverviewDataLoadListener.onProductsLoaded();
                         }
 
                         @Override
@@ -84,7 +84,7 @@ public class WholesalerProductOverviewRepo<T extends DataLoadListener> {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 wholesaler = snapshot.getValue(Wholesaler.class);
-                dataLoadListener.onWholesalerLoaded();
+                wholesalerProductOverviewDataLoadListener.onWholesalerLoaded();
             }
 
             @Override
@@ -95,7 +95,7 @@ public class WholesalerProductOverviewRepo<T extends DataLoadListener> {
 
     }
 
-    public void addProductToCart(Product product) {
+    public void addProductToCart(String pid) {
         //TODO add to cart
     }
 }

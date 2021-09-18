@@ -9,7 +9,7 @@ import java.util.List;
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 
-public class WholesalerProductOverviewViewModel extends ViewModel implements DataLoadListener {
+public class WholesalerProductOverviewViewModel extends ViewModel implements WholesalerProductOverviewDataLoadListener {
 
     private String wid;
     private WholesalerProductOverviewRepo<WholesalerProductOverviewViewModel> repo;
@@ -32,8 +32,8 @@ public class WholesalerProductOverviewViewModel extends ViewModel implements Dat
         return wholesalerProducts;
     }
 
-    public void addToCart(int position) {
-        repo.addProductToCart(wholesalerProducts.getValue().get(position));
+    public void addToCart(String pid) {
+        repo.addProductToCart(pid);
     }
 
     @Override

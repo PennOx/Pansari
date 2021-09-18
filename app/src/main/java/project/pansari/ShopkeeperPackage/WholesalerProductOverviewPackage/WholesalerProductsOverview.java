@@ -85,8 +85,8 @@ public class WholesalerProductsOverview extends AppCompatActivity implements Pro
     }
 
     @Override
-    public void onProductActionClick(int position) {
-        viewModel.addToCart(position);
+    public void onProductActionClick(String pid) {
+        viewModel.addToCart(pid);
     }
 
 }

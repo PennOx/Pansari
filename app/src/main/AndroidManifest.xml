@@ -19,7 +19,7 @@
             android:resource="@color/primary_color" />
 
         <activity android:name=".ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview" />
-        <activity android:name=".WholesalerPackage.WholesalerAddProduct" />
+        <activity android:name=".WholesalerPackage.WholesalerAddProductPackage.WholesalerAddProduct" />
         <activity android:name=".WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
         <activity android:name=".LoginAndSignupPackage.SignupPackage.SignupActivity" />
         <activity android:name=".LoginAndSignupPackage.LoginPackage.LoginActivity" />

@@ -10,13 +10,13 @@ import java.util.List;
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 import project.pansari.R;
-import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.DataLoadListener;
+import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductOverviewDataLoadListener;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerCompletedOrders;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerPendingOrders;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProducts;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProfile;
 
-public class WholesalerMainActivityViewModel extends ViewModel implements DataLoadListener {
+public class WholesalerMainActivityViewModel extends ViewModel implements WholesalerProductOverviewDataLoadListener {
 
     private final WholesalerPendingOrders pendingOrders;
     private final WholesalerCompletedOrders completedOrders;
