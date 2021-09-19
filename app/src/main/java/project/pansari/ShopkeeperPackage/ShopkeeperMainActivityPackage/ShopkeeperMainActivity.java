@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,7 +23,13 @@ public class ShopkeeperMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper_main);
 
-        viewModel = new ViewModelProvider(this).get(ShopkeeperMainActivityViewModel.class);
+        viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new ShopkeeperMainActivityViewModel(getApplication());
+            }
+        }).get(ShopkeeperMainActivityViewModel.class);
 
         viewModel.getActiveFragment().observe(this, new Observer<Fragment>() {
             @Override

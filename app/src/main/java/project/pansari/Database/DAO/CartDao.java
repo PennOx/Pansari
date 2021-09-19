@@ -1,6 +1,5 @@
 package project.pansari.Database.DAO;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -24,6 +23,6 @@ public interface CartDao {
     void remove(Product product);
 
     @Query("SELECT * FROM product")
-    LiveData<List<Product>> getAllProducts();
+    List<Product> getAllProducts();
 
 }

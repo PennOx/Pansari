@@ -30,7 +30,7 @@ public class ShopkeeperCartProductsRecyclerAdapter extends RecyclerView.Adapter<
 
     @Override
     public void onBindViewHolder(@NonNull CartProductHolder holder, int position) {
-
+        holder.setData(products.get(position));
     }
 
     @Override

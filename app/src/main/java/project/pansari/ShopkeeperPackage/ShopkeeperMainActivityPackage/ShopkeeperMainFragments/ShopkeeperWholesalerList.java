@@ -1,4 +1,4 @@
-package project.pansari.ShopkeeperPackage.ShopkeeperMainFragments;
+package project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments;
 
 import android.content.Intent;
 import android.os.Bundle;

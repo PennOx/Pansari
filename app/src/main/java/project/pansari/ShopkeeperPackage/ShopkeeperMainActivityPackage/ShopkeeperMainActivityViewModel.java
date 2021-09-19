@@ -1,32 +1,46 @@
 package project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage;
 
+import android.app.Application;
+
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
+import java.util.List;
+
+import project.pansari.Models.Product;
 import project.pansari.R;
-import project.pansari.ShopkeeperPackage.ShopkeeperMainFragments.ShopkeeperCart;
-import project.pansari.ShopkeeperPackage.ShopkeeperMainFragments.ShopkeeperOrders;
-import project.pansari.ShopkeeperPackage.ShopkeeperMainFragments.ShopkeeperProfile;
-import project.pansari.ShopkeeperPackage.ShopkeeperMainFragments.ShopkeeperWholesalerList;
+import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperCart;
+import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperOrders;
+import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperProfile;
+import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperWholesalerList;
 
-public class ShopkeeperMainActivityViewModel extends ViewModel {
+public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements CartDataLoadListener {
 
     private final ShopkeeperWholesalerList wholesalerList;
     private final ShopkeeperOrders orders;
     private final ShopkeeperCart cart;
     private final ShopkeeperProfile profile;
 
+    private ShopkeeperMainActivityRepo<ShopkeeperMainActivityViewModel> repo;
+
+    private MutableLiveData<List<Product>> inCartProducts;
     private MutableLiveData<Fragment> activeFragment;
 
-    public ShopkeeperMainActivityViewModel() {
+    public ShopkeeperMainActivityViewModel(Application app) {
+        super(app);
+
         wholesalerList = new ShopkeeperWholesalerList();
         orders = new ShopkeeperOrders();
-        cart = new ShopkeeperCart();
+        cart = new ShopkeeperCart(this);
         profile = new ShopkeeperProfile();
 
+        repo = new ShopkeeperMainActivityRepo<>(this, app.getApplicationContext());
+
         activeFragment = new MutableLiveData<>(wholesalerList);
+        inCartProducts = new MutableLiveData<>(repo.getCartProducts());
+
     }
 
     public LiveData<Fragment> getActiveFragment() {
@@ -48,5 +62,14 @@ public class ShopkeeperMainActivityViewModel extends ViewModel {
                 activeFragment.setValue(profile);
                 break;
         }
+    }
+
+    public LiveData<List<Product>> getInCartProducts() {
+        return inCartProducts;
+    }
+
+    @Override
+    public void onProductsLoadedListener() {
+        inCartProducts.postValue(repo.getCartProducts());
     }
 }
