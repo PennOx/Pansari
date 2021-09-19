@@ -3,6 +3,7 @@ package project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage;
 import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -103,7 +104,7 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
     }
 
     public void addProductToCart(String pid) {
-        //TODO add to cart
+
         Database.getProductsRef().child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -115,8 +116,14 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
                         Product p = snapshot.getValue(Product.class);
                         p.setInCart(1);
 
-                        OfflineDatabase db = OfflineDatabase.getInstance(context);
-                        db.getCartDao().addToCart(p);
+                        try {
+                            OfflineDatabase db = OfflineDatabase.getInstance(context);
+                            db.getCartDao().addToCart(p);
+                        } catch (Exception e) {
+                            Log.e("Pansari-Error", e.getMessage());
+                        }
+
+
                     }
                 });
             }
