@@ -49,6 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
     };
+
     private LinearLayout dotsLayout;
     ViewPager2.OnPageChangeCallback callback = new ViewPager2.OnPageChangeCallback() {
         @Override
@@ -96,6 +97,7 @@ public class WelcomeActivity extends AppCompatActivity {
             dotsLayout.addView(dots[i]);
 
         }
+
     }
 
     private void startLoginActivity(char type) {

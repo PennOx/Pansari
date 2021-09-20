@@ -9,23 +9,32 @@ import com.google.firebase.database.Exclude;
 
 @Entity
 public class Product {
+
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "pid")
     private String pid;
+
     @ColumnInfo(name = "name")
     private String name;
+
     @ColumnInfo(name = "brand")
     private String brand;
+
     @ColumnInfo(name = "description")
     private String description;
+
     @ColumnInfo(name = "image")
     private String image;
+
     @ColumnInfo(name = "quantity")
     private String quantity;
+
     @Exclude
     @ColumnInfo(name = "inCart")
     private int inCart;
+
+    @ColumnInfo(name = "sellerId")
     private String sellerId;
 
     public Product() {

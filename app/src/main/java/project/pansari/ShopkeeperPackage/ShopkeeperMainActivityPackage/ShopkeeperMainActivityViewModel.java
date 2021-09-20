@@ -10,28 +10,33 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import project.pansari.Models.Product;
+import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperCart;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperOrders;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperProfile;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperWholesalerList;
 
-public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements CartDataLoadListener {
+public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements ShopkeeperMainActivityDataLoadListener {
 
     private final ShopkeeperWholesalerList wholesalerList;
     private final ShopkeeperOrders orders;
     private final ShopkeeperCart cart;
     private final ShopkeeperProfile profile;
-
+    private MutableLiveData<Fragment> activeFragment;
     private ShopkeeperMainActivityRepo<ShopkeeperMainActivityViewModel> repo;
 
+    //Cart Fragment
     private MutableLiveData<List<Product>> inCartProducts;
-    private MutableLiveData<Fragment> activeFragment;
+
+    //Wholesaler List
+    private MutableLiveData<List<Wholesaler>> availableWholesalers;
+
 
     public ShopkeeperMainActivityViewModel(Application app) {
         super(app);
 
-        wholesalerList = new ShopkeeperWholesalerList();
+        wholesalerList = new ShopkeeperWholesalerList(this);
         orders = new ShopkeeperOrders();
         cart = new ShopkeeperCart(this);
         profile = new ShopkeeperProfile();
@@ -40,11 +45,8 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
         activeFragment = new MutableLiveData<>(wholesalerList);
         inCartProducts = new MutableLiveData<>(repo.getCartProducts());
+        availableWholesalers = new MutableLiveData<>(repo.getAvailableWholesalers());
 
-    }
-
-    public LiveData<Fragment> getActiveFragment() {
-        return activeFragment;
     }
 
     public void updateMenuItemFragment(int itemId) {
@@ -64,12 +66,25 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         }
     }
 
+    public LiveData<Fragment> getActiveFragment() {
+        return activeFragment;
+    }
+
     public LiveData<List<Product>> getInCartProducts() {
         return inCartProducts;
     }
 
+    public LiveData<List<Wholesaler>> getAvailableWholesalers() {
+        return availableWholesalers;
+    }
+
     @Override
-    public void onProductsLoadedListener() {
+    public void onProductsLoaded() {
         inCartProducts.postValue(repo.getCartProducts());
+    }
+
+    @Override
+    public void onAvailableWholesalersLoaded() {
+        availableWholesalers.postValue(repo.getAvailableWholesalers());
     }
 }

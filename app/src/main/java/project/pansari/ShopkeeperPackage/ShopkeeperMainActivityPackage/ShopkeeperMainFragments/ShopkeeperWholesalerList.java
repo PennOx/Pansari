@@ -6,38 +6,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import java.util.List;
 
-import project.pansari.Auth.Auth;
-import project.pansari.Database.Database;
+import project.pansari.Adapters.WholesalerBannerRecyclerAdapter;
 import project.pansari.Models.Wholesaler;
 import project.pansari.R;
+import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
 import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview;
-import project.pansari.ViewHolders.WholesalerListHolder;
+import project.pansari.ViewHolders.ViewClickListener;
 
-public class ShopkeeperWholesalerList extends Fragment {
+public class ShopkeeperWholesalerList extends Fragment implements ViewClickListener {
 
-    private FirebaseRecyclerAdapter<Boolean, WholesalerListHolder> adapter;
-    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
 
-    public ShopkeeperWholesalerList() {
-        // Required empty public constructor
+    private ShopkeeperMainActivityViewModel viewModel;
+
+    public ShopkeeperWholesalerList(ShopkeeperMainActivityViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        adapter = new WholesalerBannerRecyclerAdapter(viewModel.getAvailableWholesalers().getValue(), this);
+
+        viewModel.getAvailableWholesalers().observe(this, new Observer<List<Wholesaler>>() {
+            @Override
+            public void onChanged(List<Wholesaler> wholesalers) {
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -45,71 +49,18 @@ public class ShopkeeperWholesalerList extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_shopkeeper_wholesaler_list, container, false);
-        recyclerView = v.findViewById(R.id.shopkeeper_wholesaler_recycler);
-
-        Database.getShopkeeperRef().child(Auth.getCurrentUser().getUid()).child("pinCode").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                setRecycler(snapshot.getValue(Long.class));
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        RecyclerView recyclerView = v.findViewById(R.id.shopkeeper_wholesaler_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
 
         return v;
     }
 
-    private void setRecycler(Long pin) {
-
-        Query query = Database.getPinRef().child(pin + "").limitToLast(50);
-
-        FirebaseRecyclerOptions<Boolean> options = new FirebaseRecyclerOptions.Builder<Boolean>()
-                .setQuery(query, Boolean.class).build();
-
-        adapter = new FirebaseRecyclerAdapter<Boolean, WholesalerListHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NonNull WholesalerListHolder holder, int position, @NonNull Boolean status) {
-                String wid = getRef(position).getKey();
-                holder.setEnable(status);
-                Database.getWholesalersRef().child(wid).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Wholesaler w = snapshot.getValue(Wholesaler.class);
-
-                        holder.setData(w);
-                        holder.itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(getContext(), WholesalerProductsOverview.class);
-                                intent.putExtra("wid", w.getWid());
-                                startActivity(intent);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-
-            @NonNull
-            @Override
-            public WholesalerListHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.single_wholesaler_banner, parent, false);
-
-                return new WholesalerListHolder(view);
-            }
-        };
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter.startListening();
+    @Override
+    public void onViewClickListener(String wid) {
+        Intent intent = new Intent(getContext(), WholesalerProductsOverview.class);
+        intent.putExtra("wid", wid);
+        startActivity(intent);
     }
 }
 

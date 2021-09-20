@@ -5,6 +5,7 @@ import android.util.Patterns;
 import java.util.regex.Pattern;
 
 public class LoginCredential {
+
     private String email;
     private String password;
     private int validStatus;

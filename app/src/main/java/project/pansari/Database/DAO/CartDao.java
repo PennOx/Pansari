@@ -22,7 +22,7 @@ public interface CartDao {
     @Delete
     void remove(Product product);
 
-    @Query("SELECT * FROM product")
+    @Query("SELECT * FROM product ORDER BY sellerId")
     List<Product> getAllProducts();
 
 }
