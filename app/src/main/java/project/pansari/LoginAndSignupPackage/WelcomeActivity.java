@@ -89,7 +89,7 @@ public class WelcomeActivity extends AppCompatActivity {
             dots[i].setTextSize(35);
 
             if (active == i) {
-                dots[i].setTextColor(getResources().getColor(R.color.primary_color));
+                dots[i].setTextColor(R.attr.colorPrimary);
             } else {
                 dots[i].setTextColor(getResources().getColor(R.color.colorTransparentWhite));
             }
