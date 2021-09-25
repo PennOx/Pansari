@@ -18,6 +18,7 @@ import java.util.List;
 
 import project.pansari.Database.Database;
 import project.pansari.Database.OfflineDatabase;
+import project.pansari.Models.CartProduct;
 import project.pansari.Models.Product;
 import project.pansari.Models.Wholesaler;
 
@@ -104,7 +105,6 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
     }
 
     public void addProductToCart(String pid) {
-
         Database.getProductsRef().child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -113,12 +113,13 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
                     @Override
                     public void run() {
 
-                        Product p = snapshot.getValue(Product.class);
+                        CartProduct p = snapshot.getValue(CartProduct.class);
                         p.setInCart(1);
 
                         try {
                             OfflineDatabase db = OfflineDatabase.getInstance(context);
                             db.getCartDao().addToCart(p);
+
                         } catch (Exception e) {
                             Log.e("Pansari-Error", e.getMessage());
                         }
@@ -126,6 +127,7 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
 
                     }
                 });
+
             }
 
             @Override

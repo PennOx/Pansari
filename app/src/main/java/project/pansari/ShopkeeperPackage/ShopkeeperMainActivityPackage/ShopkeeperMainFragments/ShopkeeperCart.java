@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import project.pansari.Adapters.ShopkeeperCartProductsRecyclerAdapter;
-import project.pansari.Models.Product;
+import project.pansari.Models.CartProduct;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
 
@@ -30,8 +30,6 @@ public class ShopkeeperCart extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -44,9 +42,9 @@ public class ShopkeeperCart extends Fragment {
 
         adapter = new ShopkeeperCartProductsRecyclerAdapter(viewModel.getInCartProducts().getValue());
 
-        viewModel.getInCartProducts().observe(getActivity(), new Observer<List<Product>>() {
+        viewModel.getInCartProducts().observe(getActivity(), new Observer<List<CartProduct>>() {
             @Override
-            public void onChanged(List<Product> productList) {
+            public void onChanged(List<CartProduct> productList) {
                 adapter.notifyDataSetChanged();
             }
         });

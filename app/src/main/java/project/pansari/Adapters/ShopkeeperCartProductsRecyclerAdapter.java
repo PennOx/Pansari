@@ -9,15 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import project.pansari.Models.Product;
+import project.pansari.Models.CartProduct;
 import project.pansari.R;
 import project.pansari.ViewHolders.CartProductHolder;
 
 public class ShopkeeperCartProductsRecyclerAdapter extends RecyclerView.Adapter<CartProductHolder> {
 
-    private List<Product> products;
+    private List<CartProduct> products;
 
-    public ShopkeeperCartProductsRecyclerAdapter(List<Product> products) {
+    public ShopkeeperCartProductsRecyclerAdapter(List<CartProduct> products) {
         this.products = products;
     }
 

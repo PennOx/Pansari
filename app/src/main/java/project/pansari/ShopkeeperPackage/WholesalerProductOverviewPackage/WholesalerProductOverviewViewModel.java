@@ -13,7 +13,6 @@ import project.pansari.Models.Wholesaler;
 
 public class WholesalerProductOverviewViewModel extends AndroidViewModel implements WholesalerProductOverviewDataLoadListener {
 
-    private String wid;
     private WholesalerProductOverviewRepo<WholesalerProductOverviewViewModel> repo;
     private MutableLiveData<Wholesaler> wholesaler;
     private MutableLiveData<List<Product>> wholesalerProducts;
@@ -21,7 +20,6 @@ public class WholesalerProductOverviewViewModel extends AndroidViewModel impleme
     public WholesalerProductOverviewViewModel(Application app, String wid) {
         super(app);
 
-        this.wid = wid;
         this.repo = new WholesalerProductOverviewRepo<>(app, this, wid);
         wholesalerProducts = repo.getProducts();
         wholesaler = repo.getWholesaler();

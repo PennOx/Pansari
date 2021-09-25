@@ -9,11 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pansari">
+        <activity android:name=".ShopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity"></activity>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/primary_color" />
@@ -27,14 +27,13 @@
         <activity
             android:name=".LoginAndSignupPackage.StartActivityPackage.StartActivity"
             android:theme="@style/SplashStyle">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity" />
     </application>
-
 
 </manifest>

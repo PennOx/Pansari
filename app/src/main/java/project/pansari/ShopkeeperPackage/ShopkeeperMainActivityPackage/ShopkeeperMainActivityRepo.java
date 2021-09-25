@@ -16,7 +16,7 @@ import java.util.List;
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
 import project.pansari.Database.OfflineDatabase;
-import project.pansari.Models.Product;
+import project.pansari.Models.CartProduct;
 import project.pansari.Models.Wholesaler;
 
 public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoadListener> {
@@ -24,7 +24,7 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
     private ShopkeeperMainActivityDataLoadListener listener;
     private Context context;
 
-    private List<Product> cartProducts;
+    private List<CartProduct> cartProducts;
     private List<Wholesaler> availableWholesalers;
 
     public ShopkeeperMainActivityRepo(T listener, Context context) {
@@ -93,7 +93,7 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         });
     }
 
-    public List<Product> getCartProducts() {
+    public List<CartProduct> getCartProducts() {
         return cartProducts;
     }
 

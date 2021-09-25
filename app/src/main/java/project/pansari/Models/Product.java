@@ -5,8 +5,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.google.firebase.database.Exclude;
-
 @Entity
 public class Product {
 
@@ -29,10 +27,6 @@ public class Product {
 
     @ColumnInfo(name = "quantity")
     private String quantity;
-
-    @Exclude
-    @ColumnInfo(name = "inCart")
-    private int inCart;
 
     @ColumnInfo(name = "sellerId")
     private String sellerId;
@@ -95,15 +89,6 @@ public class Product {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
-    }
-
-    @Exclude
-    public int getInCart() {
-        return inCart;
-    }
-
-    public void setInCart(int inCart) {
-        this.inCart = inCart;
     }
 
     public String getSellerId() {

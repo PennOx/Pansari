@@ -9,7 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import project.pansari.Models.Product;
+import project.pansari.Models.CartProduct;
 import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperCart;
@@ -27,7 +27,7 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     private ShopkeeperMainActivityRepo<ShopkeeperMainActivityViewModel> repo;
 
     //Cart Fragment
-    private MutableLiveData<List<Product>> inCartProducts;
+    private MutableLiveData<List<CartProduct>> inCartProducts;
 
     //Wholesaler List
     private MutableLiveData<List<Wholesaler>> availableWholesalers;
@@ -70,7 +70,7 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         return activeFragment;
     }
 
-    public LiveData<List<Product>> getInCartProducts() {
+    public LiveData<List<CartProduct>> getInCartProducts() {
         return inCartProducts;
     }
 

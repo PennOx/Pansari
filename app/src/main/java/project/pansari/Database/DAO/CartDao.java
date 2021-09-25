@@ -8,21 +8,21 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import project.pansari.Models.Product;
+import project.pansari.Models.CartProduct;
 
 @Dao
 public interface CartDao {
 
     @Insert
-    void addToCart(Product product);
+    void addToCart(CartProduct product);
 
     @Update
-    void updateCart(Product product);
+    void updateCart(CartProduct product);
 
     @Delete
-    void remove(Product product);
+    void remove(CartProduct product);
 
-    @Query("SELECT * FROM product ORDER BY sellerId")
-    List<Product> getAllProducts();
+    @Query("SELECT * FROM cartproduct ORDER BY sellerId")
+    List<CartProduct> getAllProducts();
 
 }
