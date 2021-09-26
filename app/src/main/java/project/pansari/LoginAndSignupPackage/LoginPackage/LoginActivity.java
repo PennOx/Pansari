@@ -4,49 +4,42 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.google.android.material.textfield.TextInputLayout;
 
 import project.pansari.LoginAndSignupPackage.SignupPackage.SignupActivity;
 import project.pansari.LoginAndSignupPackage.StartActivityPackage.StartActivity;
 import project.pansari.Models.LoginCredential;
 import project.pansari.R;
+import project.pansari.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailField;
-    private EditText passwordField;
     private ProgressDialog progressDialog;
 
     private LoginActivityViewModel viewModel;
+    private ActivityLoginBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        char type = getIntent().getCharExtra("type", 'd');
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading...");
         progressDialog.setMessage("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
 
-        emailField = ((TextInputLayout) findViewById(R.id.login_email_field)).getEditText();
-        passwordField = ((TextInputLayout) findViewById(R.id.login_password_field)).getEditText();
-
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return ((T) new LoginActivityViewModel(getApplication(), type));
+                return ((T) new LoginActivityViewModel(getApplication()));
             }
         }).get(LoginActivityViewModel.class);
 
@@ -54,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
-                    loginSuccess();
+                    onLoginSuccess();
                 }
             }
         });
@@ -69,15 +62,28 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.loginLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onLoginButtonClick();
+            }
+        });
+
+        binding.loginCreateAccountTextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRegisterButtonClick();
+            }
+        });
     }
 
-    public void registerButtonClick(View view) {
+    private void onRegisterButtonClick() {
         Intent intent = new Intent(this, SignupActivity.class);
-        intent.putExtra("type", viewModel.getType());
         startActivity(intent);
     }
 
-    public void loginButtonClick(View view) {
+    private void onLoginButtonClick() {
         LoginCredential loginCredential = getLoginCredentials();
 
         switch (loginCredential.getValidStatus()) {
@@ -85,26 +91,25 @@ public class LoginActivity extends AppCompatActivity {
                 viewModel.login(loginCredential);
                 break;
             case 1:
-                emailField.setError(loginCredential.getMessage());
+                binding.loginEmailEdittext.setError(loginCredential.getMessage());
                 break;
             case 2:
-                passwordField.setError(loginCredential.getMessage());
+                binding.loginPasswordEdittext.setError(loginCredential.getMessage());
                 break;
         }
     }
 
     private LoginCredential getLoginCredentials() {
-        String email = emailField.getEditableText().toString().trim();
-        String pass = passwordField.getEditableText().toString().trim();
+        String email = binding.loginEmailEdittext.getText().toString().trim();
+        String pass = binding.loginPasswordEdittext.getText().toString().trim();
 
         return new LoginCredential(email, pass);
 
     }
 
-    private void loginSuccess() {
+    private void onLoginSuccess() {
         hideProgressDialog();
         Intent intent = new Intent(this, StartActivity.class);
-        intent.putExtra("type", viewModel.getType());
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();

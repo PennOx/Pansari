@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
-import project.pansari.LoginAndSignupPackage.WelcomeActivity;
+import project.pansari.LoginAndSignupPackage.LoginPackage.LoginActivity;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity;
@@ -47,13 +47,14 @@ public class StartActivity extends AppCompatActivity {
                 });
 
             } else {
+
                 AlertDialog.Builder builder = new AlertDialog.Builder(StartActivity.this);
                 builder.setMessage("Please verify your email and login again!");
                 builder.setCancelable(false);
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startWelcomeActivity();
+                        sendToLogin();
                         dialog.cancel();
                         finish();
                     }
@@ -68,7 +69,7 @@ public class StartActivity extends AppCompatActivity {
                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                startWelcomeActivity();
+                                sendToLogin();
                                 dialog.cancel();
                                 finish();
                             }
@@ -82,9 +83,7 @@ public class StartActivity extends AppCompatActivity {
             }
 
         } else {
-
-            startWelcomeActivity();
-
+            sendToLogin();
         }
 
     }
@@ -101,8 +100,8 @@ public class StartActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void startWelcomeActivity() {
-        Intent intent = new Intent(StartActivity.this, WelcomeActivity.class);
+    private void sendToLogin() {
+        Intent intent = new Intent(StartActivity.this, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }

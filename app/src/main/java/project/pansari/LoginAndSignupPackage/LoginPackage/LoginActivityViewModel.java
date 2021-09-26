@@ -17,13 +17,11 @@ import project.pansari.Models.LoginCredential;
 
 public class LoginActivityViewModel extends AndroidViewModel {
 
-    private char type;
     private MutableLiveData<Boolean> isLoggedIn;
     private MutableLiveData<Boolean> isLoading;
 
-    LoginActivityViewModel(Application app, char type) {
+    LoginActivityViewModel(Application app) {
         super(app);
-        this.type = type;
         isLoggedIn = new MutableLiveData<>(false);
         isLoading = new MutableLiveData<>(false);
     }
@@ -54,10 +52,6 @@ public class LoginActivityViewModel extends AndroidViewModel {
                 }
             }
         });
-    }
-
-    public char getType() {
-        return type;
     }
 
     private void showLoading() {
