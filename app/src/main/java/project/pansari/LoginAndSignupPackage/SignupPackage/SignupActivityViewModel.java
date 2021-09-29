@@ -21,11 +21,10 @@ import project.pansari.Models.Wholesaler;
 
 public class SignupActivityViewModel extends AndroidViewModel {
 
-    private char type;
     private MutableLiveData<Boolean> isLoading;
     private MutableLiveData<Boolean> isSignedup;
 
-    public SignupActivityViewModel(@NonNull Application application, char type) {
+    public SignupActivityViewModel(@NonNull Application application) {
         super(application);
 
         isLoading = new MutableLiveData<>(false);
@@ -40,10 +39,6 @@ public class SignupActivityViewModel extends AndroidViewModel {
         return isLoading;
     }
 
-    private char getType() {
-        return type;
-    }
-
     private void showLoading() {
         isLoading.setValue(true);
     }
@@ -53,7 +48,6 @@ public class SignupActivityViewModel extends AndroidViewModel {
     }
 
     public void signupUser(SignupCredential signupCredential) {
-        //TODO .....
         showLoading();
 
         Auth.getInstance().createUserWithEmailAndPassword(signupCredential.getEmail(), signupCredential.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -61,7 +55,7 @@ public class SignupActivityViewModel extends AndroidViewModel {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
 
-                    if (type == 's') {
+                    if (signupCredential.getAccountType() == 's') {
                         Shopkeeper currentUser = new Shopkeeper();
                         currentUser.setAddress(signupCredential.getShopAddress());
                         currentUser.setContact(signupCredential.getContactNumber());

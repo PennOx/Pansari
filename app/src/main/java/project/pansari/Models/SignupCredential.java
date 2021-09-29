@@ -14,11 +14,12 @@ public class SignupCredential {
     private int pinCode;
     private String password;
     private String confirmPassword;
+    private char accountType;
 
     private int validStatus;
     private String message;
 
-    public SignupCredential(String name, String shopName, String email, String contactNumber, String shopAddress, String pinCode, String password, String confirmPassword) {
+    public SignupCredential(String name, String shopName, String email, String contactNumber, String shopAddress, String pinCode, String password, String confirmPassword, char accountType) {
         this.name = name;
         this.shopName = shopName;
         this.email = email;
@@ -26,6 +27,7 @@ public class SignupCredential {
         this.shopAddress = shopAddress;
         this.password = password;
         this.confirmPassword = confirmPassword;
+        this.accountType = accountType;
 
         if (name.isEmpty()) {
             validStatus = 1;
@@ -56,7 +58,7 @@ public class SignupCredential {
             message = "Invalid area PIN code";
         } else if (password.isEmpty()) {
             validStatus = 7;
-            message = "Password required";
+            message = "Password require";
         } else if (password.length() < 6 || password.length() > 12) {
             validStatus = 7;
             message = "Password should be at least 6 to 12 characters long";
@@ -66,6 +68,9 @@ public class SignupCredential {
         } else if (!confirmPassword.equals(password)) {
             validStatus = 8;
             message = "Password mismatched";
+        } else if (accountType != 's' && accountType != 'w') {
+            validStatus = 9;
+            message = "Account type require";
         } else {
             validStatus = 0;
             this.pinCode = Integer.parseInt(pinCode);
@@ -108,7 +113,8 @@ public class SignupCredential {
         return password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public char getAccountType() {
+        return accountType;
     }
+
 }

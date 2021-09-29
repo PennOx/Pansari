@@ -8,4 +8,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="pansari_logo">Pansari logo</string>
+    <string name="let_s_get_started">Lets Get Started!</string>
+    <string name="create_an_account_to_get_amazing_feature_of_this_app">Create an account to get amazing feature of this app</string>
+    <string name="select_account_type">Select account type</string>
+    <string name="account_type">Account type</string>
 </resources>

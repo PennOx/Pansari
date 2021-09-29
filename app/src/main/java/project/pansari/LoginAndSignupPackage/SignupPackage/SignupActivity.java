@@ -4,74 +4,59 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import project.pansari.Models.SignupCredential;
 import project.pansari.R;
+import project.pansari.databinding.ActivitySignupBinding;
 
 public class SignupActivity extends AppCompatActivity {
-
-    private EditText nameField;
-    private EditText emailField;
-    private EditText contactField;
-    private EditText shopNameField;
-    private EditText shopAddressField;
-    private EditText pinCodeField;
-    private EditText passwordField;
-    private EditText confirmPasswordField;
 
     private ProgressDialog progressDialog;
     private AlertDialog alertDialog;
 
+    private ActivitySignupBinding binding;
     private SignupActivityViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_signup);
 
-        char type = getIntent().getCharExtra("type", 'd');
+        setupAccountTypeLayout();
+        setupProgressDialog();
 
-        nameField = findViewById(R.id.signup_name_edittext);
-        emailField = findViewById(R.id.signup_email_edittext);
-        contactField = findViewById(R.id.signup_contact_edittext);
-        shopNameField = findViewById(R.id.signup_shopname_edittext);
-        shopAddressField = findViewById(R.id.signup_address_edittext);
-        pinCodeField = findViewById(R.id.signup_pincode_edittext);
-        passwordField = findViewById(R.id.signup_password_edittext);
-        confirmPasswordField = findViewById(R.id.signup_confirmpassword_edittext);
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Loading");
-        progressDialog.setMessage("Please wait");
-        progressDialog.setCanceledOnTouchOutside(false);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-        builder.setMessage("E-mail verification mail has been sent.\nPlease verify and login again!");
-        builder.setCancelable(false);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                finish();
-            }
-        });
-        alertDialog = builder.create();
+        setSupportActionBar(binding.signupToolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new SignupActivityViewModel(getApplication(), type);
+                return (T) new SignupActivityViewModel(getApplication());
             }
         }).get(SignupActivityViewModel.class);
+
+        binding.signupCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRegisterClick();
+            }
+        });
 
         viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
             @Override
@@ -94,66 +79,107 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
+    private void setupAccountTypeLayout() {
+        List<String> accountTypes = new ArrayList<>();
+        accountTypes.add("Wholesaler");
+        accountTypes.add("Retailer");
+        ArrayAdapter<String> a = new ArrayAdapter<>(this, R.layout.account_type_item, accountTypes);
+        ((AutoCompleteTextView) binding.signupBusinessType.getEditText()).setText(getString(R.string.select_account_type), false);
+        ((AutoCompleteTextView) binding.signupBusinessType.getEditText()).setAdapter(a);
+    }
+
     private void showAlertDialog() {
         alertDialog.show();
     }
 
-    public void registerButtonClick(View view) {
+    public void onRegisterClick() {
 
         clearErrors();
 
-        String name = nameField.getEditableText().toString().trim();
-        String shopName = shopNameField.getEditableText().toString().trim();
-        String email = emailField.getEditableText().toString().trim();
-        String contact = contactField.getEditableText().toString().trim();
-        String shopAddress = shopAddressField.getEditableText().toString().trim();
-        String pinCode = pinCodeField.getEditableText().toString().trim();
-        String password = passwordField.getEditableText().toString().trim();
-        String confirmPassword = confirmPasswordField.getEditableText().toString().trim();
+        String name = binding.signupOwnerName.getEditableText().toString().trim();
+        String shopName = binding.signupBusinessName.getEditableText().toString().trim();
+        String email = binding.signupEmail.getEditableText().toString().trim();
+        String contact = binding.signupBusinessContact.getEditableText().toString().trim();
+        String shopAddress = binding.signupBusinessAddress.getEditableText().toString().trim();
+        String pinCode = binding.signupBusinessPin.getEditableText().toString().trim();
+        String password = binding.signupPassword.getEditableText().toString().trim();
+        String confirmPassword = binding.signupConfirmPassword.getEditableText().toString().trim();
+        char type;
 
-        SignupCredential signupCredential = new SignupCredential(name, shopName, email, contact, shopAddress, pinCode, password, confirmPassword);
+        switch (binding.signupBusinessType.getEditText().getText().toString()) {
+            case "Wholesaler":
+                type = 'w';
+                break;
+            case "Retailer":
+                type = 's';
+                break;
+            default:
+                type = 'a';
+        }
+
+        SignupCredential signupCredential = new SignupCredential(name, shopName, email, contact, shopAddress, pinCode, password, confirmPassword, type);
 
         switch (signupCredential.getValidStatus()) {
             case 0:
                 viewModel.signupUser(signupCredential);
                 break;
             case 1:
-                nameField.setError(signupCredential.getMessage());
+                binding.signupOwnerName.setError(signupCredential.getMessage());
                 break;
             case 2:
-                shopNameField.setError(signupCredential.getMessage());
+                binding.signupBusinessName.setError(signupCredential.getMessage());
                 break;
             case 3:
-                emailField.setError(signupCredential.getMessage());
+                binding.signupEmail.setError(signupCredential.getMessage());
                 break;
             case 4:
-                contactField.setError(signupCredential.getMessage());
+                binding.signupBusinessContact.setError(signupCredential.getMessage());
                 break;
             case 5:
-                shopAddressField.setError(signupCredential.getMessage());
+                binding.signupBusinessAddress.setError(signupCredential.getMessage());
                 break;
             case 6:
-                pinCodeField.setError(signupCredential.getMessage());
+                binding.signupBusinessPin.setError(signupCredential.getMessage());
                 break;
             case 7:
-                passwordField.setError(signupCredential.getMessage());
+                binding.signupPassword.setError(signupCredential.getMessage());
                 break;
             case 8:
-                confirmPasswordField.setError(signupCredential.getMessage());
+                binding.signupConfirmPassword.setError(signupCredential.getMessage());
                 break;
+            case 9:
+                binding.signupBusinessType.setError(signupCredential.getMessage());
         }
 
     }
 
     private void clearErrors() {
-        nameField.setError(null);
-        shopNameField.setError(null);
-        emailField.setError(null);
-        contactField.setError(null);
-        shopAddressField.setError(null);
-        pinCodeField.setError(null);
-        passwordField.setError(null);
-        confirmPasswordField.setError(null);
+        binding.signupOwnerName.setError(null);
+        binding.signupBusinessName.setError(null);
+        binding.signupEmail.setError(null);
+        binding.signupBusinessContact.setError(null);
+        binding.signupBusinessAddress.setError(null);
+        binding.signupBusinessPin.setError(null);
+        binding.signupPassword.setError(null);
+        binding.signupConfirmPassword.setError(null);
+    }
+
+    private void setupProgressDialog() {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
+        AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
+        builder.setMessage("E-mail verification mail has been sent.\nPlease verify and login again!");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                finish();
+            }
+        });
+        alertDialog = builder.create();
     }
 
     private void showProgressDialog() {

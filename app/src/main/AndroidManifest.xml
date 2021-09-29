@@ -3,11 +3,11 @@
     package="project.pansari">
 
     <application
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:allowBackup="false"
         android:theme="@style/Theme.Pansari">
 
         <activity android:name=".ShopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity" />
@@ -22,9 +22,11 @@
         <activity android:name=".ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview" />
         <activity android:name=".WholesalerPackage.WholesalerAddProductPackage.WholesalerAddProduct" />
         <activity android:name=".WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
-        <activity android:name=".LoginAndSignupPackage.SignupPackage.SignupActivity" />
+        <activity
+            android:name=".LoginAndSignupPackage.SignupPackage.SignupActivity"
+            android:parentActivityName=".LoginAndSignupPackage.LoginPackage.LoginActivity" />
         <activity android:name=".LoginAndSignupPackage.LoginPackage.LoginActivity" />
-        <activity android:name=".LoginAndSignupPackage.WelcomeActivity" />
+
         <activity
             android:name=".LoginAndSignupPackage.StartActivityPackage.StartActivity"
             android:theme="@style/SplashStyle">
