@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,7 +58,7 @@ public class WholesalerProducts extends Fragment implements ProductActionClickLi
         });
 
         recycler = view.findViewById(R.id.wholesaler_products_recycler);
-        recycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        recycler.setLayoutManager(new LinearLayoutManager(getContext()));
         recycler.setAdapter(adapter);
 
         viewModel.getWholesalerProducts().observe(getViewLifecycleOwner(), new Observer<List<Product>>() {

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -46,7 +46,7 @@ public class WholesalerProductsOverview extends AppCompatActivity implements Pro
         call = findViewById(R.id.wholesaler_overview_call);
 
         productsRecycler = findViewById(R.id.wholesaler_overview_products_recycler);
-        productsRecycler.setLayoutManager(new GridLayoutManager(this, 2));
+        productsRecycler.setLayoutManager(new LinearLayoutManager(this));
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
