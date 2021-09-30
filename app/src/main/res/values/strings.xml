@@ -12,4 +12,6 @@
     <string name="create_an_account_to_get_amazing_feature_of_this_app">Create an account to get amazing feature of this app</string>
     <string name="select_account_type">Select account type</string>
     <string name="account_type">Account type</string>
+    <string name="wholesaler_name">Wholesaler Name</string>
+    <string name="wholesaler_address">Wholesaler address</string>
 </resources>
