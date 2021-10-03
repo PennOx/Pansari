@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import project.pansari.Models.Product;
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductOverviewDataLoadListener;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerCompletedOrders;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerPendingOrders;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProducts;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProfile;
+import project.pansari.models.Product;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerMainActivityViewModel extends ViewModel implements WholesalerProductOverviewDataLoadListener {
 
@@ -30,7 +30,7 @@ public class WholesalerMainActivityViewModel extends ViewModel implements Wholes
     public WholesalerMainActivityViewModel() {
         pendingOrders = new WholesalerPendingOrders();
         completedOrders = new WholesalerCompletedOrders();
-        products = new WholesalerProducts(this);
+        products = new WholesalerProducts();
         profile = new WholesalerProfile();
         activeFragment = new MutableLiveData<>(pendingOrders);
 

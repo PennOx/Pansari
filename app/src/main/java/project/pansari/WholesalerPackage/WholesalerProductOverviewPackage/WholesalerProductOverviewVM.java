@@ -1,28 +1,30 @@
-package project.pansari.WholesalerPackage.WholesalerAddProductPackage;
+package project.pansari.WholesalerPackage.WholesalerProductOverviewPackage;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import project.pansari.Models.Product;
+import project.pansari.Auth.Auth;
+import project.pansari.models.Product;
 
-public class WholesalerAddProductViewModel extends ViewModel implements WholesalerAddProductDataLoadListener {
+public class WholesalerProductOverviewVM extends ViewModel implements WholesalerProductOverviewDataListener {
 
     private String pid;
     private MutableLiveData<Boolean> newProduct;
-    private WholesalerAddProductRepo repo;
+    private WholesalerProductOverviewRepo repo;
     private MutableLiveData<Product> product;
 
-    WholesalerAddProductViewModel(String pid) {
-        this.pid = pid;
+    WholesalerProductOverviewVM(String pid) {
         product = new MutableLiveData<>();
-        repo = new WholesalerAddProductRepo(this);
+        repo = new WholesalerProductOverviewRepo(this);
         newProduct = new MutableLiveData<>();
         if (pid != null) {
-            newProduct.setValue(true);
+            this.pid = pid;
+            newProduct.setValue(false);
             loadProduct(pid);
         } else {
-            newProduct.setValue(false);
+            this.pid = "PD" + System.currentTimeMillis();
+            newProduct.setValue(true);
         }
     }
 
@@ -54,8 +56,8 @@ public class WholesalerAddProductViewModel extends ViewModel implements Wholesal
     }
 
     public void addProduct(Product p) {
-
-        p.setPid(System.currentTimeMillis() + "");
+        p.setPid(pid);
+        p.setSellerId(Auth.getCurrentUserUid());
         repo.addProduct(p);
     }
 }

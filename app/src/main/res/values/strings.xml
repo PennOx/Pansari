@@ -18,4 +18,12 @@
     <string name="add_product_button">Add product button</string>
     <string name="create_account">Create Account</string>
     <string name="owner_name">Owner name</string>
+    <string name="edit_product">Edit Product</string>
+    <string name="add_product">Add product</string>
+    <string name="product_image">Product image</string>
+    <string name="product_name">Product name</string>
+    <string name="brand_name">Brand name</string>
+    <string name="unit_quantity">Unit quantity</string>
+    <string name="pack_quantity">Pack quantity</string>
+    <string name="product_description">Product description</string>
 </resources>

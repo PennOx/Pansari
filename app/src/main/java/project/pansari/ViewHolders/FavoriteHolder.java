@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
+import project.pansari.models.Wholesaler;
 
 public class FavoriteHolder extends RecyclerView.ViewHolder {
 

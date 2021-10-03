@@ -18,9 +18,9 @@ import java.util.List;
 
 import project.pansari.Database.Database;
 import project.pansari.Database.OfflineDatabase;
-import project.pansari.Models.CartProduct;
-import project.pansari.Models.Product;
-import project.pansari.Models.Wholesaler;
+import project.pansari.models.CartProduct;
+import project.pansari.models.Product;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDataLoadListener> {
 

@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import project.pansari.Models.CartProduct;
 import project.pansari.R;
 import project.pansari.ViewHolders.CartProductHolder;
+import project.pansari.models.CartProduct;
 
 public class ShopkeeperCartProductsRecyclerAdapter extends RecyclerView.Adapter<CartProductHolder> {
 

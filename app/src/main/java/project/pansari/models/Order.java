@@ -1,4 +1,4 @@
-package project.pansari.Models;
+package project.pansari.models;
 
 import java.util.Map;
 

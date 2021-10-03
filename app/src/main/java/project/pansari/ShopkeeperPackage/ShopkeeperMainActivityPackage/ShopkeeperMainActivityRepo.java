@@ -16,8 +16,8 @@ import java.util.List;
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
 import project.pansari.Database.OfflineDatabase;
-import project.pansari.Models.CartProduct;
-import project.pansari.Models.Wholesaler;
+import project.pansari.models.CartProduct;
+import project.pansari.models.Wholesaler;
 
 public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoadListener> {
 

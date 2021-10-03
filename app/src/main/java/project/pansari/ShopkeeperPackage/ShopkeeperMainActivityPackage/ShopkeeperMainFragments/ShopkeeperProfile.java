@@ -20,8 +20,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
 import project.pansari.LoginAndSignupPackage.StartActivityPackage.StartActivity;
-import project.pansari.Models.Shopkeeper;
 import project.pansari.R;
+import project.pansari.models.Shopkeeper;
 
 public class ShopkeeperProfile extends Fragment {
 

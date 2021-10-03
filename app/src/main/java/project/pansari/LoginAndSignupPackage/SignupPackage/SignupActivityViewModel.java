@@ -15,9 +15,9 @@ import com.google.firebase.auth.AuthResult;
 
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
-import project.pansari.Models.Shopkeeper;
-import project.pansari.Models.SignupCredential;
-import project.pansari.Models.Wholesaler;
+import project.pansari.models.Shopkeeper;
+import project.pansari.models.SignupCredential;
+import project.pansari.models.Wholesaler;
 
 public class SignupActivityViewModel extends AndroidViewModel {
 

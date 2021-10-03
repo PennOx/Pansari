@@ -18,10 +18,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import project.pansari.Adapters.WholesalerProductsRecyclerAdapter;
-import project.pansari.Models.Product;
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ViewHolders.ProductActionClickListener;
+import project.pansari.models.Product;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerProductsOverview extends AppCompatActivity implements ProductActionClickListener {
 

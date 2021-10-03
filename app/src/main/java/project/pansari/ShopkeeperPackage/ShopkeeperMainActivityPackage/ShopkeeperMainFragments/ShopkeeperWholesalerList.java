@@ -14,11 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import project.pansari.Adapters.WholesalerBannerRecyclerAdapter;
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
 import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview;
 import project.pansari.ViewHolders.ViewClickListener;
+import project.pansari.models.Wholesaler;
 
 public class ShopkeeperWholesalerList extends Fragment implements ViewClickListener {
 

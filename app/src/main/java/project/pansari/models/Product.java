@@ -1,4 +1,4 @@
-package project.pansari.Models;
+package project.pansari.models;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -25,22 +25,17 @@ public class Product {
     @ColumnInfo(name = "image")
     private String image;
 
-    @ColumnInfo(name = "quantity")
-    private String quantity;
+    @ColumnInfo(name = "unitQuantity")
+    private String unitQuantity;
+
+    @ColumnInfo(name = "packQuantity")
+    private String packQuantity;
 
     @ColumnInfo(name = "sellerId")
     private String sellerId;
 
     public Product() {
         //for firebase;
-    }
-
-    public Product(String name, String brand, String description, String image, String quantity) {
-        this.name = name;
-        this.brand = brand;
-        this.description = description;
-        this.image = image;
-        this.quantity = quantity;
     }
 
     public String getPid() {
@@ -83,12 +78,20 @@ public class Product {
         this.image = image;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getUnitQuantity() {
+        return unitQuantity;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setUnitQuantity(String unitQuantity) {
+        this.unitQuantity = unitQuantity;
+    }
+
+    public String getPackQuantity() {
+        return packQuantity;
+    }
+
+    public void setPackQuantity(String packQuantity) {
+        this.packQuantity = packQuantity;
     }
 
     public String getSellerId() {
@@ -98,4 +101,6 @@ public class Product {
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
     }
+
+
 }

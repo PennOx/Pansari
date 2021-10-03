@@ -8,8 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import project.pansari.Models.Product;
-import project.pansari.Models.Wholesaler;
+import project.pansari.models.Product;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerProductOverviewViewModel extends AndroidViewModel implements WholesalerProductOverviewDataLoadListener {
 

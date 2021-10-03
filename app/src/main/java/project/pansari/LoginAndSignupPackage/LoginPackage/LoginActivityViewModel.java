@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 
 import project.pansari.Auth.Auth;
-import project.pansari.Models.LoginCredential;
+import project.pansari.models.LoginCredential;
 
 public class LoginActivityViewModel extends AndroidViewModel {
 

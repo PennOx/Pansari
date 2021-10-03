@@ -8,7 +8,7 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import project.pansari.Models.CartProduct;
+import project.pansari.models.CartProduct;
 
 @Dao
 public interface CartDao {

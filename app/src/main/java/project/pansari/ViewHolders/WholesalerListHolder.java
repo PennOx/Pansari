@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerListHolder<T extends ViewClickListener> extends RecyclerView.ViewHolder {
 
@@ -21,7 +21,7 @@ public class WholesalerListHolder<T extends ViewClickListener> extends RecyclerV
 
     public WholesalerListHolder(@NonNull View itemView, T listener) {
         super(itemView);
-        image = itemView.findViewById(R.id.wholesaler_overview_banner);
+        image = itemView.findViewById(R.id.singleProductImage);
         name = itemView.findViewById(R.id.single_wholesaler_name);
         address = itemView.findViewById(R.id.single_wholesaler_address);
         this.listener = listener;

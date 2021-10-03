@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import project.pansari.Database.DAO.CartDao;
-import project.pansari.Models.CartProduct;
+import project.pansari.models.CartProduct;
 
 @Database(entities = {CartProduct.class}, version = 1)
 public abstract class OfflineDatabase extends RoomDatabase {

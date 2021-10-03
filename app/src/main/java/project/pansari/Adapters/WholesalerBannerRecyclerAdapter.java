@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ViewHolders.ViewClickListener;
 import project.pansari.ViewHolders.WholesalerListHolder;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerBannerRecyclerAdapter extends RecyclerView.Adapter<WholesalerListHolder> {
 

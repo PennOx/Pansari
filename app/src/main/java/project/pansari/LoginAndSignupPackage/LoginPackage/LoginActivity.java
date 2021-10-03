@@ -14,9 +14,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import project.pansari.LoginAndSignupPackage.SignupPackage.SignupActivity;
 import project.pansari.LoginAndSignupPackage.StartActivityPackage.StartActivity;
-import project.pansari.Models.LoginCredential;
 import project.pansari.R;
 import project.pansari.databinding.ActivityLoginBinding;
+import project.pansari.models.LoginCredential;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import project.pansari.Adapters.ShopkeeperCartProductsRecyclerAdapter;
-import project.pansari.Models.CartProduct;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
+import project.pansari.models.CartProduct;
 
 public class ShopkeeperCart extends Fragment {
 

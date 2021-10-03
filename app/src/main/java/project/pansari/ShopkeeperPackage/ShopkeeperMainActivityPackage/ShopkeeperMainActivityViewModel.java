@@ -9,13 +9,13 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
-import project.pansari.Models.CartProduct;
-import project.pansari.Models.Wholesaler;
 import project.pansari.R;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperCart;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperOrders;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperProfile;
 import project.pansari.ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperWholesalerList;
+import project.pansari.models.CartProduct;
+import project.pansari.models.Wholesaler;
 
 public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements ShopkeeperMainActivityDataLoadListener {
 

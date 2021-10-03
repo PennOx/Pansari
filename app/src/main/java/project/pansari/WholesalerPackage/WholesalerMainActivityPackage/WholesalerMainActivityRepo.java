@@ -13,9 +13,9 @@ import java.util.List;
 
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
-import project.pansari.Models.Product;
-import project.pansari.Models.Wholesaler;
 import project.pansari.ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductOverviewDataLoadListener;
+import project.pansari.models.Product;
+import project.pansari.models.Wholesaler;
 
 public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataLoadListener> {
 

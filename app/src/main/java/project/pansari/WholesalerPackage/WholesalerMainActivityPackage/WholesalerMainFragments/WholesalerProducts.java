@@ -5,10 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,11 +17,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import project.pansari.Adapters.WholesalerProductsRecyclerAdapter;
-import project.pansari.Models.Product;
 import project.pansari.R;
 import project.pansari.ViewHolders.ProductActionClickListener;
-import project.pansari.WholesalerPackage.WholesalerAddProductPackage.WholesalerAddProduct;
 import project.pansari.WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
+import project.pansari.WholesalerPackage.WholesalerProductOverviewPackage.WholesalerProductOverview;
+import project.pansari.models.Product;
 
 public class WholesalerProducts extends Fragment implements ProductActionClickListener {
 
@@ -30,15 +30,14 @@ public class WholesalerProducts extends Fragment implements ProductActionClickLi
     private RecyclerView recycler;
     private FloatingActionButton fab;
 
+    public WholesalerProducts() {
 
-    public WholesalerProducts(WholesalerMainActivityViewModel viewModel) {
-        this.viewModel = viewModel;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        viewModel = new ViewModelProvider(getActivity()).get(WholesalerMainActivityViewModel.class);
         adapter = new WholesalerProductsRecyclerAdapter<>(this,
                 viewModel.getWholesalerProducts().getValue());
     }
@@ -52,7 +51,7 @@ public class WholesalerProducts extends Fragment implements ProductActionClickLi
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), WholesalerAddProduct.class);
+                Intent intent = new Intent(getContext(), WholesalerProductOverview.class);
                 startActivity(intent);
             }
         });
@@ -73,9 +72,8 @@ public class WholesalerProducts extends Fragment implements ProductActionClickLi
 
     @Override
     public void onProductActionClick(String pid) {
-        Intent intent = new Intent(getContext(), WholesalerAddProduct.class);
+        Intent intent = new Intent(getContext(), WholesalerProductOverview.class);
         intent.putExtra("pid", pid);
-        Toast.makeText(getContext(), pid, Toast.LENGTH_LONG).show();
         startActivity(intent);
     }
 }

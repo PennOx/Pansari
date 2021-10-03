@@ -18,9 +18,9 @@ import androidx.lifecycle.ViewModelProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-import project.pansari.Models.SignupCredential;
 import project.pansari.R;
 import project.pansari.databinding.ActivitySignupBinding;
+import project.pansari.models.SignupCredential;
 
 public class SignupActivity extends AppCompatActivity {
 

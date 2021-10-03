@@ -1,4 +1,4 @@
-package project.pansari.WholesalerPackage.WholesalerAddProductPackage;
+package project.pansari.WholesalerPackage.WholesalerProductOverviewPackage;
 
 import androidx.annotation.NonNull;
 
@@ -8,14 +8,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import project.pansari.Auth.Auth;
 import project.pansari.Database.Database;
-import project.pansari.Models.Product;
+import project.pansari.models.Product;
 
-public class WholesalerAddProductRepo {
+public class WholesalerProductOverviewRepo {
 
     private Product product;
-    private WholesalerAddProductDataLoadListener loadListener;
+    private WholesalerProductOverviewDataListener loadListener;
 
-    public WholesalerAddProductRepo(WholesalerAddProductDataLoadListener loadListener) {
+    public WholesalerProductOverviewRepo(WholesalerProductOverviewDataListener loadListener) {
         this.loadListener = loadListener;
     }
 

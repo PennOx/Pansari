@@ -6,8 +6,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import project.pansari.Models.Product;
 import project.pansari.R;
+import project.pansari.models.Product;
 
 public class CartProductHolder extends RecyclerView.ViewHolder {
 
