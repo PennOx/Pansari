@@ -58,7 +58,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
+        viewModel.isLoading().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {
@@ -69,7 +69,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        viewModel.getIsSignedup().observe(this, new Observer<Boolean>() {
+        viewModel.isSignedUp().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean) {

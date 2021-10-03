@@ -58,5 +58,6 @@
         android:src="@android:drawable/ic_input_add"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp"
+        android:contentDescription="@string/add_product_button"
         app:tint="@android:color/white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

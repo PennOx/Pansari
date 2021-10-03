@@ -22,6 +22,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
 
     LoginActivityViewModel(Application app) {
         super(app);
+
         isLoggedIn = new MutableLiveData<>(false);
         isLoading = new MutableLiveData<>(false);
     }

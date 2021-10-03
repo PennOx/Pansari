@@ -31,7 +31,7 @@
                     android:fontFamily="@font/poppins_semibold"
                     android:text="@string/let_s_get_started"
                     android:textColor="?attr/colorOnSecondary"
-                    android:textSize="24dp" />
+                    android:textSize="24sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:text="@string/create_an_account_to_get_amazing_feature_of_this_app"
                     android:textColor="?attr/colorOnSecondary"
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
@@ -100,7 +100,7 @@
                             android:layout_marginTop="8dp"
                             android:ems="10"
                             android:fontFamily="@font/poppins_medium"
-                            android:hint="Owner name"
+                            android:hint="@string/owner_name"
                             android:inputType="textPersonName" />
 
                         <EditText
@@ -181,7 +181,7 @@
                             android:layout_marginTop="32dp"
                             android:background="@drawable/bg_round_button"
                             android:fontFamily="@font/poppins"
-                            android:text="Create Account" />
+                            android:text="@string/create_account" />
 
                     </LinearLayout>
 

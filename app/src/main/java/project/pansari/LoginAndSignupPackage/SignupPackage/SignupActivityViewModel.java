@@ -31,20 +31,12 @@ public class SignupActivityViewModel extends AndroidViewModel {
         isSignedup = new MutableLiveData<>(false);
     }
 
-    public LiveData<Boolean> getIsSignedup() {
+    public LiveData<Boolean> isSignedUp() {
         return isSignedup;
     }
 
-    public LiveData<Boolean> getIsLoading() {
+    public LiveData<Boolean> isLoading() {
         return isLoading;
-    }
-
-    private void showLoading() {
-        isLoading.setValue(true);
-    }
-
-    private void hideLoading() {
-        isLoading.setValue(false);
     }
 
     public void signupUser(SignupCredential signupCredential) {
@@ -109,5 +101,14 @@ public class SignupActivityViewModel extends AndroidViewModel {
             Toast.makeText(getApplication(), task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
         }
     }
+
+    private void showLoading() {
+        isLoading.setValue(true);
+    }
+
+    private void hideLoading() {
+        isLoading.setValue(false);
+    }
+
 
 }

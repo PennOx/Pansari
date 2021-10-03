@@ -3,6 +3,7 @@ package project.pansari.LoginAndSignupPackage.StartActivityPackage;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -42,7 +43,7 @@ public class StartActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                        Toast.makeText(StartActivity.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
 
@@ -54,6 +55,7 @@ public class StartActivity extends AppCompatActivity {
                 builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Auth.getInstance().signOut();
                         sendToLogin();
                         dialog.cancel();
                         finish();
@@ -69,6 +71,7 @@ public class StartActivity extends AppCompatActivity {
                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                Auth.getInstance().signOut();
                                 sendToLogin();
                                 dialog.cancel();
                                 finish();
