@@ -10,7 +10,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
 
-        <activity android:name=".ShopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity" />
+        <activity android:name=".shopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -19,18 +19,18 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/blue" />
 
-        <activity android:name=".ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview" />
+        <activity android:name=".shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview" />
         <activity
-            android:name=".WholesalerPackage.WholesalerProductOverviewPackage.WholesalerProductOverview"
-            android:parentActivityName=".WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
-        <activity android:name=".WholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
+            android:name=".wholesalerPackage.WholesalerProductOverviewPackage.WholesalerProductOverview"
+            android:parentActivityName=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
+        <activity android:name=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
         <activity
-            android:name=".LoginAndSignupPackage.SignupPackage.SignupActivity"
-            android:parentActivityName=".LoginAndSignupPackage.LoginPackage.LoginActivity" />
-        <activity android:name=".LoginAndSignupPackage.LoginPackage.LoginActivity" />
+            android:name=".loginAndSignupPackage.SignupPackage.SignupActivity"
+            android:parentActivityName=".loginAndSignupPackage.LoginPackage.LoginActivity" />
+        <activity android:name=".loginAndSignupPackage.LoginPackage.LoginActivity" />
 
         <activity
-            android:name=".LoginAndSignupPackage.StartActivityPackage.StartActivity"
+            android:name=".loginAndSignupPackage.StartActivityPackage.StartActivity"
             android:exported="true"
             android:theme="@style/SplashStyle">
             <intent-filter>
@@ -39,7 +39,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity" />
+        <activity android:name=".shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity" />
     </application>
 
 </manifest>

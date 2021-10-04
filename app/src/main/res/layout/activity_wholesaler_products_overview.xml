@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview">
+    tools:context=".shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -26,7 +26,7 @@
 
 
             <ImageView
-                android:id="@+id/singleProductImage"
+                android:id="@+id/singleWholesalerBanner"
                 android:layout_width="0dp"
                 android:layout_height="125dp"
                 android:minHeight="150dp"
@@ -37,7 +37,7 @@
                 app:srcCompat="@drawable/wholesaler_banner" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/wholesaler_overview_profile_image"
+                android:id="@+id/singleWholesalerImage"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_marginStart="24dp"
@@ -47,8 +47,8 @@
                 android:scaleType="centerCrop"
                 app:civ_border_color="#FFFFFF"
                 app:civ_border_width="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/singleProductImage"
-                app:layout_constraintStart_toStartOf="@+id/singleProductImage"
+                app:layout_constraintBottom_toBottomOf="@+id/singleWholesalerBanner"
+                app:layout_constraintStart_toStartOf="@+id/singleWholesalerBanner"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
@@ -60,7 +60,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/singleProductImage">
+                app:layout_constraintTop_toBottomOf="@id/singleWholesalerBanner">
 
                 <TextView
                     android:id="@+id/wholesaler_overview_name"
