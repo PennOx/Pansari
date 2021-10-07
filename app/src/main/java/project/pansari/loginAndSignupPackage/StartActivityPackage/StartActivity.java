@@ -31,7 +31,7 @@ public class StartActivity extends AppCompatActivity {
 
             if (Auth.getCurrentUser().isEmailVerified()) {
 
-                Database.getShopkeeperRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                Database.getShopkeepersRef().addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.hasChild(Auth.getCurrentUser().getUid())) {

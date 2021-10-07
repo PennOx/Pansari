@@ -2,8 +2,6 @@ package project.pansari.shopkeeperPackage.WholesalerProductOverviewPackage;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
@@ -17,8 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import project.pansari.database.Database;
-import project.pansari.database.OfflineDatabase;
-import project.pansari.models.CartProduct;
 import project.pansari.models.Product;
 import project.pansari.models.Wholesaler;
 
@@ -52,7 +48,7 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
     }
 
     private void loadProducts() {
-        Database.getWholesalerProductsRef(wid).addListenerForSingleValueEvent(new ValueEventListener() {
+        Database.getWholesalerProductsRefByWid(wid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
@@ -105,29 +101,13 @@ public class WholesalerProductOverviewRepo<T extends WholesalerProductOverviewDa
     }
 
     public void addProductToCart(String pid) {
-        Database.getProductsRef().child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+        Database.getProductRefById(pid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                AsyncTask.execute(new Runnable() {
-                    @Override
-                    public void run() {
+                Product p = snapshot.getValue(Product.class);
 
-                        CartProduct p = snapshot.getValue(CartProduct.class);
-                        p.setInCart(1);
-
-                        try {
-                            OfflineDatabase db = OfflineDatabase.getInstance(context);
-                            db.getCartDao().addToCart(p);
-
-                        } catch (Exception e) {
-                            Log.e("Pansari-Error", e.getMessage());
-                        }
-
-
-                    }
-                });
-
+                Database.getCartRef().child(p.getSellerId()).child(p.getPid()).setValue(1);
             }
 
             @Override

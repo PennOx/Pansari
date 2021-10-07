@@ -8,10 +8,12 @@ public class LoginCredential {
 
     private String email;
     private String password;
+
     private int validStatus;
     private String message;
 
     public LoginCredential(String email, String password) {
+
         this.email = email;
         this.password = password;
 
@@ -21,6 +23,7 @@ public class LoginCredential {
         } else if (password.isEmpty()) {
             validStatus = 2;
             message = "Password required";
+
         } else if (!Pattern.matches(String.valueOf(Patterns.EMAIL_ADDRESS), email)) {
             validStatus = 1;
             message = "Invalid email address";

@@ -38,7 +38,7 @@ public class WholesalerListHolder<T extends ViewClickListener> extends RecyclerV
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onViewClickListener(w.getWid());
+                listener.onWholesalerBannerClicked(w.getWid());
             }
         });
     }

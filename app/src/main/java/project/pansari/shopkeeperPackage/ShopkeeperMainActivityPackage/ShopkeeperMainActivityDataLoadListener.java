@@ -5,4 +5,6 @@ public interface ShopkeeperMainActivityDataLoadListener {
     void onProductsLoaded();
 
     void onAvailableWholesalersLoaded();
+
+    void onFavoriteWholesalersLoaded();
 }

@@ -1,19 +1,14 @@
 package project.pansari.models;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-
-@Entity
 public class CartProduct extends Product {
 
-    @ColumnInfo(name = "inCart")
-    private int inCart;
+    private int inCartQuantity;
 
-    public int getInCart() {
-        return inCart;
+    public int getInCartQuantity() {
+        return inCartQuantity;
     }
 
-    public void setInCart(int inCart) {
-        this.inCart = inCart;
+    public void setInCartQuantity(int inCartQuantity) {
+        this.inCartQuantity = inCartQuantity;
     }
 }

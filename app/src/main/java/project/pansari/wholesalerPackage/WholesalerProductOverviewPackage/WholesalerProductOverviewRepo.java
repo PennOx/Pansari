@@ -45,6 +45,6 @@ public class WholesalerProductOverviewRepo {
 
     public void addProduct(Product p) {
         Database.getProductsRef().child(p.getPid()).setValue(p);
-        Database.getWholesalerProductsRef(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
+        Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
     }
 }

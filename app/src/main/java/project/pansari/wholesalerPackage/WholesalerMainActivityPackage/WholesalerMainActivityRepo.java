@@ -43,7 +43,7 @@ public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataL
     }
 
     private void loadProducts() {
-        Database.getWholesalerProductsRef(Auth.getCurrentUserUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();

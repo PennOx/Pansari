@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 import project.pansari.R;
-import project.pansari.models.CartProduct;
+import project.pansari.models.CartItem;
 import project.pansari.models.Wholesaler;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperCart;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperOrders;
@@ -27,10 +27,12 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     private ShopkeeperMainActivityRepo<ShopkeeperMainActivityViewModel> repo;
 
     //Cart Fragment
-    private MutableLiveData<List<CartProduct>> inCartProducts;
+    private MutableLiveData<List<CartItem>> inCartProducts;
 
-    //Wholesaler List
+    //Wholesaler List Fragment
     private MutableLiveData<List<Wholesaler>> availableWholesalers;
+
+    private MutableLiveData<List<Wholesaler>> favoriteWholesalers;
 
 
     public ShopkeeperMainActivityViewModel(Application app) {
@@ -46,6 +48,7 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         activeFragment = new MutableLiveData<>(wholesalerList);
         inCartProducts = new MutableLiveData<>(repo.getCartProducts());
         availableWholesalers = new MutableLiveData<>(repo.getAvailableWholesalers());
+        favoriteWholesalers = new MutableLiveData<>(repo.getFavoriteWholesalers());
 
     }
 
@@ -70,12 +73,16 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         return activeFragment;
     }
 
-    public LiveData<List<CartProduct>> getInCartProducts() {
+    public LiveData<List<CartItem>> getInCartProducts() {
         return inCartProducts;
     }
 
     public LiveData<List<Wholesaler>> getAvailableWholesalers() {
         return availableWholesalers;
+    }
+
+    public LiveData<List<Wholesaler>> getFavoriteWholesalers() {
+        return favoriteWholesalers;
     }
 
     @Override
@@ -87,4 +94,14 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     public void onAvailableWholesalersLoaded() {
         availableWholesalers.postValue(repo.getAvailableWholesalers());
     }
+
+    @Override
+    public void onFavoriteWholesalersLoaded() {
+        favoriteWholesalers.postValue(repo.getFavoriteWholesalers());
+    }
+
+    public void refreshCartProducts() {
+        repo.loadCartProducts();
+    }
+
 }

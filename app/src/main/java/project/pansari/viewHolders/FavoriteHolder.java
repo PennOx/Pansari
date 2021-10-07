@@ -2,28 +2,35 @@ package project.pansari.viewHolders;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-import project.pansari.R;
+import project.pansari.databinding.SingleFavoriteLayoutBinding;
 import project.pansari.models.Wholesaler;
 
 public class FavoriteHolder extends RecyclerView.ViewHolder {
 
-    private CircleImageView image;
+    private SingleFavoriteLayoutBinding binding;
+    private ViewClickListener clickListener;
 
-    public FavoriteHolder(@NonNull View itemView) {
-        super(itemView);
+    public FavoriteHolder(SingleFavoriteLayoutBinding binding, ViewClickListener listener) {
+        super(binding.getRoot());
 
-        image = itemView.findViewById(R.id.favorite_imageview);
+        this.binding = binding;
+        this.clickListener = listener;
     }
 
     public void setData(Wholesaler w) {
         if (w.getImage() != null && !w.getImage().isEmpty()) {
-            Glide.with(image.getContext()).load(w.getImage()).into(image);
+            Glide.with(binding.favoriteImageview.getContext()).load(w.getImage()).into(binding.favoriteImageview);
         }
+
+        binding.favoriteImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickListener.onWholesalerBannerClicked(w.getWid());
+            }
+        });
     }
 }

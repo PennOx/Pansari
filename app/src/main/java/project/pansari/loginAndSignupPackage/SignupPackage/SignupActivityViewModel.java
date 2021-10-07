@@ -57,7 +57,7 @@ public class SignupActivityViewModel extends AndroidViewModel {
                         currentUser.setShopName(signupCredential.getShopName());
                         currentUser.setSid(Auth.getCurrentUserUid());
 
-                        Database.getShopkeeperRef().child(Auth.getCurrentUser().getUid()).setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).setValue(currentUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 processTask(task);

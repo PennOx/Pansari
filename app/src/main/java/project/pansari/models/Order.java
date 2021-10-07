@@ -8,7 +8,7 @@ public class Order {
     private String orderFrom;
     private long orderTime;
     private String orderStatus;
-    private Map<String, Map<String, CartProduct>> Wholesalers;
+    private Map<String, Map<String, CartItem>> Wholesalers;
 
     public String getOrderId() {
         return orderId;
@@ -42,11 +42,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public Map<String, Map<String, CartProduct>> getWholesalers() {
+    public Map<String, Map<String, CartItem>> getWholesalers() {
         return Wholesalers;
     }
 
-    public void setWholesalers(Map<String, Map<String, CartProduct>> wholesalers) {
+    public void setWholesalers(Map<String, Map<String, CartItem>> wholesalers) {
         Wholesalers = wholesalers;
     }
 }

@@ -26,4 +26,5 @@
     <string name="unit_quantity">Unit quantity</string>
     <string name="pack_quantity">Pack quantity</string>
     <string name="product_description">Product description</string>
+    <string name="favorite_wholesalers_title">Favorite wholesalers</string>
 </resources>

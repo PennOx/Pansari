@@ -10,7 +10,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
 
-        <activity android:name=".shopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity" />
+        <activity
+            android:name=".shopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -19,19 +21,28 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/blue" />
 
-        <activity android:name=".shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview" />
+        <activity
+            android:name=".shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".wholesalerPackage.WholesalerProductOverviewPackage.WholesalerProductOverview"
-            android:parentActivityName=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
-        <activity android:name=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity" />
+            android:parentActivityName=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".loginAndSignupPackage.SignupPackage.SignupActivity"
-            android:parentActivityName=".loginAndSignupPackage.LoginPackage.LoginActivity" />
-        <activity android:name=".loginAndSignupPackage.LoginPackage.LoginActivity" />
+            android:parentActivityName=".loginAndSignupPackage.LoginPackage.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".loginAndSignupPackage.LoginPackage.LoginActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".loginAndSignupPackage.StartActivityPackage.StartActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -68,7 +68,7 @@ public class ShopkeeperProfile extends Fragment {
             }
         });
 
-        Database.getShopkeeperRef().child(Auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Shopkeeper s = dataSnapshot.getValue(Shopkeeper.class);

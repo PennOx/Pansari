@@ -1,7 +1,6 @@
 package project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
 
@@ -15,29 +14,31 @@ import java.util.List;
 
 import project.pansari.auth.Auth;
 import project.pansari.database.Database;
-import project.pansari.database.OfflineDatabase;
+import project.pansari.models.CartItem;
 import project.pansari.models.CartProduct;
 import project.pansari.models.Wholesaler;
 
 public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoadListener> {
 
     private ShopkeeperMainActivityDataLoadListener listener;
-    private Context context;
 
-    private List<CartProduct> cartProducts;
+    private List<CartItem> cartItems;
     private List<Wholesaler> availableWholesalers;
+    private List<Wholesaler> favoriteWholesalers;
 
     public ShopkeeperMainActivityRepo(T listener, Context context) {
         this.listener = listener;
-        this.context = context;
-        cartProducts = new LinkedList<>();
+        cartItems = new LinkedList<>();
         availableWholesalers = new LinkedList<>();
-        loadCartProducts();
+        favoriteWholesalers = new LinkedList<>();
         loadAvailableWholesalers();
+        loadCartProducts();
+        loadFavoriteWholesalers();
     }
 
+
     private void loadAvailableWholesalers() {
-        Database.getShopkeeperRef().child(Auth.getCurrentUser().getUid()).child("pinCode").addListenerForSingleValueEvent(new ValueEventListener() {
+        Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).child("pinCode").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Long currentPin = snapshot.getValue(Long.class);
@@ -46,10 +47,8 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        Iterator<DataSnapshot> iterator = snapshot.getChildren().iterator();
-
-                        while (iterator.hasNext()) {
-                            String wid = iterator.next().getKey();
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                            String wid = dataSnapshot.getKey();
 
                             Database.getWholesalersRef().child(wid).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
@@ -82,22 +81,118 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         });
     }
 
-    private void loadCartProducts() {
-        AsyncTask.execute(new Runnable() {
+    public void loadCartProducts() {
+        //TODO load cart products
+
+        cartItems = new LinkedList<>();
+
+
+        Database.getCartRef().addListenerForSingleValueEvent(new ValueEventListener() {
+
             @Override
-            public void run() {
-                OfflineDatabase db = OfflineDatabase.getInstance(context);
-                cartProducts = db.getCartDao().getAllProducts();
-                listener.onProductsLoaded();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterator wholesalersIt = dataSnapshot.getChildren().iterator();
+
+                while (wholesalersIt.hasNext()) {
+                    DataSnapshot wholesaler = (DataSnapshot) wholesalersIt.next();
+
+                    CartItem item = new CartItem();
+                    item.setProducts(new LinkedList<>());
+                    cartItems.add(item);
+
+                    String wid = wholesaler.getKey();
+
+                    Database.getWholesalersRef().child(wid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            item.setWholesaler(dataSnapshot.getValue(Wholesaler.class));
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                    Iterator productIt = wholesaler.getChildren().iterator();
+
+                    while (productIt.hasNext()) {
+                        DataSnapshot product = (DataSnapshot) productIt.next();
+
+
+                        String pId = product.getKey();
+                        Integer quantity = product.getValue(Integer.class);
+
+                        Database.getProductRefById(pId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                CartProduct product = dataSnapshot.getValue(CartProduct.class);
+                                product.setInCartQuantity(quantity);
+
+                                item.getProducts().add(product);
+
+                                listener.onProductsLoaded();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
 
-    public List<CartProduct> getCartProducts() {
-        return cartProducts;
+    private void loadFavoriteWholesalers() {
+        //TODO
+        Database.getShopkeeperRefById(Auth.getCurrentUserUid()).child("Fabs").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String wid = snapshot.getValue(String.class);
+
+                    Database.getWholesalerRefById(wid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            Wholesaler w = snapshot.getValue(Wholesaler.class);
+                            favoriteWholesalers.add(w);
+                            listener.onFavoriteWholesalersLoaded();
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public List<CartItem> getCartProducts() {
+        return cartItems;
     }
 
     public List<Wholesaler> getAvailableWholesalers() {
         return availableWholesalers;
+    }
+
+    public List<Wholesaler> getFavoriteWholesalers() {
+        return favoriteWholesalers;
     }
 }

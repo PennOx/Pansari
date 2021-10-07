@@ -2,5 +2,6 @@ package project.pansari.viewHolders;
 
 public interface ViewClickListener {
 
-    void onViewClickListener(String wid);
+    void onWholesalerBannerClicked(String wid);
+
 }
