@@ -38,7 +38,6 @@ public class CartProductHolder extends RecyclerView.ViewHolder {
 
             SingleCartProductItemBinding bind = SingleCartProductItemBinding.inflate(LayoutInflater.from(itemView.getContext()), binding.singleCartProductsLayout, false);
             bind.setProduct(cartProduct);
-
             binding.singleCartProductsLayout.addView(bind.getRoot());
         }
     }
