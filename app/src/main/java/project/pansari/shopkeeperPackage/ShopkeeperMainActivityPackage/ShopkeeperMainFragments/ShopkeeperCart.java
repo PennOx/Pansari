@@ -1,10 +1,10 @@
 package project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -18,7 +18,6 @@ import project.pansari.R;
 import project.pansari.adapters.ShopkeeperCartProductsRecyclerAdapter;
 import project.pansari.databinding.FragmentShopkeeperCartBinding;
 import project.pansari.models.CartItem;
-import project.pansari.shopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
 
 public class ShopkeeperCart extends Fragment {
@@ -75,8 +74,7 @@ public class ShopkeeperCart extends Fragment {
     }
 
     private void startOrderSummaryActivity() {
-        Intent intent = new Intent(getContext(), OrderSummaryActivity.class);
-        startActivity(intent);
+        Toast.makeText(getContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
     }
 
     private void onSwipeRefresh() {

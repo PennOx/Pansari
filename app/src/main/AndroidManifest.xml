@@ -10,10 +10,6 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
 
-        <activity
-            android:name=".shopkeeperPackage.OrderSummaryPackage.OrderSummaryActivity"
-            android:screenOrientation="portrait" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
@@ -50,7 +46,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity" />
+        <activity
+            android:name=".shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -41,7 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:text="Checkout"
+            android:text="@string/place_order"
+            android:textColor="?attr/colorOnSecondary"
+            app:iconTint="?attr/colorOnSecondary"
             app:icon="@drawable/cart" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

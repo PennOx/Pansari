@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import project.pansari.database.Database;
 import project.pansari.databinding.SingleCartProductCardBinding;
 import project.pansari.databinding.SingleCartProductItemBinding;
 import project.pansari.models.CartItem;
@@ -38,6 +39,32 @@ public class CartProductHolder extends RecyclerView.ViewHolder {
 
             SingleCartProductItemBinding bind = SingleCartProductItemBinding.inflate(LayoutInflater.from(itemView.getContext()), binding.singleCartProductsLayout, false);
             bind.setProduct(cartProduct);
+            bind.setIncreaseListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Database.getCartRef().child(cartProduct.getSellerId()).child(cartProduct.getPid()).setValue(cartProduct.getInCartQuantity() + 1);
+                    cartProduct.setInCartQuantity(cartProduct.getInCartQuantity() + 1);
+                    bind.invalidateAll();
+                }
+            });
+
+            bind.setDecreaseListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (cartProduct.getInCartQuantity() <= 1) {
+                        Database.getCartRef().child(cartProduct.getSellerId()).child(cartProduct.getPid()).setValue(null);
+                        cartProduct.setInCartQuantity(1);
+                    } else {
+                        Database.getCartRef().child(cartProduct.getSellerId()).child(cartProduct.getPid()).setValue(cartProduct.getInCartQuantity() - 1);
+
+                    }
+                    cartProduct.setInCartQuantity(cartProduct.getInCartQuantity() - 1);
+                    bind.invalidateAll();
+                }
+            });
+
+
+            bind.setLifecycleOwner(binding.getLifecycleOwner());
             binding.singleCartProductsLayout.addView(bind.getRoot());
         }
     }

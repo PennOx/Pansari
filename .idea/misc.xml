@@ -24,11 +24,12 @@
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/fragment_shopkeeper_wholesaler_list.xml" value="0.15" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/fragment_wholesaler_completed_orders.xml" value="0.2" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/layout_product_overview.xml" value="0.16" />
-        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_cart_product_card.xml" value="0.2" />
+        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_cart_product_card.xml" value="0.22" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_cart_product_item.xml" value="0.31053604436229204" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_favorite_layout.xml" value="0.1935185185185185" />
+        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_order_banner.xml" value="0.2" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_product_view.xml" value="0.25" />
-        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_wholesaler_banner.xml" value="0.25" />
+        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_wholesaler_banner.xml" value="0.33" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/welcome_slider_layout.xml" value="0.1" />
       </map>
     </option>

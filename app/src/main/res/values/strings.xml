@@ -27,4 +27,5 @@
     <string name="pack_quantity">Pack quantity</string>
     <string name="product_description">Product description</string>
     <string name="favorite_wholesalers_title">Favorite wholesalers</string>
+    <string name="place_order">Place order</string>
 </resources>

@@ -6,9 +6,19 @@
 
         <import type="project.pansari.models.CartProduct" />
 
+        <import type="android.view.View.OnClickListener" />
+
         <variable
             name="product"
             type="CartProduct" />
+
+        <variable
+            name="increaseListener"
+            type="OnClickListener" />
+
+        <variable
+            name="decreaseListener"
+            type="OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,18 +84,19 @@
             android:layout_margin="8dp"
             android:background="@drawable/bg_small_button"
             android:fontFamily="@font/poppins_medium"
-            android:paddingHorizontal="4dp"
+            android:onClick="@{decreaseListener}"
+            android:paddingHorizontal="8dp"
             android:text="-"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintEnd_toStartOf="@+id/singleCartProductQuantity"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@id/guideline10"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/singleCartProductQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
@@ -104,14 +115,15 @@
             android:layout_margin="8dp"
             android:background="@drawable/bg_small_button"
             android:fontFamily="@font/poppins_medium"
-            android:paddingHorizontal="4dp"
+            android:onClick="@{increaseListener}"
             android:text="+"
+            android:paddingHorizontal="8dp"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/singleCartProductQuantity"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

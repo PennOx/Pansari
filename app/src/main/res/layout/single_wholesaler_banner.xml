@@ -24,30 +24,35 @@
         <ImageView
             android:id="@+id/singleWholesalerBanner"
             android:layout_width="0dp"
-            android:layout_height="125dp"
-            android:minHeight="150dp"
+            android:layout_height="0dp"
+            android:minHeight="100dp"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="4:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/wholesaler_banner"
             tools:ignore="ContentDescription" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/singleWholesalerImage"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/ic_profile_image_2"
             android:scaleType="centerCrop"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp"
             app:layout_constraintBottom_toBottomOf="@+id/singleWholesalerBanner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/singleWholesalerBanner"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="0dp"
