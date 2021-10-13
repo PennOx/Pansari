@@ -8,14 +8,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import project.pansari.auth.Auth;
 import project.pansari.database.Database;
 import project.pansari.models.CartItem;
 import project.pansari.models.CartProduct;
+import project.pansari.models.Order;
 import project.pansari.models.Wholesaler;
 
 public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoadListener> {
@@ -194,5 +197,33 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
 
     public List<Wholesaler> getFavoriteWholesalers() {
         return favoriteWholesalers;
+    }
+
+    public void placeOrder() {
+
+        for (CartItem item : cartItems) {
+            Order od = new Order();
+            od.setTimestamp(System.currentTimeMillis());
+            od.setId("OD" + od.getTimestamp());
+            od.setFrom(Auth.getCurrentUserUid());
+            od.setTo(item.getWholesaler().getWid());
+            od.setStatus("Pending");
+
+            Map<String, CartProduct> products = new HashMap<>();
+
+            for (CartProduct product : item.getProducts()) {
+                products.put(product.getPid(), product);
+            }
+            od.setProducts(products);
+
+            Database.getOrderRefById(od.getId()).setValue(od);
+            Database.getCartRef().child(od.getTo()).setValue(null);
+            Database.getShopkeeperOrderRefBySidAndOid(od.getFrom(), od.getId()).setValue(od.getId());
+            Database.getWholesalerOrderRefByWidAndOid(od.getTo(), od.getId()).setValue(od.getId());
+        }
+
+        cartItems.clear();
+        listener.onProductsLoaded();
+        listener.onOrderPlaced();
     }
 }

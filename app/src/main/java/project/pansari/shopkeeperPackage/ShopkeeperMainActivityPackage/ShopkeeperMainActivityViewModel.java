@@ -19,12 +19,13 @@ import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.Shopkeepe
 
 public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements ShopkeeperMainActivityDataLoadListener {
 
-    private final ShopkeeperWholesalerList wholesalerList;
-    private final ShopkeeperOrders orders;
-    private final ShopkeeperCart cart;
-    private final ShopkeeperProfile profile;
+    private final ShopkeeperWholesalerList wholesalerListFragment;
+    private final ShopkeeperOrders ordersFragment;
+    private final ShopkeeperCart cartFragment;
+    private final ShopkeeperProfile profileFragment;
     private MutableLiveData<Fragment> activeFragment;
     private ShopkeeperMainActivityRepo<ShopkeeperMainActivityViewModel> repo;
+    private MutableLiveData<Boolean> isLoading;
 
     //Cart Fragment
     private MutableLiveData<List<CartItem>> inCartProducts;
@@ -38,14 +39,16 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     public ShopkeeperMainActivityViewModel(Application app) {
         super(app);
 
-        wholesalerList = new ShopkeeperWholesalerList(this);
-        orders = new ShopkeeperOrders();
-        cart = new ShopkeeperCart(this);
-        profile = new ShopkeeperProfile();
+        wholesalerListFragment = new ShopkeeperWholesalerList(this);
+        ordersFragment = new ShopkeeperOrders();
+        cartFragment = new ShopkeeperCart(this);
+        profileFragment = new ShopkeeperProfile();
+
+        isLoading = new MutableLiveData<>(false);
 
         repo = new ShopkeeperMainActivityRepo<>(this, app.getApplicationContext());
 
-        activeFragment = new MutableLiveData<>(wholesalerList);
+        activeFragment = new MutableLiveData<>(wholesalerListFragment);
         inCartProducts = new MutableLiveData<>(repo.getCartProducts());
         availableWholesalers = new MutableLiveData<>(repo.getAvailableWholesalers());
         favoriteWholesalers = new MutableLiveData<>(repo.getFavoriteWholesalers());
@@ -55,16 +58,16 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     public void updateMenuItemFragment(int itemId) {
         switch (itemId) {
             case R.id.shopkeeper_main_menu_wholesaler:
-                activeFragment.setValue(wholesalerList);
+                activeFragment.setValue(wholesalerListFragment);
                 break;
             case R.id.shopkeeper_main_menu_orders:
-                activeFragment.setValue(orders);
+                activeFragment.setValue(ordersFragment);
                 break;
             case R.id.shopkeeper_main_menu_cart:
-                activeFragment.setValue(cart);
+                activeFragment.setValue(cartFragment);
                 break;
             case R.id.shopkeeper_main_menu_profile:
-                activeFragment.setValue(profile);
+                activeFragment.setValue(profileFragment);
                 break;
         }
     }
@@ -83,6 +86,10 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
     public LiveData<List<Wholesaler>> getFavoriteWholesalers() {
         return favoriteWholesalers;
+    }
+
+    public LiveData<Boolean> isLoading() {
+        return isLoading;
     }
 
     @Override
@@ -104,4 +111,14 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         repo.loadCartProducts();
     }
 
+    public void placeOrder() {
+        isLoading.setValue(true);
+
+        repo.placeOrder();
+    }
+
+    @Override
+    public void onOrderPlaced() {
+        isLoading.setValue(false);
+    }
 }

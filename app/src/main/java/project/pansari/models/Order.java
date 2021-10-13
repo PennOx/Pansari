@@ -1,53 +1,63 @@
 package project.pansari.models;
 
+
 import java.util.Map;
 
 public class Order {
 
-    private String orderId;
-    private String orderFrom;
-    private long orderTime;
-    private String orderStatus;
-    private Map<String, Map<String, CartItem>> Wholesalers;
+    private String id;
+    private String from;
+    private String to;
+    private long timestamp;
+    private String status;
+    private Map<String, CartProduct> products;
 
-    public String getOrderId() {
-        return orderId;
+    public String getId() {
+        return id;
     }
 
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getOrderFrom() {
-        return orderFrom;
+    public String getFrom() {
+        return from;
     }
 
-    public void setOrderFrom(String orderFrom) {
-        this.orderFrom = orderFrom;
+    public void setFrom(String from) {
+        this.from = from;
     }
 
-    public long getOrderTime() {
-        return orderTime;
+    public String getTo() {
+        return to;
     }
 
-    public void setOrderTime(long orderTime) {
-        this.orderTime = orderTime;
+    public void setTo(String to) {
+        this.to = to;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public Map<String, Map<String, CartItem>> getWholesalers() {
-        return Wholesalers;
+    public String getStatus() {
+        return status;
     }
 
-    public void setWholesalers(Map<String, Map<String, CartItem>> wholesalers) {
-        Wholesalers = wholesalers;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Map<String, CartProduct> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Map<String, CartProduct> products) {
+        this.products = products;
     }
 }
 

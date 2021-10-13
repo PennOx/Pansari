@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -62,19 +61,19 @@ public class ShopkeeperCart extends Fragment {
         binding.shopkeeperCartCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onCheckoutClick();
+                onPlaceOrderClicked();
             }
         });
 
         return binding.getRoot();
     }
 
-    private void onCheckoutClick() {
-        startOrderSummaryActivity();
+    private void onPlaceOrderClicked() {
+        placeOrder();
     }
 
-    private void startOrderSummaryActivity() {
-        Toast.makeText(getContext(), "Not implemented yet", Toast.LENGTH_SHORT).show();
+    private void placeOrder() {
+        viewModel.placeOrder();
     }
 
     private void onSwipeRefresh() {

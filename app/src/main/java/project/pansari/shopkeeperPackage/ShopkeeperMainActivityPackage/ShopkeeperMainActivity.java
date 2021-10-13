@@ -1,5 +1,6 @@
 package project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -17,11 +18,17 @@ import project.pansari.R;
 public class ShopkeeperMainActivity extends AppCompatActivity {
 
     private ShopkeeperMainActivityViewModel viewModel;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopkeeper_main);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait");
+        progressDialog.setCanceledOnTouchOutside(false);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
@@ -35,6 +42,17 @@ public class ShopkeeperMainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Fragment fragment) {
                 setFragment(fragment);
+            }
+        });
+
+        viewModel.isLoading().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showProgressDialog();
+                } else {
+                    hideProgressDialog();
+                }
             }
         });
 
@@ -54,5 +72,14 @@ public class ShopkeeperMainActivity extends AppCompatActivity {
     private void setFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.shopkeeper_main_fragment_view, fragment).commit();
+    }
+
+    private void showProgressDialog() {
+        progressDialog.show();
+    }
+
+    private void hideProgressDialog() {
+        progressDialog.hide();
+        progressDialog.dismiss();
     }
 }
