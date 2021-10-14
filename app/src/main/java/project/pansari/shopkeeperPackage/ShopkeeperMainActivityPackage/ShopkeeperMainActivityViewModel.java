@@ -42,7 +42,7 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     public ShopkeeperMainActivityViewModel(Application app) {
         super(app);
 
-        wholesalerListFragment = new ShopkeeperWholesalerList(this);
+        wholesalerListFragment = new ShopkeeperWholesalerList();
         ordersFragment = new ShopkeeperOrders();
         cartFragment = new ShopkeeperCart(this);
         profileFragment = new ShopkeeperProfile();
@@ -137,5 +137,13 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
     public void refreshOrders() {
         repo.loadOrders();
+    }
+
+    public void refreshAvailableWholesalers() {
+        repo.loadAvailableWholesalers();
+    }
+
+    public void refreshFavoriteWholesalers() {
+        repo.loadFavoriteWholesalers();
     }
 }

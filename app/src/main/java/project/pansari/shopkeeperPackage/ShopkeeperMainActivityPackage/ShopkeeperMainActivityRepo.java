@@ -44,7 +44,8 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         loadOrders();
     }
 
-    private void loadAvailableWholesalers() {
+    public void loadAvailableWholesalers() {
+        availableWholesalers = new LinkedList<>();
         Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).child("pinCode").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,8 +90,6 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
     }
 
     public void loadCartProducts() {
-        //TODO load cart products
-
         cartItems = new LinkedList<>();
 
 
@@ -159,8 +158,8 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         });
     }
 
-    private void loadFavoriteWholesalers() {
-        //TODO
+    public void loadFavoriteWholesalers() {
+        favoriteWholesalers = new LinkedList<>();
         Database.getShopkeeperRefById(Auth.getCurrentUserUid()).child("Fabs").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

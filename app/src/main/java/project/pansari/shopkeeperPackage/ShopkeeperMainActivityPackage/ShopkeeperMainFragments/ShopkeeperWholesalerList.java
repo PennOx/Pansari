@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.List;
 
@@ -30,30 +32,16 @@ public class ShopkeeperWholesalerList extends Fragment implements ViewClickListe
     private ShopkeeperMainActivityViewModel viewModel;
     private FragmentShopkeeperWholesalerListBinding binding;
 
-    public ShopkeeperWholesalerList(ShopkeeperMainActivityViewModel viewModel) {
-        this.viewModel = viewModel;
+    public ShopkeeperWholesalerList() {
+        //Require Empty Constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        wholesalersAdapter = new WholesalerBannerRecyclerAdapter(viewModel.getAvailableWholesalers().getValue(), this);
-        favoriteWholesalersAdapter = new FavoriteWholesalerRecyclerAdapter(viewModel.getFavoriteWholesalers().getValue(), this);
+        viewModel = new ViewModelProvider(getActivity()).get(ShopkeeperMainActivityViewModel.class);
 
-        viewModel.getAvailableWholesalers().observe(this, new Observer<List<Wholesaler>>() {
-            @Override
-            public void onChanged(List<Wholesaler> wholesalers) {
-                wholesalersAdapter.notifyDataSetChanged();
-            }
-        });
-
-        viewModel.getFavoriteWholesalers().observe(this, new Observer<List<Wholesaler>>() {
-            @Override
-            public void onChanged(List<Wholesaler> wholesalers) {
-                favoriteWholesalersAdapter.notifyDataSetChanged();
-            }
-        });
     }
 
     @Override
@@ -65,8 +53,31 @@ public class ShopkeeperWholesalerList extends Fragment implements ViewClickListe
         binding.shopkeeperWholesalersListRecycler.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.shopkeeperWholesalerListFavoriteWholesalersRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        binding.shopkeeperWholesalersListRecycler.setAdapter(wholesalersAdapter);
-        binding.shopkeeperWholesalerListFavoriteWholesalersRecycler.setAdapter(favoriteWholesalersAdapter);
+        binding.shopkeeperWholesalerListSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                binding.shopkeeperWholesalerListSwipeRefreshLayout.setRefreshing(false);
+                viewModel.refreshAvailableWholesalers();
+                viewModel.refreshFavoriteWholesalers();
+            }
+        });
+
+        viewModel.getAvailableWholesalers().observe(getViewLifecycleOwner(), new Observer<List<Wholesaler>>() {
+            @Override
+            public void onChanged(List<Wholesaler> wholesalers) {
+                wholesalersAdapter = new WholesalerBannerRecyclerAdapter(viewModel.getAvailableWholesalers().getValue(), ShopkeeperWholesalerList.this);
+                binding.shopkeeperWholesalersListRecycler.setAdapter(wholesalersAdapter);
+            }
+        });
+
+        viewModel.getFavoriteWholesalers().observe(getViewLifecycleOwner(), new Observer<List<Wholesaler>>() {
+            @Override
+            public void onChanged(List<Wholesaler> wholesalers) {
+                favoriteWholesalersAdapter = new FavoriteWholesalerRecyclerAdapter(viewModel.getFavoriteWholesalers().getValue(), ShopkeeperWholesalerList.this);
+                binding.shopkeeperWholesalerListFavoriteWholesalersRecycler.setAdapter(favoriteWholesalersAdapter);
+            }
+        });
+
 
         return binding.getRoot();
     }
