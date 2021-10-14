@@ -25,7 +25,7 @@ public class FavoriteHolder extends RecyclerView.ViewHolder {
         if (w.getImage() != null && !w.getImage().isEmpty()) {
             Glide.with(binding.favoriteImageview.getContext()).load(w.getImage()).into(binding.favoriteImageview);
         }
-
+        binding.setWholesaler(w);
         binding.favoriteImageview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
