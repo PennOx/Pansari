@@ -10,6 +10,7 @@ public class Order {
     private String to;
     private long timestamp;
     private String status;
+    private int productsCount;
     private Map<String, CartProduct> products;
 
     public String getId() {
@@ -50,6 +51,14 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getProductsCount() {
+        return productsCount;
+    }
+
+    public void setProductsCount(int productsCount) {
+        this.productsCount = productsCount;
     }
 
     public Map<String, CartProduct> getProducts() {

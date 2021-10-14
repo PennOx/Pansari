@@ -9,4 +9,6 @@ public interface ShopkeeperMainActivityDataLoadListener {
     void onFavoriteWholesalersLoaded();
 
     void onOrderPlaced();
+
+    void onOrdersLoaded();
 }

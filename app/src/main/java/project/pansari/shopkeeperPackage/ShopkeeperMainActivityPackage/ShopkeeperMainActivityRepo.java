@@ -19,6 +19,8 @@ import project.pansari.database.Database;
 import project.pansari.models.CartItem;
 import project.pansari.models.CartProduct;
 import project.pansari.models.Order;
+import project.pansari.models.OrderWrap;
+import project.pansari.models.User;
 import project.pansari.models.Wholesaler;
 
 public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoadListener> {
@@ -28,17 +30,19 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
     private List<CartItem> cartItems;
     private List<Wholesaler> availableWholesalers;
     private List<Wholesaler> favoriteWholesalers;
+    private List<OrderWrap> orders;
 
     public ShopkeeperMainActivityRepo(T listener, Context context) {
         this.listener = listener;
         cartItems = new LinkedList<>();
         availableWholesalers = new LinkedList<>();
         favoriteWholesalers = new LinkedList<>();
+        orders = new LinkedList<>();
         loadAvailableWholesalers();
         loadCartProducts();
         loadFavoriteWholesalers();
+        loadOrders();
     }
-
 
     private void loadAvailableWholesalers() {
         Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).child("pinCode").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -187,6 +191,52 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         });
     }
 
+    public void loadOrders() {
+        orders = new LinkedList<>();
+
+        Database.getShopkeeperOrdersRefBySid(Auth.getCurrentUserUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> oIdIterator = dataSnapshot.getChildren().iterator();
+
+                while (oIdIterator.hasNext()) {
+                    String oId = oIdIterator.next().getValue(String.class);
+
+                    Database.getOrderRefById(oId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            OrderWrap wrap = dataSnapshot.getValue(OrderWrap.class);
+
+                            Database.getWholesalerRefById(wrap.getTo()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    wrap.setUser(dataSnapshot.getValue(User.class));
+                                    orders.add(wrap);
+                                    listener.onOrdersLoaded();
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public List<CartItem> getCartProducts() {
         return cartItems;
     }
@@ -208,6 +258,7 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
             od.setFrom(Auth.getCurrentUserUid());
             od.setTo(item.getWholesaler().getWid());
             od.setStatus("Pending");
+            od.setProductsCount(item.getProducts().size());
 
             Map<String, CartProduct> products = new HashMap<>();
 
@@ -225,5 +276,9 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         cartItems.clear();
         listener.onProductsLoaded();
         listener.onOrderPlaced();
+    }
+
+    public List<OrderWrap> getOrders() {
+        return orders;
     }
 }
