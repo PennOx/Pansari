@@ -107,4 +107,8 @@ public class WholesalerMainActivityViewModel extends ViewModel implements Wholes
     public void refreshPendingOrders() {
         repo.loadOrders();
     }
+
+    public void refreshCompletedOrders() {
+        repo.loadOrders();
+    }
 }
