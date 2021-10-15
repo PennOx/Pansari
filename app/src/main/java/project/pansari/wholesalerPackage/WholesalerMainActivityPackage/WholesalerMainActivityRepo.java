@@ -1,7 +1,6 @@
 package project.pansari.wholesalerPackage.WholesalerMainActivityPackage;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -13,36 +12,51 @@ import java.util.List;
 
 import project.pansari.auth.Auth;
 import project.pansari.database.Database;
+import project.pansari.models.OrderWrap;
 import project.pansari.models.Product;
+import project.pansari.models.Shopkeeper;
 import project.pansari.models.Wholesaler;
-import project.pansari.shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductOverviewDataLoadListener;
 
-public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataLoadListener> {
+public class WholesalerMainActivityRepo<T extends WholesalerMainActivityDataLoadListener> {
 
-    private WholesalerProductOverviewDataLoadListener wholesalerProductOverviewDataLoadListener;
+    private final WholesalerMainActivityDataLoadListener listener;
+
     private Wholesaler wholesaler = new Wholesaler();
-    private List<Product> productList = new LinkedList<>();
+
+    private List<Product> productList;
+    private List<OrderWrap> pendingOrders;
+    private List<OrderWrap> completedOrders;
 
     public WholesalerMainActivityRepo(T context) {
-        wholesalerProductOverviewDataLoadListener = context;
+        listener = context;
+
+        productList = new LinkedList<>();
+        pendingOrders = new LinkedList<>();
+        completedOrders = new LinkedList<>();
+
         loadProducts();
         loadWholesaler();
+        loadOrders();
     }
 
-    public MutableLiveData<List<Product>> getProducts() {
-        MutableLiveData<List<Product>> p = new MutableLiveData<>();
-        p.setValue(productList);
-        return p;
+    public List<Product> getProducts() {
+        return productList;
     }
 
-    public MutableLiveData<Wholesaler> getWholesaler() {
-
-        MutableLiveData<Wholesaler> w = new MutableLiveData<>();
-        w.setValue(wholesaler);
-        return w;
+    public Wholesaler getWholesaler() {
+        return wholesaler;
     }
 
-    private void loadProducts() {
+    public List<OrderWrap> getPendingOrders() {
+        return pendingOrders;
+    }
+
+    public List<OrderWrap> getCompletedOrders() {
+        return completedOrders;
+    }
+
+    void loadProducts() {
+        productList = new LinkedList<>();
         Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -59,7 +73,7 @@ public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataL
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             productList.add(snapshot.getValue(Product.class));
-                            wholesalerProductOverviewDataLoadListener.onProductsLoaded();
+                            listener.onProductsLoaded();
                         }
 
                         @Override
@@ -77,14 +91,13 @@ public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataL
         });
     }
 
-    private void loadWholesaler() {
-
+    void loadWholesaler() {
         Database.getWholesalersRef().child(Auth.getCurrentUserUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 wholesaler = snapshot.getValue(Wholesaler.class);
-                wholesalerProductOverviewDataLoadListener.onWholesalerLoaded();
+                listener.onWholesalerLoaded();
             }
 
             @Override
@@ -94,4 +107,57 @@ public class WholesalerMainActivityRepo<T extends WholesalerProductOverviewDataL
         });
 
     }
+
+    void loadOrders() {
+        pendingOrders = new LinkedList<>();
+        completedOrders = new LinkedList<>();
+
+        Database.getWholesalerOrdersRefByWid(Auth.getCurrentUserUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String oId = snapshot.getValue(String.class);
+
+                    Database.getOrderRefById(oId).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            OrderWrap order = dataSnapshot.getValue(OrderWrap.class);
+
+                            Database.getShopkeeperRefById(order.getFrom()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    order.setUser(dataSnapshot.getValue(Shopkeeper.class));
+
+                                    if (order.getStatus().equals("Completed") || order.getStatus().equals("Cancelled")) {
+                                        completedOrders.add(order);
+                                        listener.onCompletedOrdersLoaded();
+                                    } else {
+                                        pendingOrders.add(order);
+                                        listener.onPendingOrdersLoaded();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

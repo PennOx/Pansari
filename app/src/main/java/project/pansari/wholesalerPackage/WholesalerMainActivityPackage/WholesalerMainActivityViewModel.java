@@ -8,51 +8,58 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import project.pansari.R;
+import project.pansari.models.OrderWrap;
 import project.pansari.models.Product;
 import project.pansari.models.Wholesaler;
-import project.pansari.shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductOverviewDataLoadListener;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerCompletedOrders;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerPendingOrders;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProducts;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProfile;
 
-public class WholesalerMainActivityViewModel extends ViewModel implements WholesalerProductOverviewDataLoadListener {
+public class WholesalerMainActivityViewModel extends ViewModel implements WholesalerMainActivityDataLoadListener {
 
-    private final WholesalerPendingOrders pendingOrders;
-    private final WholesalerCompletedOrders completedOrders;
-    private final WholesalerProducts products;
-    private final WholesalerProfile profile;
+    private final WholesalerPendingOrders pendingOrdersFragment;
+    private final WholesalerCompletedOrders completedOrdersFragment;
+    private final WholesalerProducts productsFragment;
+    private final WholesalerProfile profileFragment;
     private MutableLiveData<Fragment> activeFragment;
-    private WholesalerMainActivityRepo repo;
+
+    private WholesalerMainActivityRepo<WholesalerMainActivityDataLoadListener> repo;
+
     private MutableLiveData<Wholesaler> wholesaler;
     private MutableLiveData<List<Product>> wholesalerProducts;
+    private MutableLiveData<List<OrderWrap>> pendingOrders;
+    private MutableLiveData<List<OrderWrap>> completedOrders;
+
 
     public WholesalerMainActivityViewModel() {
-        pendingOrders = new WholesalerPendingOrders();
-        completedOrders = new WholesalerCompletedOrders();
-        products = new WholesalerProducts();
-        profile = new WholesalerProfile();
-        activeFragment = new MutableLiveData<>(pendingOrders);
+        pendingOrdersFragment = new WholesalerPendingOrders();
+        completedOrdersFragment = new WholesalerCompletedOrders();
+        productsFragment = new WholesalerProducts();
+        profileFragment = new WholesalerProfile();
+        activeFragment = new MutableLiveData<>(pendingOrdersFragment);
 
-        repo = new WholesalerMainActivityRepo(this);
+        repo = new WholesalerMainActivityRepo<>(this);
 
-        wholesalerProducts = repo.getProducts();
-        wholesaler = repo.getWholesaler();
+        wholesalerProducts = new MutableLiveData<>(repo.getProducts());
+        wholesaler = new MutableLiveData<>(repo.getWholesaler());
+        pendingOrders = new MutableLiveData<>(repo.getPendingOrders());
+        completedOrders = new MutableLiveData<>(repo.getCompletedOrders());
     }
 
     public void updateMenuItemFragment(int itemId) {
         switch (itemId) {
             case R.id.wholesaler_main_menu_pending:
-                activeFragment.setValue(pendingOrders);
+                activeFragment.setValue(pendingOrdersFragment);
                 break;
             case R.id.wholesaler_main_menu_completed:
-                activeFragment.setValue(completedOrders);
+                activeFragment.setValue(completedOrdersFragment);
                 break;
             case R.id.wholesaler_main_menu_products:
-                activeFragment.setValue(products);
+                activeFragment.setValue(productsFragment);
                 break;
             case R.id.wholesaler_main_menu_profile:
-                activeFragment.setValue(profile);
+                activeFragment.setValue(profileFragment);
                 break;
         }
     }
@@ -69,13 +76,35 @@ public class WholesalerMainActivityViewModel extends ViewModel implements Wholes
         return wholesaler;
     }
 
+    public LiveData<List<OrderWrap>> getPendingOrders() {
+        return pendingOrders;
+    }
+
+    public LiveData<List<OrderWrap>> getCompletedOrders() {
+        return completedOrders;
+    }
+
     @Override
     public void onProductsLoaded() {
-        wholesalerProducts.setValue((List<Product>) repo.getProducts().getValue());
+        wholesalerProducts.postValue(repo.getProducts());
     }
 
     @Override
     public void onWholesalerLoaded() {
-        wholesaler.setValue((Wholesaler) repo.getWholesaler().getValue());
+        wholesaler.postValue(repo.getWholesaler());
+    }
+
+    @Override
+    public void onPendingOrdersLoaded() {
+        pendingOrders.postValue(repo.getPendingOrders());
+    }
+
+    @Override
+    public void onCompletedOrdersLoaded() {
+        completedOrders.postValue(repo.getCompletedOrders());
+    }
+
+    public void refreshPendingOrders() {
+        repo.loadOrders();
     }
 }
