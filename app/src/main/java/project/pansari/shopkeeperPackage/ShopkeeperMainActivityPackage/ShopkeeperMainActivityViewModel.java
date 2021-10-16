@@ -44,7 +44,7 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
         wholesalerListFragment = new ShopkeeperWholesalerList();
         ordersFragment = new ShopkeeperOrders();
-        cartFragment = new ShopkeeperCart(this);
+        cartFragment = new ShopkeeperCart();
         profileFragment = new ShopkeeperProfile();
 
         isLoading = new MutableLiveData<>(false);

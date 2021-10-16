@@ -18,9 +18,10 @@ import project.pansari.R;
 import project.pansari.adapters.OrderBannerRecyclerAdapter;
 import project.pansari.databinding.FragmentWholesalerCompletedOrdersBinding;
 import project.pansari.models.OrderWrap;
+import project.pansari.viewHolders.OrderBannerClickListener;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
 
-public class WholesalerCompletedOrders extends Fragment {
+public class WholesalerCompletedOrders extends Fragment implements OrderBannerClickListener {
 
     private WholesalerMainActivityViewModel viewModel;
     private FragmentWholesalerCompletedOrdersBinding binding;
@@ -55,11 +56,21 @@ public class WholesalerCompletedOrders extends Fragment {
             @Override
             public void onChanged(List<OrderWrap> orderWraps) {
                 binding.wholesalerCompletedOrdersSwipeRefreshLayout.setRefreshing(false);
-                adapter = new OrderBannerRecyclerAdapter(orderWraps);
+                adapter = new OrderBannerRecyclerAdapter(orderWraps, WholesalerCompletedOrders.this);
                 binding.wholesalerCompletedOrdersRecycler.setAdapter(adapter);
             }
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClickOrderBanner(int pos) {
+        //TODO
+    }
+
+    @Override
+    public void onClickViewOrder(int pos) {
+        //TODO
     }
 }

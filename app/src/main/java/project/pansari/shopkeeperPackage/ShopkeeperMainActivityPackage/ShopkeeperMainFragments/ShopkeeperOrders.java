@@ -1,9 +1,11 @@
 package project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -19,8 +21,10 @@ import project.pansari.adapters.OrderBannerRecyclerAdapter;
 import project.pansari.databinding.FragmentShopkeeperOrdersBinding;
 import project.pansari.models.OrderWrap;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
+import project.pansari.shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview;
+import project.pansari.viewHolders.OrderBannerClickListener;
 
-public class ShopkeeperOrders extends Fragment {
+public class ShopkeeperOrders extends Fragment implements OrderBannerClickListener {
 
     private ShopkeeperMainActivityViewModel viewModel;
     private FragmentShopkeeperOrdersBinding binding;
@@ -54,11 +58,24 @@ public class ShopkeeperOrders extends Fragment {
         viewModel.getOrders().observe(getViewLifecycleOwner(), new Observer<List<OrderWrap>>() {
             @Override
             public void onChanged(List<OrderWrap> orderWraps) {
-                adapter = new OrderBannerRecyclerAdapter(orderWraps);
+                adapter = new OrderBannerRecyclerAdapter(orderWraps, ShopkeeperOrders.this);
                 binding.shopkeeperOrdersRecycler.setAdapter(adapter);
             }
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClickOrderBanner(int pos) {
+        Intent intent = new Intent(getContext(), WholesalerProductsOverview.class);
+        intent.putExtra("wid", viewModel.getOrders().getValue().get(pos).getTo());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClickViewOrder(int pos) {
+        //TODO
+        Toast.makeText(getContext(), "Not implememted yet", Toast.LENGTH_LONG).show();
     }
 }

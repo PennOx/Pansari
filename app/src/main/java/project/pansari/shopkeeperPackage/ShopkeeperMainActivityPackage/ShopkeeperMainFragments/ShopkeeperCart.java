@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -26,13 +27,14 @@ public class ShopkeeperCart extends Fragment {
 
     private FragmentShopkeeperCartBinding binding;
 
-    public ShopkeeperCart(ShopkeeperMainActivityViewModel viewModel) {
-        this.viewModel = viewModel;
+    public ShopkeeperCart() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        viewModel = new ViewModelProvider(getActivity()).get(ShopkeeperMainActivityViewModel.class);
     }
 
     @Override

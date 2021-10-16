@@ -6,10 +6,19 @@
 
         <import type="project.pansari.models.OrderWrap" />
 
+        <import type="android.view.View.OnClickListener" />
+
         <variable
             name="order"
             type="OrderWrap" />
 
+        <variable
+            name="onBannerClickListener"
+            type="OnClickListener" />
+
+        <variable
+            name="onViewOrderClickListener"
+            type="OnClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -22,6 +31,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:cardMaxElevation="4dp"
+        android:onClick="@{onBannerClickListener}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +153,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_semibold"
+                    android:onClick="@{onViewOrderClickListener}"
                     android:gravity="center"
                     android:text="@string/view_order"
                     android:textColor="?attr/colorSecondary"

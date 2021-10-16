@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -17,9 +18,10 @@ import project.pansari.R;
 import project.pansari.adapters.OrderBannerRecyclerAdapter;
 import project.pansari.databinding.FragmentWholesalerPendingOrdersBinding;
 import project.pansari.models.OrderWrap;
+import project.pansari.viewHolders.OrderBannerClickListener;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
 
-public class WholesalerPendingOrders extends Fragment {
+public class WholesalerPendingOrders extends Fragment implements OrderBannerClickListener {
 
     private OrderBannerRecyclerAdapter adapter;
     private WholesalerMainActivityViewModel viewModel;
@@ -52,11 +54,22 @@ public class WholesalerPendingOrders extends Fragment {
             @Override
             public void onChanged(List<OrderWrap> orderWraps) {
                 binding.wholesalerPendingOrdersSwipeRefreshLayout.setRefreshing(false);
-                adapter = new OrderBannerRecyclerAdapter(orderWraps);
+                adapter = new OrderBannerRecyclerAdapter(orderWraps, WholesalerPendingOrders.this);
                 binding.wholesalerPendingOrdersRecycler.setAdapter(adapter);
             }
         });
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onClickOrderBanner(int pos) {
+        //TODO
+    }
+
+    @Override
+    public void onClickViewOrder(int pos) {
+        //TODO
+        Toast.makeText(getContext(), "Not implemented yet.", Toast.LENGTH_SHORT).show();
     }
 }
