@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -22,6 +21,7 @@ import project.pansari.databinding.FragmentShopkeeperOrdersBinding;
 import project.pansari.models.OrderWrap;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
 import project.pansari.shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview;
+import project.pansari.shopkeeperPackage.shopkeeperOrderViewActivity.OrderViewActivity;
 import project.pansari.viewHolders.OrderBannerClickListener;
 
 public class ShopkeeperOrders extends Fragment implements OrderBannerClickListener {
@@ -76,6 +76,8 @@ public class ShopkeeperOrders extends Fragment implements OrderBannerClickListen
     @Override
     public void onClickViewOrder(int pos) {
         //TODO
-        Toast.makeText(getContext(), "Not implememted yet", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(getContext(), OrderViewActivity.class);
+        intent.putExtra("oid", viewModel.getOrders().getValue().get(pos).getId());
+        startActivity(intent);
     }
 }

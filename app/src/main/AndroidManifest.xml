@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
+        <activity
+            android:name=".shopkeeperPackage.shopkeeperOrderViewActivity.OrderViewActivity"
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
@@ -34,7 +37,6 @@
         <activity
             android:name=".loginAndSignupPackage.LoginPackage.LoginActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".loginAndSignupPackage.StartActivityPackage.StartActivity"
             android:exported="true"

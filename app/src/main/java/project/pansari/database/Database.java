@@ -55,10 +55,6 @@ public class Database {
         return getProductsRef().child(id);
     }
 
-    public static DatabaseReference getOrdersRef() {
-        return ordersRef;
-    }
-
     public static DatabaseReference getOrderRefById(String oId) {
         return ordersRef.child(oId);
     }
