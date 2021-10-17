@@ -32,4 +32,10 @@
     <string name="accept_order">Accept order</string>
     <string name="decline_order">Decline order</string>
     <string name="cancel_order">Cancel order</string>
+    <string name="name">Name</string>
+    <string name="order_id">Order ID</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="contact">Contact</string>
+    <string name="total_items">Total items</string>
 </resources>

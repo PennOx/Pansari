@@ -21,6 +21,7 @@ import project.pansari.databinding.FragmentShopkeeperOrdersBinding;
 import project.pansari.models.OrderWrap;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivityViewModel;
 import project.pansari.shopkeeperPackage.WholesalerProductOverviewPackage.WholesalerProductsOverview;
+import project.pansari.shopkeeperPackage.shopkeeperOrderViewActivity.OrderOverviewActivity;
 import project.pansari.shopkeeperPackage.shopkeeperOrderViewActivity.OrderViewActivity;
 import project.pansari.viewHolders.OrderBannerClickListener;
 
@@ -75,9 +76,17 @@ public class ShopkeeperOrders extends Fragment implements OrderBannerClickListen
 
     @Override
     public void onClickViewOrder(int pos) {
-        //TODO
-        Intent intent = new Intent(getContext(), OrderViewActivity.class);
-        intent.putExtra("oid", viewModel.getOrders().getValue().get(pos).getId());
-        startActivity(intent);
+
+        String status = viewModel.getOrders().getValue().get(pos).getStatus();
+
+        if (status.equals("Cancelled") || status.equals("Completed") || status.equals("Declined")) {
+            Intent intent = new Intent(getContext(), OrderOverviewActivity.class);
+            intent.putExtra("oid", viewModel.getOrders().getValue().get(pos).getId());
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getContext(), OrderViewActivity.class);
+            intent.putExtra("oid", viewModel.getOrders().getValue().get(pos).getId());
+            startActivity(intent);
+        }
     }
 }

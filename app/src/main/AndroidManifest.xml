@@ -10,6 +10,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
         <activity
+            android:name=".shopkeeperPackage.shopkeeperOrderViewActivity.OrderOverviewActivity"
+            android:exported="true" />
+        <activity
             android:name=".shopkeeperPackage.shopkeeperOrderViewActivity.OrderViewActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
