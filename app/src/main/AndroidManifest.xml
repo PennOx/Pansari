@@ -11,7 +11,8 @@
         android:theme="@style/Theme.Pansari">
         <activity
             android:name=".shopkeeperPackage.shopkeeperOrderViewActivity.OrderViewActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

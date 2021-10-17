@@ -169,6 +169,7 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setTitle("Loading");
         progressDialog.setMessage("Please wait");
         progressDialog.setCanceledOnTouchOutside(false);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
         builder.setMessage("E-mail verification mail has been sent.\nPlease verify and login again!");
         builder.setCancelable(false);

@@ -29,4 +29,7 @@
     <string name="favorite_wholesalers_title">Favorite wholesalers</string>
     <string name="place_order">Place order</string>
     <string name="view_order">View order</string>
+    <string name="accept_order">Accept order</string>
+    <string name="decline_order">Decline order</string>
+    <string name="cancel_order">Cancel order</string>
 </resources>

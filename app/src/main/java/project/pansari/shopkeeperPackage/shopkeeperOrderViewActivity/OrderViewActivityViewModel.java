@@ -15,12 +15,14 @@ public class OrderViewActivityViewModel extends ViewModel implements OrderViewDa
 
     private MutableLiveData<OrderWrap> orderWrap;
     private MutableLiveData<List<CartProduct>> orderProducts;
+    private MutableLiveData<Boolean> orderCancelFlag;
 
     public OrderViewActivityViewModel(String oid) {
         this.repo = new OrderViewActivityRepo(oid, this);
 
         this.orderWrap = new MutableLiveData<>(repo.getOrderWrap());
         this.orderProducts = new MutableLiveData<>(repo.getOrderProducts());
+        this.orderCancelFlag = new MutableLiveData<>(false);
     }
 
     public LiveData<OrderWrap> getOrderWrap() {
@@ -31,6 +33,10 @@ public class OrderViewActivityViewModel extends ViewModel implements OrderViewDa
         return orderProducts;
     }
 
+    public LiveData<Boolean> getOrderCancelFlag() {
+        return orderCancelFlag;
+    }
+
     @Override
     public void onOrderLoaded() {
         orderWrap.postValue(repo.getOrderWrap());
@@ -39,5 +45,14 @@ public class OrderViewActivityViewModel extends ViewModel implements OrderViewDa
     @Override
     public void onOrderProductsLoaded() {
         orderProducts.postValue(repo.getOrderProducts());
+    }
+
+    @Override
+    public void onOrderCancelled() {
+        orderCancelFlag.postValue(true);
+    }
+
+    public void cancelOrder() {
+        repo.cancelOrder();
     }
 }

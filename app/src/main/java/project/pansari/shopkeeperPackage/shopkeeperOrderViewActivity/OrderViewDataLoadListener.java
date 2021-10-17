@@ -5,4 +5,6 @@ public interface OrderViewDataLoadListener {
     void onOrderLoaded();
 
     void onOrderProductsLoaded();
+
+    void onOrderCancelled();
 }

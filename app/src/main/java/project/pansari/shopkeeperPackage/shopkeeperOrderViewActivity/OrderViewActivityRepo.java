@@ -5,6 +5,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -42,6 +43,7 @@ public class OrderViewActivityRepo {
                 OrderWrap wrap = dataSnapshot.getValue(OrderWrap.class);
 
                 Database.getWholesalerRefById(wrap.getTo()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         wrap.setUser(dataSnapshot.getValue(User.class));
@@ -84,5 +86,14 @@ public class OrderViewActivityRepo {
 
     public List<CartProduct> getOrderProducts() {
         return orderProducts;
+    }
+
+    public void cancelOrder() {
+        Database.getOrderRefById(oId).child("status").setValue("Cancelled").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                listener.onOrderCancelled();
+            }
+        });
     }
 }
