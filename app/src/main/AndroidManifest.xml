@@ -10,6 +10,12 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
         <activity
+            android:name=".wholesalerPackage.wholesalerOrderViewPackage.OrderViewActivity"
+            android:exported="true" />
+        <activity
+            android:name=".wholesalerPackage.wholesalerOrderViewPackage.OrderOverviewActivity"
+            android:exported="true" />
+        <activity
             android:name=".shopkeeperPackage.shopkeeperOrderViewActivity.OrderOverviewActivity"
             android:exported="true" />
         <activity

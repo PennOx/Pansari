@@ -1,5 +1,6 @@
 package project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import project.pansari.databinding.FragmentWholesalerCompletedOrdersBinding;
 import project.pansari.models.OrderWrap;
 import project.pansari.viewHolders.OrderBannerClickListener;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
+import project.pansari.wholesalerPackage.wholesalerOrderViewPackage.OrderOverviewActivity;
 
 public class WholesalerCompletedOrders extends Fragment implements OrderBannerClickListener {
 
@@ -66,11 +68,13 @@ public class WholesalerCompletedOrders extends Fragment implements OrderBannerCl
 
     @Override
     public void onClickOrderBanner(int pos) {
-        //TODO
+        //Intentionally left blank
     }
 
     @Override
     public void onClickViewOrder(int pos) {
-        //TODO
+        Intent intent = new Intent(getContext(), OrderOverviewActivity.class);
+        intent.putExtra("oid", viewModel.getCompletedOrders().getValue().get(pos).getId());
+        startActivity(intent);
     }
 }

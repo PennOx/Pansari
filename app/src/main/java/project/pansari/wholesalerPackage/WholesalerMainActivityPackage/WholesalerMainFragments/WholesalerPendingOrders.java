@@ -1,10 +1,10 @@
 package project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -20,6 +20,7 @@ import project.pansari.databinding.FragmentWholesalerPendingOrdersBinding;
 import project.pansari.models.OrderWrap;
 import project.pansari.viewHolders.OrderBannerClickListener;
 import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
+import project.pansari.wholesalerPackage.wholesalerOrderViewPackage.OrderViewActivity;
 
 public class WholesalerPendingOrders extends Fragment implements OrderBannerClickListener {
 
@@ -64,12 +65,13 @@ public class WholesalerPendingOrders extends Fragment implements OrderBannerClic
 
     @Override
     public void onClickOrderBanner(int pos) {
-        //TODO
+        //Intentionally left blank
     }
 
     @Override
     public void onClickViewOrder(int pos) {
-        //TODO
-        Toast.makeText(getContext(), "Not implemented yet.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getContext(), OrderViewActivity.class);
+        intent.putExtra("oid", viewModel.getPendingOrders().getValue().get(pos).getId());
+        startActivity(intent);
     }
 }
