@@ -129,7 +129,7 @@ public class WholesalerMainActivityRepo<T extends WholesalerMainActivityDataLoad
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     order.setUser(dataSnapshot.getValue(Shopkeeper.class));
 
-                                    if (order.getStatus().equals("Completed") || order.getStatus().equals("Cancelled")) {
+                                    if (order.getStatus().equals("Completed") || order.getStatus().equals("Cancelled") || order.getStatus().equals("Declined")) {
                                         completedOrders.add(order);
                                         listener.onCompletedOrdersLoaded();
                                     } else {
@@ -147,7 +147,6 @@ public class WholesalerMainActivityRepo<T extends WholesalerMainActivityDataLoad
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
                         }
                     });
                 }

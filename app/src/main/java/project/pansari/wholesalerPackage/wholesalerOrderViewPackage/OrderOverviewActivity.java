@@ -32,7 +32,7 @@ public class OrderOverviewActivity extends AppCompatActivity {
         @Override
         public void onChanged(List<CartProduct> products) {
             OrderProductsRecyclerAdapter adapter = new OrderProductsRecyclerAdapter(products);
-            binding.orderRequestOrdersRecycler.setAdapter(adapter);
+            binding.setRecyclerAdapter(adapter);
         }
     };
 

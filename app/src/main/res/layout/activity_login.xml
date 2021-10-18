@@ -4,6 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".loginAndSignupPackage.LoginPackage.LoginActivity">
 
+    <data>
+
+        <import type="android.view.View.OnClickListener" />
+
+        <variable
+            name="loginClickListener"
+            type="OnClickListener" />
+
+        <variable
+            name="createAccountClickListener"
+            type="OnClickListener" />
+
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,7 +25,7 @@
         app:layout_constraintTop_toTopOf="@+id/cardView3">
 
         <ImageView
-            android:id="@+id/login_logo"
+            android:id="@+id/logo"
             android:layout_width="190dp"
             android:layout_height="190dp"
             android:layout_marginStart="8dp"
@@ -21,25 +35,25 @@
             app:layout_constraintBottom_toTopOf="@+id/guideline7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_create_account_text_button"
+            app:layout_constraintTop_toBottomOf="@+id/crateAccountButton"
             app:layout_constraintVertical_bias="0.0"
             app:srcCompat="@drawable/logo" />
 
         <TextView
-            android:id="@+id/login_logo_name"
+            android:id="@+id/logoName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_semibold"
             android:text="@string/app_name"
             android:textSize="30sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/login_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
 
         <TextView
-            android:id="@+id/login_create_account_text_button"
+            android:id="@+id/crateAccountButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -48,6 +62,7 @@
             android:fontFamily="@font/poppins"
             android:padding="12dp"
             android:text="@string/create_an_account"
+            android:onClick="@{createAccountClickListener}"
             android:textColor="?attr/colorOnPrimary"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +111,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/login_email_edittext"
+                    android:id="@+id/emailEditText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -112,7 +127,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
                 <EditText
-                    android:id="@+id/login_password_edittext"
+                    android:id="@+id/passwordEditText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
@@ -125,10 +140,10 @@
                     android:textColorHint="@color/light_black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/login_email_edittext" />
+                    app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
 
                 <Button
-                    android:id="@+id/login_login_button"
+                    android:id="@+id/loginButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -137,10 +152,11 @@
                     android:layout_marginBottom="32dp"
                     android:text="@string/login"
                     app:cornerRadius="15dp"
+                    android:onClick="@{loginClickListener}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/login_password_edittext"
+                    app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
                     app:layout_constraintVertical_bias="0.00999999" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,7 +22,7 @@ public class WholesalerMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wholesaler_main);
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.wholesaler_main_bottom_navigation);
+        BottomNavigationView bottomNavigation = findViewById(R.id.mainBottomNavigation);
 
         viewModel = new ViewModelProvider(this).get(WholesalerMainActivityViewModel.class);
 
@@ -47,6 +47,6 @@ public class WholesalerMainActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.wholesaler_main_fragment_view, fragment).commit();
+                .replace(R.id.wholesalerMainFragment, fragment).commit();
     }
 }

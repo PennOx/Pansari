@@ -15,7 +15,7 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="SignupAppbar" parent="Theme.Pansari">
+    <style name="appBar" parent="Theme.Pansari">
         <item name="android:background">@color/white</item>
     </style>
 

@@ -38,4 +38,14 @@
     <string name="time">Time</string>
     <string name="contact">Contact</string>
     <string name="total_items">Total items</string>
+    <string name="business_name">Business name</string>
+    <string name="e_mail_address">E-mail address</string>
+    <string name="business_contact_number">Business contact number</string>
+    <string name="business_address">Business address</string>
+    <string name="business_pin">Business pin</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="email_verification_alert">E-mail verification mail has been sent.\nPlease verify and login again!</string>
+    <string name="cancel_order_alert">Do you really want to cancel this order.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

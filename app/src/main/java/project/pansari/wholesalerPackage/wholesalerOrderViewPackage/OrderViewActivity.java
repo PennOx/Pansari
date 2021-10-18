@@ -34,7 +34,7 @@ public class OrderViewActivity extends AppCompatActivity {
         @Override
         public void onChanged(List<CartProduct> products) {
             OrderProductsRecyclerAdapter adapter = new OrderProductsRecyclerAdapter(products);
-            binding.orderRequestOrdersRecycler.setAdapter(adapter);
+            binding.setRecyclerAdapter(adapter);
         }
     };
     private View.OnClickListener onClickAcceptListener = new View.OnClickListener() {
@@ -47,21 +47,18 @@ public class OrderViewActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(OrderViewActivity.this);
-            builder.setMessage("Do you really want to decline this order.");
+            builder.setMessage(R.string.cancel_order_alert);
             builder.setCancelable(true);
-            builder.setPositiveButton("Yes", (dialog, which) -> viewModel.declineOrder());
+            builder.setPositiveButton(R.string.yes, (dialog, which) -> viewModel.declineOrder());
 
-            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss());
             builder.create().show();
         }
     };
-    private Observer<Boolean> orderResponseObserver = new Observer<Boolean>() {
-        @Override
-        public void onChanged(Boolean flag) {
+    private Observer<Boolean> orderResponseObserver = flag -> {
 
-            if (flag) {
-                finish();
-            }
+        if (flag) {
+            finish();
         }
     };
 
@@ -70,9 +67,9 @@ public class OrderViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_request_overview);
-        binding.orderRequestCancelButton.setVisibility(View.GONE);
-        binding.orderRequestDeclineButton.setVisibility(View.VISIBLE);
-        binding.orderRequestAcceptButton.setVisibility(View.VISIBLE);
+        binding.cancelButton.setVisibility(View.GONE);
+        binding.declineButton.setVisibility(View.VISIBLE);
+        binding.acceptButton.setVisibility(View.VISIBLE);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull

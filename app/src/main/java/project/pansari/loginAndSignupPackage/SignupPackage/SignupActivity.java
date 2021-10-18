@@ -1,9 +1,7 @@
 package project.pansari.loginAndSignupPackage.SignupPackage;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
@@ -11,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -38,7 +35,7 @@ public class SignupActivity extends AppCompatActivity {
         setupAccountTypeLayout();
         setupProgressDialog();
 
-        setSupportActionBar(binding.signupToolbar);
+        setSupportActionBar(binding.toolBar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -51,30 +48,19 @@ public class SignupActivity extends AppCompatActivity {
             }
         }).get(SignupActivityViewModel.class);
 
-        binding.signupCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRegisterClick();
+        binding.setCreateAccountClickListener(v -> onRegisterClick());
+
+        viewModel.isLoading().observe(this, aBoolean -> {
+            if (aBoolean) {
+                showProgressDialog();
+            } else {
+                hideProgressDialog();
             }
         });
 
-        viewModel.isLoading().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    showProgressDialog();
-                } else {
-                    hideProgressDialog();
-                }
-            }
-        });
-
-        viewModel.isSignedUp().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    showAlertDialog();
-                }
+        viewModel.isSignedUp().observe(this, aBoolean -> {
+            if (aBoolean) {
+                showAlertDialog();
             }
         });
     }
@@ -84,8 +70,8 @@ public class SignupActivity extends AppCompatActivity {
         accountTypes.add("Wholesaler");
         accountTypes.add("Retailer");
         ArrayAdapter<String> a = new ArrayAdapter<>(this, R.layout.account_type_item, accountTypes);
-        ((AutoCompleteTextView) binding.signupBusinessType.getEditText()).setText(getString(R.string.select_account_type), false);
-        ((AutoCompleteTextView) binding.signupBusinessType.getEditText()).setAdapter(a);
+        ((AutoCompleteTextView) binding.businessType.getEditText()).setText(getString(R.string.select_account_type), false);
+        ((AutoCompleteTextView) binding.businessType.getEditText()).setAdapter(a);
     }
 
     private void showAlertDialog() {
@@ -96,17 +82,17 @@ public class SignupActivity extends AppCompatActivity {
 
         clearErrors();
 
-        String name = binding.signupOwnerName.getEditableText().toString().trim();
-        String shopName = binding.signupBusinessName.getEditableText().toString().trim();
-        String email = binding.signupEmail.getEditableText().toString().trim();
-        String contact = binding.signupBusinessContact.getEditableText().toString().trim();
-        String shopAddress = binding.signupBusinessAddress.getEditableText().toString().trim();
-        String pinCode = binding.signupBusinessPin.getEditableText().toString().trim();
-        String password = binding.signupPassword.getEditableText().toString().trim();
-        String confirmPassword = binding.signupConfirmPassword.getEditableText().toString().trim();
+        String name = binding.ownerName.getEditableText().toString().trim();
+        String shopName = binding.businessName.getEditableText().toString().trim();
+        String email = binding.email.getEditableText().toString().trim();
+        String contact = binding.contact.getEditableText().toString().trim();
+        String shopAddress = binding.address.getEditableText().toString().trim();
+        String pinCode = binding.pin.getEditableText().toString().trim();
+        String password = binding.password.getEditableText().toString().trim();
+        String confirmPassword = binding.confirmPassword.getEditableText().toString().trim();
         char type;
 
-        switch (binding.signupBusinessType.getEditText().getText().toString()) {
+        switch (binding.businessType.getEditText().getText().toString()) {
             case "Wholesaler":
                 type = 'w';
                 break;
@@ -124,44 +110,44 @@ public class SignupActivity extends AppCompatActivity {
                 viewModel.signupUser(signupCredential);
                 break;
             case 1:
-                binding.signupOwnerName.setError(signupCredential.getMessage());
+                binding.ownerName.setError(signupCredential.getMessage());
                 break;
             case 2:
-                binding.signupBusinessName.setError(signupCredential.getMessage());
+                binding.businessName.setError(signupCredential.getMessage());
                 break;
             case 3:
-                binding.signupEmail.setError(signupCredential.getMessage());
+                binding.email.setError(signupCredential.getMessage());
                 break;
             case 4:
-                binding.signupBusinessContact.setError(signupCredential.getMessage());
+                binding.contact.setError(signupCredential.getMessage());
                 break;
             case 5:
-                binding.signupBusinessAddress.setError(signupCredential.getMessage());
+                binding.address.setError(signupCredential.getMessage());
                 break;
             case 6:
-                binding.signupBusinessPin.setError(signupCredential.getMessage());
+                binding.pin.setError(signupCredential.getMessage());
                 break;
             case 7:
-                binding.signupPassword.setError(signupCredential.getMessage());
+                binding.password.setError(signupCredential.getMessage());
                 break;
             case 8:
-                binding.signupConfirmPassword.setError(signupCredential.getMessage());
+                binding.confirmPassword.setError(signupCredential.getMessage());
                 break;
             case 9:
-                binding.signupBusinessType.setError(signupCredential.getMessage());
+                binding.businessType.setError(signupCredential.getMessage());
         }
 
     }
 
     private void clearErrors() {
-        binding.signupOwnerName.setError(null);
-        binding.signupBusinessName.setError(null);
-        binding.signupEmail.setError(null);
-        binding.signupBusinessContact.setError(null);
-        binding.signupBusinessAddress.setError(null);
-        binding.signupBusinessPin.setError(null);
-        binding.signupPassword.setError(null);
-        binding.signupConfirmPassword.setError(null);
+        binding.ownerName.setError(null);
+        binding.businessName.setError(null);
+        binding.email.setError(null);
+        binding.contact.setError(null);
+        binding.address.setError(null);
+        binding.pin.setError(null);
+        binding.password.setError(null);
+        binding.confirmPassword.setError(null);
     }
 
     private void setupProgressDialog() {
@@ -171,14 +157,11 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.setCanceledOnTouchOutside(false);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(SignupActivity.this);
-        builder.setMessage("E-mail verification mail has been sent.\nPlease verify and login again!");
+        builder.setMessage(R.string.email_verification_alert);
         builder.setCancelable(false);
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-                finish();
-            }
+        builder.setPositiveButton("Ok", (dialog, which) -> {
+            dialog.cancel();
+            finish();
         });
         alertDialog = builder.create();
     }

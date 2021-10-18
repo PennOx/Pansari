@@ -11,9 +11,15 @@
 
         <import type="android.view.View.OnClickListener" />
 
+        <import type="project.pansari.adapters.OrderProductsRecyclerAdapter" />
+
         <variable
             name="order"
             type="OrderWrap" />
+
+        <variable
+            name="recyclerAdapter"
+            type="OrderProductsRecyclerAdapter" />
 
     </data>
 
@@ -255,9 +261,10 @@
             app:layout_constraintTop_toBottomOf="@+id/cardView5">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/orderRequestOrdersRecycler"
+                android:id="@+id/recycler"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:adapter="@{recyclerAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
         </androidx.cardview.widget.CardView>
 

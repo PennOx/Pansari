@@ -3,12 +3,10 @@ package project.pansari.loginAndSignupPackage.LoginPackage;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -44,39 +42,23 @@ public class LoginActivity extends AppCompatActivity {
             }
         }).get(LoginActivityViewModel.class);
 
-        viewModel.getIsLoggedIn().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    onLoginSuccess();
-                }
+        viewModel.getIsLoggedIn().observe(this, aBoolean -> {
+            if (aBoolean) {
+                onLoginSuccess();
             }
         });
 
-        viewModel.getIsLoading().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    showProgressDialog();
-                } else {
-                    hideProgressDialog();
-                }
+        viewModel.getIsLoading().observe(this, aBoolean -> {
+            if (aBoolean) {
+                showProgressDialog();
+            } else {
+                hideProgressDialog();
             }
         });
 
-        binding.loginLoginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onLoginButtonClick();
-            }
-        });
+        binding.setLoginClickListener(v -> onLoginButtonClick());
 
-        binding.loginCreateAccountTextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRegisterButtonClick();
-            }
-        });
+        binding.setCreateAccountClickListener(v -> onRegisterButtonClick());
     }
 
     private void onRegisterButtonClick() {
@@ -92,17 +74,17 @@ public class LoginActivity extends AppCompatActivity {
                 viewModel.login(loginCredential);
                 break;
             case 1:
-                binding.loginEmailEdittext.setError(loginCredential.getMessage());
+                binding.emailEditText.setError(loginCredential.getMessage());
                 break;
             case 2:
-                binding.loginPasswordEdittext.setError(loginCredential.getMessage());
+                binding.passwordEditText.setError(loginCredential.getMessage());
                 break;
         }
     }
 
     private LoginCredential getLoginCredentials() {
-        String email = binding.loginEmailEdittext.getText().toString().trim();
-        String pass = binding.loginPasswordEdittext.getText().toString().trim();
+        String email = binding.emailEditText.getText().toString().trim();
+        String pass = binding.passwordEditText.getText().toString().trim();
 
         return new LoginCredential(email, pass);
 

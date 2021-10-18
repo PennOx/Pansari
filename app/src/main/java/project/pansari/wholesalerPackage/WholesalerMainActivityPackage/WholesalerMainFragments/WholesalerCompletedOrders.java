@@ -67,6 +67,12 @@ public class WholesalerCompletedOrders extends Fragment implements OrderBannerCl
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.refreshCompletedOrders();
+    }
+
+    @Override
     public void onClickOrderBanner(int pos) {
         //Intentionally left blank
     }

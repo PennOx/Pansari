@@ -35,7 +35,7 @@ public class OrderViewActivity extends AppCompatActivity {
         @Override
         public void onChanged(List<CartProduct> products) {
             OrderProductsRecyclerAdapter adapter = new OrderProductsRecyclerAdapter(products);
-            binding.orderRequestOrdersRecycler.setAdapter(adapter);
+            binding.setRecyclerAdapter(adapter);
         }
     };
 
@@ -43,11 +43,11 @@ public class OrderViewActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             AlertDialog.Builder builder = new AlertDialog.Builder(OrderViewActivity.this);
-            builder.setMessage("Do you really want to cancel this order.");
+            builder.setMessage(R.string.cancel_order_alert);
             builder.setCancelable(true);
-            builder.setPositiveButton("Yes", (dialog, which) -> viewModel.cancelOrder());
+            builder.setPositiveButton(R.string.yes, (dialog, which) -> viewModel.cancelOrder());
 
-            builder.setNegativeButton("No", (dialog, which) -> dialog.dismiss());
+            builder.setNegativeButton(R.string.no, (dialog, which) -> dialog.dismiss());
             builder.create().show();
         }
     };
@@ -62,15 +62,15 @@ public class OrderViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_request_overview);
-        binding.orderRequestAcceptButton.setVisibility(View.GONE);
-        binding.orderRequestDeclineButton.setVisibility(View.GONE);
-        binding.orderRequestCancelButton.setVisibility(View.VISIBLE);
+        binding.acceptButton.setVisibility(View.GONE);
+        binding.declineButton.setVisibility(View.GONE);
+        binding.cancelButton.setVisibility(View.VISIBLE);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
             @Override
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new OrderViewActivityViewModel(getIntent().getStringExtra("oid"));
+                return (T) new OrderViewActivityViewModel(getIntent().getStringExtra(getString(R.string.INTENT_ORDER_ID)));
             }
         }).get(OrderViewActivityViewModel.class);
 
