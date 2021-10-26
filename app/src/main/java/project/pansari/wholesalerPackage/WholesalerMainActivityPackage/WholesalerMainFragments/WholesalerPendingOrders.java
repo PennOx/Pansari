@@ -66,7 +66,7 @@ public class WholesalerPendingOrders extends Fragment implements OrderBannerClic
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.refreshPendingOrders();
+//        viewModel.refreshPendingOrders();
     }
 
     @Override
