@@ -48,4 +48,5 @@
     <string name="cancel_order_alert">Do you really want to cancel this order.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="profile">Profile</string>
 </resources>

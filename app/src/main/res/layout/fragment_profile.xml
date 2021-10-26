@@ -1,307 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainFragments.WholesalerProfile">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintGuide_percent="0.22074789" />
+    <data>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-        app:layout_constraintGuide_percent="0.24969843" />
+        <import type="project.pansari.models.User" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        app:layout_constraintGuide_percent="0.05" />
+        <import type="android.view.View.OnClickListener" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="invisible"
-        app:layout_constraintGuide_percent="0.95" />
+        <variable
+            name="user"
+            type="User" />
 
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="@+id/guideline4">
+        <variable
+            name="onClickBanner"
+            type="OnClickListener" />
 
-        <LinearLayout
+        <variable
+            name="onClickProfileImage"
+            type="OnClickListener" />
+
+        <variable
+            name="onClickLogoutButton"
+            type="OnClickListener" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:layout_scrollFlags="scroll|enterAlways|snap">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView2"
+            <com.google.android.material.appbar.MaterialToolbar
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardMaxElevation="4dp"
-                app:layout_constraintEnd_toStartOf="@+id/parent"
-                app:layout_constraintStart_toStartOf="@+id/parent"
-                app:layout_constraintTop_toTopOf="@+id/parent">
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                app:title="@string/profile" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/profileBannerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:onClick="@{onClickBanner}"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/wholesaler_banner"
+                    app:layout_constraintDimensionRatio="3:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileProfileImage"
+                    android:layout_width="126dp"
+                    android:layout_height="0dp"
+                    android:onClick="@{onClickProfileImage}"
+                    android:src="@drawable/ic_profile_image_2"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="12dp"
+                    app:layout_constraintBottom_toBottomOf="@id/profileBannerImage"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profileBannerImage" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="8dp">
+                    android:padding="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/profileProfileImage">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:text="Bussiness Name"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/profile_sname"
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:textColor="@color/black"
-                        android:textSize="20sp" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        android:enabled="false"
+                        android:hint="Owner name">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_marginTop="8dp"
-                app:cardCornerRadius="8dp"
-                app:cardElevation="4dp"
-                app:cardMaxElevation="4dp"
-                app:layout_constraintEnd_toStartOf="@+id/guideline6"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:focusable="false"
+                            android:text="@{user.name}" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <TextView
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Bussiness Details"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:layout_margin="8dp"
+                        android:enabled="false"
+                        android:hint="Shop name">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:src="@drawable/profile_image" />
-
-                        <TextView
-                            android:id="@+id/profile_name"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="10"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:focusable="false"
+                            android:text="@{user.shopName}" />
 
-                    <View style="@style/Divider.Horizontal" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:enabled="false"
+                        android:hint="Email">
 
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:src="@drawable/email" />
-
-                        <TextView
-                            android:id="@+id/profile_mail"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="10"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:focusable="false"
+                            android:text="@{user.email}" />
 
-                    <View style="@style/Divider.Horizontal" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:enabled="false"
+                        android:hint="Contact number">
 
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:src="@drawable/call" />
-
-                        <TextView
-                            android:id="@+id/profile_contact_number"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="10"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:focusable="false"
+                            android:text="@{user.contact}" />
 
-                    <View style="@style/Divider.Horizontal" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:enabled="false"
+                        android:hint="Shop address">
 
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:src="@drawable/location" />
-
-                        <TextView
-                            android:id="@+id/profile_address"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="10"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:focusable="false"
+                            android:text="@{user.address}" />
 
-                    <View style="@style/Divider.Horizontal" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
-                    <LinearLayout
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="4dp"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:enabled="false"
+                        android:hint="Postal code">
 
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:src="@drawable/local_shipping" />
-
-                        <TextView
-                            android:id="@+id/profile_area_pin"
-                            android:layout_width="wrap_content"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_weight="10"
-                            android:textColor="@color/black"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                            android:focusable="false"
+                            android:text="@{String.valueOf(user.pinCode)}" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/profile_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="8dp"
+                        android:onClick="@{onClickLogoutButton}"
+                        android:text="Logout" />
+
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/profile_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="Logout" />
-        </LinearLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="4dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardMaxElevation="4dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/guideline6"
-        app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toTopOf="parent">
+        </androidx.core.widget.NestedScrollView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/profile_banner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/wholesaler_banner"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profile_image"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_profile_image_2"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_banner"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/profile_banner"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -5,36 +5,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import project.pansari.R;
 import project.pansari.auth.Auth;
-import project.pansari.database.Database;
+import project.pansari.databinding.FragmentProfileBinding;
 import project.pansari.loginAndSignupPackage.StartActivityPackage.StartActivity;
 import project.pansari.models.Wholesaler;
+import project.pansari.wholesalerPackage.WholesalerMainActivityPackage.WholesalerMainActivityViewModel;
 
 
 public class WholesalerProfile extends Fragment {
 
-    private CircleImageView image;
-    private TextView name;
-    private TextView sName;
-    private TextView address;
-    private TextView contactNumber;
-    private TextView mail;
-    private TextView areaPIN;
-
-    private Wholesaler currentData = null;
+    private WholesalerMainActivityViewModel viewModel;
+    private FragmentProfileBinding binding;
 
     public WholesalerProfile() {
         // Required empty public constructor
@@ -45,57 +35,33 @@ public class WholesalerProfile extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        viewModel = new ViewModelProvider(getActivity()).get(WholesalerMainActivityViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_profile, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false);
 
-        image = v.findViewById(R.id.profile_image);
-        name = v.findViewById(R.id.profile_name);
-        sName = v.findViewById(R.id.profile_sname);
-        address = v.findViewById(R.id.profile_address);
-        contactNumber = v.findViewById(R.id.profile_contact_number);
-        mail = v.findViewById(R.id.profile_mail);
-        areaPIN = v.findViewById(R.id.profile_area_pin);
+        binding.setOnClickLogoutButton(v -> signout());
 
-        Button logoutButton = v.findViewById(R.id.profile_logout);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        viewModel.getWholesaler().observe(getViewLifecycleOwner(), new Observer<Wholesaler>() {
             @Override
-            public void onClick(View v) {
-                signout();
+            public void onChanged(Wholesaler wholesaler) {
+                setData(wholesaler);
             }
         });
 
-        Database.getWholesalersRef().child(Auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Wholesaler w = dataSnapshot.getValue(Wholesaler.class);
-
-                setData(w);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        return v;
+        return binding.getRoot();
     }
 
     private void setData(Wholesaler w) {
         if (w.getImage() != null) {
-            Glide.with(getContext()).load(w.getImage()).into(image);
+            Glide.with(getContext()).load(w.getImage()).into(binding.profileProfileImage);
         }
-        name.setText(w.getName());
-        sName.setText(w.getShopName());
-        address.setText(w.getAddress());
-        mail.setText(w.getEmail());
-        contactNumber.setText(w.getContact());
-        areaPIN.setText("" + w.getPinCode());
+
+        binding.setUser(w);
     }
 
     private void signout() {

@@ -20,6 +20,7 @@ import project.pansari.models.CartItem;
 import project.pansari.models.CartProduct;
 import project.pansari.models.Order;
 import project.pansari.models.OrderWrap;
+import project.pansari.models.Shopkeeper;
 import project.pansari.models.User;
 import project.pansari.models.Wholesaler;
 
@@ -31,6 +32,7 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
     private List<Wholesaler> availableWholesalers;
     private List<Wholesaler> favoriteWholesalers;
     private List<OrderWrap> orders;
+    private Shopkeeper shopkeeper;
 
     public ShopkeeperMainActivityRepo(T listener, Context context) {
         this.listener = listener;
@@ -42,6 +44,22 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         loadCartProducts();
         loadFavoriteWholesalers();
         loadOrders();
+        loadShopkeeper();
+    }
+
+    private void loadShopkeeper() {
+        Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                shopkeeper = dataSnapshot.getValue(Shopkeeper.class);
+                listener.onShopkeeperLoaded();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void loadAvailableWholesalers() {
@@ -279,5 +297,9 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
 
     public List<OrderWrap> getOrders() {
         return orders;
+    }
+
+    public Shopkeeper getShopkeeper() {
+        return shopkeeper;
     }
 }

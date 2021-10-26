@@ -11,4 +11,6 @@ public interface ShopkeeperMainActivityDataLoadListener {
     void onOrderPlaced();
 
     void onOrdersLoaded();
+
+    void onShopkeeperLoaded();
 }

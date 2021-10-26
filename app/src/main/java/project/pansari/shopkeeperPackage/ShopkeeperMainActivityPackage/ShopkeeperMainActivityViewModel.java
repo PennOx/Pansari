@@ -12,6 +12,7 @@ import java.util.List;
 import project.pansari.R;
 import project.pansari.models.CartItem;
 import project.pansari.models.OrderWrap;
+import project.pansari.models.Shopkeeper;
 import project.pansari.models.Wholesaler;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperCart;
 import project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainFragments.ShopkeeperOrders;
@@ -38,6 +39,9 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     //Orders Fragment
     private MutableLiveData<List<OrderWrap>> orders;
 
+    //Profile Fragment
+    private MutableLiveData<Shopkeeper> shopkeeper;
+
 
     public ShopkeeperMainActivityViewModel(Application app) {
         super(app);
@@ -56,6 +60,7 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         availableWholesalers = new MutableLiveData<>(repo.getAvailableWholesalers());
         favoriteWholesalers = new MutableLiveData<>(repo.getFavoriteWholesalers());
         orders = new MutableLiveData<>(repo.getOrders());
+        shopkeeper = new MutableLiveData<>(repo.getShopkeeper());
 
     }
 
@@ -90,6 +95,10 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
     public LiveData<List<Wholesaler>> getFavoriteWholesalers() {
         return favoriteWholesalers;
+    }
+
+    public LiveData<Shopkeeper> getShopkeeper() {
+        return shopkeeper;
     }
 
     public LiveData<List<OrderWrap>> getOrders() {
@@ -133,6 +142,11 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
     @Override
     public void onOrdersLoaded() {
         orders.postValue(repo.getOrders());
+    }
+
+    @Override
+    public void onShopkeeperLoaded() {
+        shopkeeper.postValue(repo.getShopkeeper());
     }
 
     public void refreshOrders() {
