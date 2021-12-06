@@ -1,5 +1,7 @@
 package project.pansari.wholesalerPackage.WholesalerMainActivityPackage;
 
+import android.net.Uri;
+
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -104,6 +106,11 @@ public class WholesalerMainActivityViewModel extends ViewModel implements Wholes
         completedOrders.postValue(repo.getCompletedOrders());
     }
 
+    @Override
+    public void onProfilePictureUpdated() {
+        repo.loadWholesaler();
+    }
+
     public void refreshPendingOrders() {
         repo.loadOrders();
     }
@@ -114,5 +121,9 @@ public class WholesalerMainActivityViewModel extends ViewModel implements Wholes
 
     public void refreshProducts() {
         repo.loadProducts();
+    }
+
+    public void setProfilePicture(Uri profilePictureUri) {
+        repo.changeProfilePic(profilePictureUri);
     }
 }

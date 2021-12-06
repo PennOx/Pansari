@@ -9,4 +9,6 @@ public interface WholesalerMainActivityDataLoadListener {
     void onPendingOrdersLoaded();
 
     void onCompletedOrdersLoaded();
+
+    void onProfilePictureUpdated();
 }

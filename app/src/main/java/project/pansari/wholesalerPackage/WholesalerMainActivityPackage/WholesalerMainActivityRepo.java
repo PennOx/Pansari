@@ -1,7 +1,10 @@
 package project.pansari.wholesalerPackage.WholesalerMainActivityPackage;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -159,4 +162,18 @@ public class WholesalerMainActivityRepo<T extends WholesalerMainActivityDataLoad
         });
     }
 
+    public void changeProfilePic(Uri profilePictureUri) {
+        Database.getProfilePictureStorageRefById(Auth.getCurrentUserUid()).child("profile.jpg").putFile(profilePictureUri).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Database.getProfilePictureStorageRefById(Auth.getCurrentUserUid()).child("profile.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                    Database.getWholesalerRefById(Auth.getCurrentUserUid()).child("image").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            listener.onProfilePictureUpdated();
+                        }
+                    });
+                });
+            }
+        });
+    }
 }

@@ -2,6 +2,8 @@ package project.pansari.database;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import project.pansari.auth.Auth;
 
@@ -14,6 +16,9 @@ public class Database {
     private static final DatabaseReference productsRef = root.child("Products");
     private static final DatabaseReference cartRef = root.child("Cart");
     private static final DatabaseReference ordersRef = root.child("Orders");
+
+    private static final StorageReference storageRoot = FirebaseStorage.getInstance().getReference();
+    private static final StorageReference profilePicturesStorageRef = storageRoot.child("ProfilePictures");
 
     static {
         root.keepSynced(true);
@@ -77,5 +82,9 @@ public class Database {
 
     public static DatabaseReference getCartRef() {
         return cartRef.child(Auth.getCurrentUserUid());
+    }
+
+    public static StorageReference getProfilePictureStorageRefById(String id) {
+        return profilePicturesStorageRef.child(id);
     }
 }

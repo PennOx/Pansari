@@ -1,37 +1,14 @@
 package project.pansari.models;
 
-import androidx.annotation.NonNull;
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity
 public class Product {
 
-    @NonNull
-    @PrimaryKey
-    @ColumnInfo(name = "pid")
     private String pid;
-
-    @ColumnInfo(name = "name")
     private String name;
-
-    @ColumnInfo(name = "brand")
     private String brand;
-
-    @ColumnInfo(name = "description")
     private String description;
-
-    @ColumnInfo(name = "image")
     private String image;
-
-    @ColumnInfo(name = "unitQuantity")
     private String unitQuantity;
-
-    @ColumnInfo(name = "packQuantity")
     private String packQuantity;
-
-    @ColumnInfo(name = "sellerId")
     private String sellerId;
 
     public Product() {

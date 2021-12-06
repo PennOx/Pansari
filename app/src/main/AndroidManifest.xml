@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="project.pansari">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
         android:theme="@style/Theme.Pansari">
+
+
         <activity
             android:name=".wholesalerPackage.wholesalerOrderViewPackage.OrderViewActivity"
             android:exported="true" />
@@ -61,6 +67,8 @@
         <activity
             android:name=".shopkeeperPackage.ShopkeeperMainActivityPackage.ShopkeeperMainActivity"
             android:screenOrientation="portrait" />
+
+
     </application>
 
 </manifest>
