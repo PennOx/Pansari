@@ -1,9 +1,11 @@
 package project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage;
 
 import android.content.Context;
+import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -47,7 +49,7 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
         loadShopkeeper();
     }
 
-    private void loadShopkeeper() {
+    public void loadShopkeeper() {
         Database.getShopkeepersRef().child(Auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -301,5 +303,20 @@ public class ShopkeeperMainActivityRepo<T extends ShopkeeperMainActivityDataLoad
 
     public Shopkeeper getShopkeeper() {
         return shopkeeper;
+    }
+
+    public void changeProfilePic(Uri profilePictureUri) {
+        Database.getProfilePictureStorageRefById(Auth.getCurrentUserUid()).child("profile.jpg").putFile(profilePictureUri).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Database.getProfilePictureStorageRefById(Auth.getCurrentUserUid()).child("profile.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                    Database.getShopkeeperRefById(Auth.getCurrentUserUid()).child("image").setValue(uri.toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            listener.onProfilePictureUpdated();
+                        }
+                    });
+                });
+            }
+        });
     }
 }

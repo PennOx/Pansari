@@ -1,6 +1,7 @@
 package project.pansari.shopkeeperPackage.ShopkeeperMainActivityPackage;
 
 import android.app.Application;
+import android.net.Uri;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
@@ -149,6 +150,11 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
         shopkeeper.postValue(repo.getShopkeeper());
     }
 
+    @Override
+    public void onProfilePictureUpdated() {
+        repo.loadShopkeeper();
+    }
+
     public void refreshOrders() {
         repo.loadOrders();
     }
@@ -159,5 +165,9 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
     public void refreshFavoriteWholesalers() {
         repo.loadFavoriteWholesalers();
+    }
+
+    public void setProfilePicture(Uri profilePictureUri) {
+        repo.changeProfilePic(profilePictureUri);
     }
 }

@@ -13,4 +13,6 @@ public interface ShopkeeperMainActivityDataLoadListener {
     void onOrdersLoaded();
 
     void onShopkeeperLoaded();
+
+    void onProfilePictureUpdated();
 }
