@@ -19,6 +19,7 @@ public class Database {
 
     private static final StorageReference storageRoot = FirebaseStorage.getInstance().getReference();
     private static final StorageReference profilePicturesStorageRef = storageRoot.child("ProfilePictures");
+    private static final StorageReference productsImageStorageRef = storageRoot.child("Products");
 
     static {
         root.keepSynced(true);
@@ -86,5 +87,9 @@ public class Database {
 
     public static StorageReference getProfilePictureStorageRefById(String id) {
         return profilePicturesStorageRef.child(id);
+    }
+
+    public static StorageReference getProductImageStorageRefById(String pId) {
+        return productsImageStorageRef.child(pId);
     }
 }

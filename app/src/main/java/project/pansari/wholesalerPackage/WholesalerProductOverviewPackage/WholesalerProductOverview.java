@@ -1,10 +1,13 @@
 package project.pansari.wholesalerPackage.WholesalerProductOverviewPackage;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
@@ -22,7 +25,7 @@ public class WholesalerProductOverview extends AppCompatActivity {
     private LayoutProductOverviewBinding binding;
     private WholesalerProductOverviewVM viewModel;
 
-    private View.OnClickListener onClickEditProduct = new View.OnClickListener() {
+    private final View.OnClickListener onClickEditProduct = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Product p = binding.getProduct();
@@ -34,7 +37,7 @@ public class WholesalerProductOverview extends AppCompatActivity {
         }
     };
 
-    private View.OnClickListener onCLickAddProduct = new View.OnClickListener() {
+    private final View.OnClickListener onCLickAddProduct = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Product p = binding.getProduct();
@@ -43,6 +46,42 @@ public class WholesalerProductOverview extends AppCompatActivity {
             finish();
         }
     };
+
+    private final View.OnClickListener onImageClick = v -> getImageFromUser();
+
+    private final Observer<Boolean> newProductObserver = new Observer<Boolean>() {
+        @Override
+        public void onChanged(Boolean aBoolean) {
+            if (aBoolean) {
+                binding.setAppbarTitle(getString(R.string.add_product));
+                binding.setActionButtonText(getString(R.string.add_product));
+                binding.setOnActionClick(onCLickAddProduct);
+                binding.setOnImageClick(onImageClick);
+                binding.setProduct(new Product());
+            } else {
+
+                binding.setAppbarTitle(getString(R.string.edit_product));
+                binding.setActionButtonText(getString(R.string.edit_product));
+                binding.setOnActionClick(onClickEditProduct);
+                binding.setOnImageClick(onImageClick);
+            }
+        }
+    };
+
+    private final Observer<Product> productsObserver = this::setData;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 997) {
+            if (resultCode == RESULT_OK) {
+                setImage(data.getData());
+            }
+        } else {
+            Toast.makeText(this, "Why are we here?", Toast.LENGTH_LONG).show();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,29 +99,18 @@ public class WholesalerProductOverview extends AppCompatActivity {
             }
         }).get(WholesalerProductOverviewVM.class);
 
-        viewModel.isNewProduct().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    binding.setAppbarTitle(getString(R.string.add_product));
-                    binding.setActionButtonText(getString(R.string.add_product));
-                    binding.setOnActionClick(onCLickAddProduct);
-                    binding.setProduct(new Product());
-                } else {
+        viewModel.isNewProduct().observe(this, newProductObserver);
 
-                    binding.setAppbarTitle(getString(R.string.edit_product));
-                    binding.setActionButtonText(getString(R.string.edit_product));
-                    binding.setOnActionClick(onClickEditProduct);
-                }
-            }
-        });
+        viewModel.getProduct().observe(this, productsObserver);
+    }
 
-        viewModel.getProduct().observe(this, new Observer<Product>() {
-            @Override
-            public void onChanged(Product product) {
-                setData(product);
-            }
-        });
+    private void getImageFromUser() {
+        Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 997);
+    }
+
+    private void setImage(Uri imageUri) {
+        viewModel.setNewImageUri(imageUri);
     }
 
     private void setData(Product p) {
@@ -93,4 +121,5 @@ public class WholesalerProductOverview extends AppCompatActivity {
             Glide.with(this).load(p.getImage()).into(binding.productOverviewImage);
         }
     }
+
 }

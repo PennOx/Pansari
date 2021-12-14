@@ -23,6 +23,11 @@
         <variable
             name="onActionClick"
             type="OnClickListener" />
+
+        <variable
+            name="onImageClick"
+            type="OnClickListener" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -68,7 +73,9 @@
                         android:background="@drawable/bg_round_images"
                         android:contentDescription="@string/product_image"
                         android:scaleType="centerCrop"
+                        android:onClick="@{onImageClick}"
                         android:src="@color/blue" />
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView

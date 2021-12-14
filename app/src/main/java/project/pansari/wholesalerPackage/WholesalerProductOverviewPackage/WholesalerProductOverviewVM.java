@@ -1,5 +1,7 @@
 package project.pansari.wholesalerPackage.WholesalerProductOverviewPackage;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,10 +11,11 @@ import project.pansari.models.Product;
 
 public class WholesalerProductOverviewVM extends ViewModel implements WholesalerProductOverviewDataListener {
 
-    private String pid;
-    private MutableLiveData<Boolean> newProduct;
-    private WholesalerProductOverviewRepo repo;
-    private MutableLiveData<Product> product;
+    private final String pid;
+    private final MutableLiveData<Boolean> newProduct;
+    private final WholesalerProductOverviewRepo repo;
+    private final MutableLiveData<Product> product;
+    private Uri imageUri;
 
     WholesalerProductOverviewVM(String pid) {
         product = new MutableLiveData<>();
@@ -50,7 +53,6 @@ public class WholesalerProductOverviewVM extends ViewModel implements Wholesaler
     }
 
     public void editProduct(Product p) {
-
         p.setPid(pid);
         repo.editProduct(p);
     }
@@ -58,6 +60,10 @@ public class WholesalerProductOverviewVM extends ViewModel implements Wholesaler
     public void addProduct(Product p) {
         p.setPid(pid);
         p.setSellerId(Auth.getCurrentUserUid());
-        repo.addProduct(p);
+        repo.addProduct(p, imageUri);
+    }
+
+    public void setNewImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
     }
 }

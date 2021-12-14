@@ -1,5 +1,7 @@
 package project.pansari.wholesalerPackage.WholesalerProductOverviewPackage;
 
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
@@ -13,7 +15,7 @@ import project.pansari.models.Product;
 public class WholesalerProductOverviewRepo {
 
     private Product product;
-    private WholesalerProductOverviewDataListener loadListener;
+    private final WholesalerProductOverviewDataListener loadListener;
 
     public WholesalerProductOverviewRepo(WholesalerProductOverviewDataListener loadListener) {
         this.loadListener = loadListener;
@@ -43,8 +45,25 @@ public class WholesalerProductOverviewRepo {
         Database.getProductsRef().child(p.getPid()).setValue(p);
     }
 
-    public void addProduct(Product p) {
-        Database.getProductsRef().child(p.getPid()).setValue(p);
-        Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
+    public void addProduct(Product p, Uri imageUri) {
+
+        if (imageUri != null) {
+            Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").putFile(imageUri).addOnCompleteListener(task -> {
+
+                if (task.isSuccessful()) {
+                    Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                        p.setImage(uri.toString());
+                        Database.getProductsRef().child(p.getPid()).setValue(p);
+                        Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
+                    });
+                } else {
+                    Database.getProductsRef().child(p.getPid()).setValue(p);
+                    Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
+                }
+            });
+        } else {
+            Database.getProductsRef().child(p.getPid()).setValue(p);
+            Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
+        }
     }
 }
