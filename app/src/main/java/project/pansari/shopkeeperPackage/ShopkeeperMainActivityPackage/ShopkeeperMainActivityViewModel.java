@@ -131,7 +131,6 @@ public class ShopkeeperMainActivityViewModel extends AndroidViewModel implements
 
     public void placeOrder() {
         isLoading.setValue(true);
-
         repo.placeOrder();
     }
 

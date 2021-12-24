@@ -46,24 +46,35 @@ public class WholesalerProductOverviewRepo {
     }
 
     public void addProduct(Product p, Uri imageUri) {
+        Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").putFile(imageUri).addOnCompleteListener(task -> {
 
-        if (imageUri != null) {
-            Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").putFile(imageUri).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                    p.setImage(uri.toString());
+                    addProduct(p);
+                });
+            } else {
+                addProduct(p);
+            }
+        });
+    }
 
-                if (task.isSuccessful()) {
-                    Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
-                        p.setImage(uri.toString());
-                        Database.getProductsRef().child(p.getPid()).setValue(p);
-                        Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
-                    });
-                } else {
-                    Database.getProductsRef().child(p.getPid()).setValue(p);
-                    Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
-                }
-            });
-        } else {
-            Database.getProductsRef().child(p.getPid()).setValue(p);
-            Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
-        }
+    public void editProduct(Product p, Uri imageUri) {
+        Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").putFile(imageUri).addOnCompleteListener(task -> {
+
+            if (task.isSuccessful()) {
+                Database.getProductImageStorageRefById(p.getPid()).child("image.jpg").getDownloadUrl().addOnSuccessListener(uri -> {
+                    p.setImage(uri.toString());
+                    editProduct(p);
+                });
+            } else {
+                editProduct(p);
+            }
+        });
+    }
+
+    public void addProduct(Product p) {
+        Database.getProductsRef().child(p.getPid()).setValue(p);
+        Database.getWholesalerProductsRefByWid(Auth.getCurrentUserUid()).child(p.getPid()).setValue(p.getPid());
     }
 }

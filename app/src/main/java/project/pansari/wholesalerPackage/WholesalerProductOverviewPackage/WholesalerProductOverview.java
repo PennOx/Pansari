@@ -47,7 +47,7 @@ public class WholesalerProductOverview extends AppCompatActivity {
         }
     };
 
-    private final View.OnClickListener onImageClick = v -> getImageFromUser();
+    private final View.OnClickListener addNewImageClick = v -> getImageFromUser();
 
     private final Observer<Boolean> newProductObserver = new Observer<Boolean>() {
         @Override
@@ -56,14 +56,14 @@ public class WholesalerProductOverview extends AppCompatActivity {
                 binding.setAppbarTitle(getString(R.string.add_product));
                 binding.setActionButtonText(getString(R.string.add_product));
                 binding.setOnActionClick(onCLickAddProduct);
-                binding.setOnImageClick(onImageClick);
+                binding.setOnImageClick(addNewImageClick);
                 binding.setProduct(new Product());
             } else {
 
                 binding.setAppbarTitle(getString(R.string.edit_product));
                 binding.setActionButtonText(getString(R.string.edit_product));
                 binding.setOnActionClick(onClickEditProduct);
-                binding.setOnImageClick(onImageClick);
+                binding.setOnImageClick(addNewImageClick);
             }
         }
     };
@@ -111,6 +111,7 @@ public class WholesalerProductOverview extends AppCompatActivity {
 
     private void setImage(Uri imageUri) {
         viewModel.setNewImageUri(imageUri);
+        Glide.with(this).load(imageUri).into(binding.productOverviewImage);
     }
 
     private void setData(Product p) {

@@ -16,11 +16,13 @@ public class WholesalerProductOverviewVM extends ViewModel implements Wholesaler
     private final WholesalerProductOverviewRepo repo;
     private final MutableLiveData<Product> product;
     private Uri imageUri;
+    private boolean hasNewImage;
 
     WholesalerProductOverviewVM(String pid) {
         product = new MutableLiveData<>();
         repo = new WholesalerProductOverviewRepo(this);
         newProduct = new MutableLiveData<>();
+        hasNewImage = false;
         if (pid != null) {
             this.pid = pid;
             newProduct.setValue(false);
@@ -54,16 +56,26 @@ public class WholesalerProductOverviewVM extends ViewModel implements Wholesaler
 
     public void editProduct(Product p) {
         p.setPid(pid);
-        repo.editProduct(p);
+        if (hasNewImage) {
+            hasNewImage = false;
+            repo.editProduct(p, imageUri);
+        } else {
+            repo.editProduct(p);
+        }
     }
 
     public void addProduct(Product p) {
         p.setPid(pid);
         p.setSellerId(Auth.getCurrentUserUid());
-        repo.addProduct(p, imageUri);
+        if (hasNewImage) {
+            repo.addProduct(p, imageUri);
+        } else {
+            repo.addProduct(p);
+        }
     }
 
     public void setNewImageUri(Uri imageUri) {
+        hasNewImage = true;
         this.imageUri = imageUri;
     }
 }
