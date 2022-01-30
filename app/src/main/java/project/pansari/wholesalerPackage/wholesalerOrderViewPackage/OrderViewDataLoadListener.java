@@ -9,4 +9,8 @@ public interface OrderViewDataLoadListener {
     void onOrderAccepted();
 
     void onOrderDeclined();
+
+    void onOrderReady();
+
+    void onOrderDelivered();
 }

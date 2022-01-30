@@ -37,7 +37,6 @@ public class OrderViewViewModel extends ViewModel implements OrderViewDataLoadLi
         return orderResponseFlag;
     }
 
-
     @Override
     public void onOrderLoaded() {
         orderWrap.postValue(repo.getOrder());
@@ -58,13 +57,29 @@ public class OrderViewViewModel extends ViewModel implements OrderViewDataLoadLi
         orderResponseFlag.postValue(true);
     }
 
+    @Override
+    public void onOrderReady() {
+        orderResponseFlag.postValue(true);
+    }
+
+    @Override
+    public void onOrderDelivered() {
+        orderResponseFlag.postValue(true);
+    }
+
     public void acceptOrder() {
-        //TODO
         repo.acceptOrder();
     }
 
     public void declineOrder() {
-        //TODO
         repo.declineOrder();
+    }
+
+    public void readyOrder() {
+        repo.readyOrder();
+    }
+
+    public void deliverOrder() {
+        repo.deliverOrder();
     }
 }

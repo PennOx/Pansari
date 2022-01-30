@@ -49,4 +49,6 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="profile">Profile</string>
+    <string name="order_ready">Order Ready</string>
+    <string name="delivered">Delevered</string>
 </resources>

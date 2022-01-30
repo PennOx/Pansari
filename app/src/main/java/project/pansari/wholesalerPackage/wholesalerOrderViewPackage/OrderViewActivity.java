@@ -28,13 +28,57 @@ public class OrderViewActivity extends AppCompatActivity {
         @Override
         public void onChanged(OrderWrap orderWrap) {
             binding.setOrder(orderWrap);
+
+            if (orderWrap == null) {
+                binding.deliveredButton.setVisibility(View.GONE);
+                binding.readyButton.setVisibility(View.GONE);
+                binding.cancelButton.setVisibility(View.GONE);
+                binding.declineButton.setVisibility(View.GONE);
+                binding.acceptButton.setVisibility(View.GONE);
+            } else {
+                switch (orderWrap.getStatus()) {
+                    case "Pending":
+                        binding.deliveredButton.setVisibility(View.GONE);
+                        binding.readyButton.setVisibility(View.GONE);
+                        binding.cancelButton.setVisibility(View.GONE);
+                        binding.declineButton.setVisibility(View.VISIBLE);
+                        binding.acceptButton.setVisibility(View.VISIBLE);
+                        break;
+                    case "Accepted":
+                        binding.deliveredButton.setVisibility(View.GONE);
+                        binding.readyButton.setVisibility(View.VISIBLE);
+                        binding.cancelButton.setVisibility(View.VISIBLE);
+                        binding.declineButton.setVisibility(View.GONE);
+                        binding.acceptButton.setVisibility(View.GONE);
+                        break;
+                    default:
+                        binding.deliveredButton.setVisibility(View.GONE);
+                        binding.readyButton.setVisibility(View.GONE);
+                        binding.cancelButton.setVisibility(View.GONE);
+                        binding.declineButton.setVisibility(View.GONE);
+                        binding.acceptButton.setVisibility(View.GONE);
+                }
+            }
         }
     };
+
     private Observer<List<CartProduct>> orderProductsObserver = new Observer<List<CartProduct>>() {
         @Override
         public void onChanged(List<CartProduct> products) {
             OrderProductsRecyclerAdapter adapter = new OrderProductsRecyclerAdapter(products);
             binding.setRecyclerAdapter(adapter);
+        }
+    };
+    private View.OnClickListener onCLickOrderDelivered = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            viewModel.deliverOrder();
+        }
+    };
+    private View.OnClickListener onClickOrderReady = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            viewModel.readyOrder();
         }
     };
     private View.OnClickListener onClickAcceptListener = new View.OnClickListener() {
@@ -68,8 +112,10 @@ public class OrderViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_order_request_overview);
         binding.cancelButton.setVisibility(View.GONE);
-        binding.declineButton.setVisibility(View.VISIBLE);
-        binding.acceptButton.setVisibility(View.VISIBLE);
+        binding.declineButton.setVisibility(View.GONE);
+        binding.acceptButton.setVisibility(View.GONE);
+        binding.readyButton.setVisibility(View.GONE);
+        binding.deliveredButton.setVisibility(View.GONE);
 
         viewModel = new ViewModelProvider(this, new ViewModelProvider.Factory() {
             @NonNull
@@ -85,6 +131,7 @@ public class OrderViewActivity extends AppCompatActivity {
 
         binding.setOrderAcceptClickListener(onClickAcceptListener);
         binding.setOrderDeclineClickListener(onClickDeclineListener);
+        binding.setOrderReadyClickListener(onClickOrderReady);
 
     }
 }

@@ -100,12 +100,29 @@ public class OrderViewRepo {
         });
     }
 
-
     public void declineOrder() {
         Database.getOrderRefById(oid).child("status").setValue("Declined").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 listener.onOrderDeclined();
+            }
+        });
+    }
+
+    public void readyOrder() {
+        Database.getOrderRefById(oid).child("status").setValue("Ready").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                listener.onOrderReady();
+            }
+        });
+    }
+
+    public void deliverOrder() {
+        Database.getOrderRefById(oid).child("status").setValue("Completed").addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                listener.onOrderDelivered();
             }
         });
     }

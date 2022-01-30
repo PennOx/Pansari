@@ -17,7 +17,7 @@
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_order_detail.xml" value="0.1925925925925926" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_order_overview.xml" value="0.22" />
-        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_order_request_overview.xml" value="0.2" />
+        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_order_request_overview.xml" value="0.264" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_order_summary.xml" value="0.2" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_shopkeeper_main.xml" value="0.15" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/activity_signup.xml" value="0.21" />
@@ -31,6 +31,7 @@
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/fragment_shopkeeper_wholesaler_list.xml" value="0.15" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/fragment_wholesaler_completed_orders.xml" value="0.2" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/fragment_wholesaler_pending_orders.xml" value="0.2" />
+        <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/fragment_wholesaler_products.xml" value="0.17889492753623187" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/layout_product_overview.xml" value="0.2" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_cart_product_card.xml" value="0.22" />
         <entry key="..\:/App_Project/Pre/Pansari/app/src/main/res/layout/single_cart_product_item.xml" value="0.2" />
@@ -88,7 +89,7 @@
       </value>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
